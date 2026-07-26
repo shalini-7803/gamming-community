@@ -892,43 +892,22 @@ Please confirm with our team before purchase regarding personal account compatib
           <span>Back</span>
         </button>
 
-        <div className="hidden lg:block">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12">
-            <div className={`${isImageSticky ? "sticky top-8" : ""} h-fit`}>
-              <div className="flex justify-center">
-                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-white/20 w-full max-w-lg">
-                  <img
-                    id="product-main-image"
-                    src={currentProduct.image}
-                    alt={currentProduct.title}
-                    className="w-full aspect-square object-cover rounded-2xl"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6 xl:space-y-8">
-              <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 xl:p-8 shadow-2xl border border-white/20">
-                {renderProductDetails()}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:hidden">
-          <div className="space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 xl:gap-12">
+          <div className={`${isImageSticky ? "xl:sticky xl:top-8" : ""} h-fit`}>
             <div className="flex justify-center">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-2xl border border-white/20 w-full max-w-sm">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl xl:rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/20 w-full max-w-sm sm:max-w-md xl:max-w-lg">
                 <img
                   id="product-main-image"
                   src={currentProduct.image}
                   alt={currentProduct.title}
-                  className="w-full aspect-square object-cover rounded-xl"
+                  className="w-full aspect-square object-cover rounded-xl xl:rounded-2xl"
                 />
               </div>
             </div>
+          </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-2xl border border-white/20">
+          <div className="space-y-4 sm:space-y-6 xl:space-y-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl xl:rounded-3xl p-4 sm:p-6 xl:p-8 shadow-2xl border border-white/20">
               {renderProductDetails()}
             </div>
           </div>
