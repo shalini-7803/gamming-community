@@ -1373,7 +1373,7 @@ onChange={(e) =>
                             visible: coupon.visible,
                         });
                       }}
-                      className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                      className="px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white rounded-lg transition-all duration-300"
                     >
                       Edit
                     </button>
@@ -1388,7 +1388,7 @@ onChange={(e) =>
                         toast.success("Coupon deleted");
                         await reloadCoupons();
                       }}
-                      className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                      className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
                     >
                       Delete
                     </button>
@@ -1532,7 +1532,7 @@ onChange={(e) =>
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
           <div className="flex items-center space-x-3 mb-6">
-            <Settings className="w-8 h-8 text-blue-500" />
+            <Settings className="w-8 h-8 text-cyan-500" />
             <h3 className="text-2xl font-bold text-gray-800">
               Shop Availability Settings
             </h3>
@@ -1559,14 +1559,14 @@ onChange={(e) =>
                     }
                     className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
                       shopSettings.shop_mode === id
-                        ? "border-blue-500 bg-blue-50"
+                        ? "border-cyan-500 bg-cyan-50"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <span
                       className={`font-medium ${
                         shopSettings.shop_mode === id
-                          ? "text-blue-700"
+                          ? "text-cyan-700"
                           : "text-gray-700"
                       }`}
                     >
@@ -1590,7 +1590,7 @@ onChange={(e) =>
                   })
                 }
                 rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
             </div>
 
@@ -1626,7 +1626,7 @@ onChange={(e) =>
                   }
                 }}
                 disabled={isSavingSettings}
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
+                className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
               >
                 {isSavingSettings ? "Saving..." : "Save Settings"}
               </button>
@@ -1636,7 +1636,7 @@ onChange={(e) =>
 
         <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
           <div className="flex items-center space-x-3 mb-6">
-            <Settings className="w-8 h-8 text-green-500" />
+            <Settings className="w-8 h-8 text-orange-500" />
             <h3 className="text-2xl font-bold text-gray-800">
               Payment Settings
             </h3>
@@ -1662,7 +1662,7 @@ onChange={(e) =>
                         }
                   )
                 }
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400"
                 placeholder="Enter UPI ID"
               />
             </div>
@@ -1741,7 +1741,7 @@ onChange={(e) =>
                   }
                 }}
                 disabled={isSavingPaymentSettings}
-                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
               >
                 {isSavingPaymentSettings ? "Saving..." : "Save Payment Settings"}
               </button>
