@@ -10,7 +10,7 @@ const FloatingCartButton: React.FC<FloatingCartButtonProps> = ({
   cartItemCount,
   onCartClick
 }) => {
-  // if (cartItemCount === 0) return null;
+  if (cartItemCount === 0) return null;
 
   return (
     <button

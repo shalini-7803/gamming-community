@@ -3,7 +3,7 @@ import { Gift } from "lucide-react";
 
 const FlashSaleStrip: React.FC = () => {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white py-3 shadow-md">
+    <div className="relative overflow-hidden bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-600 text-white py-3 shadow-md">
       {/* Subtle shimmer */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-shimmer" />
@@ -16,26 +16,6 @@ const FlashSaleStrip: React.FC = () => {
           <MarqueeContent /> {/* duplicate for seamless loop */}
         </div>
       </div>
-
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        .animate-marquee {
-          animation: marquee 25s linear infinite;
-        }
-
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-
-        .animate-shimmer {
-          animation: shimmer 4s linear infinite;
-        }
-      `}</style>
     </div>
   );
 };
@@ -77,7 +57,7 @@ const Offer: React.FC<OfferProps> = ({ title, benefit, code, accent }) => {
   const badgeStyle =
     accent === "blue"
       ? "bg-blue-100 text-blue-900"
-      : "bg-yellow-100 text-emerald-900";
+      : "bg-orange-100 text-orange-900";
 
   return (
     <div className="flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 backdrop-blur-sm transition hover:bg-white/15">

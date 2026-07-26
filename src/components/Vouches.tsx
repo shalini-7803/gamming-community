@@ -91,31 +91,6 @@ const Vouches: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes scroll-fast {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .animate-scroll-fast {
-          animation: scroll-fast 30s linear infinite;
-        }
-
-        .animate-scroll-fast:hover {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 640px) {
-          .animate-scroll-fast {
-            animation-duration: 20s;
-          }
-        }
-      `}</style>
     </section>
   );
 };
