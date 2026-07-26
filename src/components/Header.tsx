@@ -182,104 +182,96 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="bg-gradient-to-b from-white to-slate-50 shadow-md">
+      <header className="bg-gradient-to-b from-slate-950 to-slate-900 shadow-lg border-b border-cyan-500/10">
         {!isSearchExpanded ? (
-          <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
-            <div className="hidden lg:block">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex-1">
-                  <button
-                    onClick={handleSearchClick}
-                    className="text-cyan-600 hover:text-orange-500 hover:bg-cyan-50 transition-colors p-2.5 rounded-full"
-                  >
-                    <Search className="w-6 h-6" />
-                  </button>
-                </div>
+          <div className="container mx-auto px-3 sm:px-4 py-2.5 sm:py-3">
+            <div className="hidden lg:flex items-center justify-between">
+              <div className="flex items-center space-x-8">
+                <img
+                  src="https://i.ibb.co/Z6fBvJs7/IMG-20250814-112209-181.webp"
+                  alt="Gaming Community"
+                  className="h-10 xl:h-11 w-auto object-contain cursor-pointer rounded-lg"
+                  onClick={() => navigate("/")}
+                />
 
-                <div className="flex items-center justify-center">
-                  <div
-                    onClick={() => navigate("/")}
-                    className="bg-gradient-to-br from-cyan-50 to-orange-50 p-1.5 rounded-2xl shadow-md border border-white hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-                  >
-                    <img
-                      src="https://i.ibb.co/Z6fBvJs7/IMG-20250814-112209-181.webp"
-                      alt="Gaming Community"
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 object-contain rounded-xl"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3 flex-1 justify-end">
-                  {isLoggedIn ? (
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 rounded-full border border-green-200">
-                        <User className="w-4 h-4 text-green-600" />
-                        <span className="text-green-700 font-medium text-sm">
-                          {displayName}
-                        </span>
-                      </div>
-
-                      <button
-                        onClick={() => onNavigation("logout")}
-                        className="flex items-center space-x-2 px-4 py-2 rounded-full border border-transparent text-red-600 hover:text-white hover:bg-red-500 transition-all duration-300"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Logout</span>
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={onLoginClick}
-                      className="flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-200 bg-white/70 shadow-sm text-cyan-600 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 hover:border-transparent hover:shadow-md transition-all duration-300"
-                    >
-                      <User className="w-4 h-4" />
-                      <span>Login</span>
-                    </button>
-                  )}
-
-                  <button
-                    onClick={onCartClick}
-                    className="relative flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-200 bg-white/70 shadow-sm text-cyan-600 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:border-transparent hover:shadow-md transition-all duration-300"
-                  >
-                    <ShoppingCart className="w-4 h-4" />
-                    <span>Cart</span>
-                    {cartItemCount > 0 && (
-                      <span className="absolute -top-1.5 -right-1.5 bg-gradient-to-br from-orange-500 to-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-md ring-2 ring-white">
-                        {cartItemCount}
-                      </span>
-                    )}
-                  </button>
-                </div>
+                <nav>
+                  <ul className="flex items-center space-x-1">
+                    {navItems.map((item) => (
+                      <li key={item.id}>
+                        <button
+                          onClick={() => handleNavClick(item.id)}
+                          className={`text-xs font-bold uppercase tracking-wide transition-all duration-300 py-2 px-3 rounded-md flex items-center space-x-1.5 ${
+                            item.id === "admin"
+                              ? "text-purple-300 hover:text-purple-200 bg-purple-500/10"
+                              : isNavActive(item.id)
+                              ? "text-cyan-400 bg-white/5"
+                              : "text-slate-300 hover:text-cyan-400 hover:bg-white/5"
+                          }`}
+                        >
+                          {item.id === "admin" && <Shield className="w-3.5 h-3.5" />}
+                          <span>{item.name}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               </div>
 
-              <nav className="flex justify-center">
-                <ul className="flex space-x-2">
-                  {navItems.map((item) => (
-                    <li key={item.id}>
-                      <button
-                        onClick={() => handleNavClick(item.id)}
-                        className={`font-medium transition-all duration-300 py-2 px-4 rounded-full flex items-center space-x-1 ${
-                          item.id === "admin"
-                            ? "bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-700"
-                            : isNavActive(item.id)
-                            ? "bg-cyan-50 text-cyan-700"
-                            : "text-gray-600 hover:text-cyan-600 hover:bg-gray-50"
-                        }`}
-                      >
-                        {item.id === "admin" && <Shield className="w-4 h-4" />}
-                        <span>{item.name}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+              <div className="flex items-center space-x-3">
+                <button
+                  onClick={handleSearchClick}
+                  className="text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-colors p-2.5 rounded-full"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+
+                {isLoggedIn ? (
+                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-2 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/25">
+                      <User className="w-4 h-4 text-emerald-400" />
+                      <span className="text-emerald-300 font-medium text-sm">
+                        {displayName}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => onNavigation("logout")}
+                      className="flex items-center space-x-2 px-4 py-2 rounded-full border border-transparent text-red-400 hover:text-white hover:bg-red-500 transition-all duration-300 text-sm"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={onLoginClick}
+                    className="flex items-center space-x-2 px-4 py-2 rounded-full border border-white/15 text-slate-200 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 hover:border-transparent transition-all duration-300 text-sm"
+                  >
+                    <User className="w-4 h-4" />
+                    <span>Login</span>
+                  </button>
+                )}
+
+                <button
+                  onClick={onCartClick}
+                  className="relative flex items-center space-x-2 px-4 py-2 rounded-full border border-white/15 text-slate-200 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:border-transparent transition-all duration-300 text-sm"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  <span>Cart</span>
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-gradient-to-br from-orange-500 to-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-md ring-2 ring-slate-950">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </button>
+              </div>
             </div>
 
             <div className="lg:hidden relative">
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-cyan-600 p-1 z-50 relative"
+                  className="text-slate-300 hover:text-cyan-400 p-1.5 z-50 relative"
                 >
                   {isMobileMenuOpen ? (
                     <X className="w-5 h-5" />
@@ -288,30 +280,28 @@ const Header: React.FC<HeaderProps> = ({
                   )}
                 </button>
 
-                <div className="flex justify-center w-full relative">
-                  <img
-                    src="https://i.ibb.co/Z6fBvJs7/IMG-20250814-112209-181.webp"
-                    alt="Gaming Community"
-                    className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 object-contain hover:scale-105 transition-transform duration-300 shadow-lg rounded-lg cursor-pointer relative left-2 sm:left-4 md:left-0"
-                    onClick={() => navigate("/")}
-                  />
-                </div>
+                <img
+                  src="https://i.ibb.co/Z6fBvJs7/IMG-20250814-112209-181.webp"
+                  alt="Gaming Community"
+                  className="h-8 xs:h-9 sm:h-10 w-auto object-contain cursor-pointer rounded-md"
+                  onClick={() => navigate("/")}
+                />
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
                   <button
                     onClick={handleSearchClick}
-                    className="text-cyan-600 p-1"
+                    className="text-slate-300 hover:text-cyan-400 p-1.5"
                   >
                     <Search className="w-4 h-4" />
                   </button>
 
                   <button
                     onClick={onCartClick}
-                    className="relative text-cyan-600 p-1"
+                    className="relative text-slate-300 hover:text-cyan-400 p-1.5"
                   >
                     <ShoppingCart className="w-4 h-4" />
                     {cartItemCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px]">
+                      <span className="absolute -top-0.5 -right-0.5 bg-gradient-to-br from-orange-500 to-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px] ring-2 ring-slate-950">
                         {cartItemCount}
                       </span>
                     )}
@@ -320,17 +310,19 @@ const Header: React.FC<HeaderProps> = ({
               </div>
 
               {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
+                <div className="absolute top-full left-0 right-0 bg-slate-950 shadow-lg border-t border-white/10 z-50">
                   <div className="container mx-auto px-3 sm:px-4 py-4">
-                    <nav className="space-y-2">
+                    <nav className="space-y-1">
                       {navItems.map((item) => (
                         <button
                           key={item.id}
                           onClick={() => handleNavClick(item.id)}
-                          className={`block w-full text-left py-3 px-2 text-cyan-600 hover:text-orange-500 transition-colors hover:bg-gray-50 rounded-lg flex items-center space-x-2 ${
+                          className={`block w-full text-left py-3 px-3 transition-colors rounded-lg flex items-center space-x-2 text-sm font-semibold uppercase tracking-wide ${
                             item.id === "admin"
-                              ? "bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200"
-                              : ""
+                              ? "text-purple-300 bg-purple-500/10 border border-purple-500/25"
+                              : isNavActive(item.id)
+                              ? "text-cyan-400 bg-white/5"
+                              : "text-slate-300 hover:text-cyan-400 hover:bg-white/5"
                           }`}
                         >
                           {item.id === "admin" && (
@@ -343,7 +335,7 @@ const Header: React.FC<HeaderProps> = ({
 
                     {isLoggedIn ? (
                       <div className="mt-4 space-y-2">
-                        <div className="py-3 px-2 text-green-600 bg-green-50 rounded-lg flex items-center justify-between">
+                        <div className="py-3 px-3 text-emerald-300 bg-emerald-500/10 rounded-lg flex items-center justify-between border border-emerald-500/25">
                           <span>Welcome, {displayName}!</span>
                         </div>
 
@@ -352,7 +344,7 @@ const Header: React.FC<HeaderProps> = ({
                             onNavigation("logout");
                             setIsMobileMenuOpen(false);
                           }}
-                          className="w-full text-left py-3 px-2 text-red-600 hover:text-red-700 transition-colors hover:bg-red-50 rounded-lg flex items-center space-x-2"
+                          className="w-full text-left py-3 px-3 text-red-400 hover:text-white transition-colors hover:bg-red-500 rounded-lg flex items-center space-x-2"
                         >
                           <LogOut className="w-4 h-4" />
                           <span>Logout</span>
@@ -364,7 +356,7 @@ const Header: React.FC<HeaderProps> = ({
                           onLoginClick();
                           setIsMobileMenuOpen(false);
                         }}
-                        className="mt-4 w-full text-left py-3 px-2 text-cyan-600 hover:text-orange-500 transition-colors hover:bg-gray-50 rounded-lg"
+                        className="mt-4 w-full text-left py-3 px-3 text-slate-200 hover:text-white transition-all hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 rounded-lg border border-white/15"
                       >
                         Admin Login
                       </button>
@@ -379,7 +371,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex items-center justify-between gap-1 sm:gap-4">
               <button
                 onClick={handleSearchClose}
-                className="text-cyan-600 hover:text-orange-500 transition-colors p-1"
+                className="text-slate-300 hover:text-cyan-400 transition-colors p-1"
               >
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
