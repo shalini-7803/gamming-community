@@ -348,7 +348,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setShowFilters((prev) => !prev)}
-                className="lg:hidden bg-white border border-gray-200 px-4 py-3 rounded-2xl flex items-center gap-2 text-gray-700"
+                className="lg:hidden border border-gray-200 px-4 py-3 rounded-2xl flex items-center gap-2 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 hover:border-transparent transition-all duration-300"
               >
                 <Filter className="w-4 h-4" />
                 Filters
@@ -386,7 +386,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">
                   Platform
                 </label>
                 <select
@@ -405,7 +405,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">
                   Sort by
                 </label>
                 <select
@@ -424,14 +424,16 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               </div>
 
               <div className="text-sm text-gray-600 lg:text-center">
-                <span className="font-semibold text-gray-800">{totalCount}</span>{" "}
+                <span className="font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-full">
+                  {totalCount}
+                </span>{" "}
                 game{totalCount !== 1 ? "s" : ""} found
               </div>
 
               <div className="lg:text-right">
                 <button
                   onClick={resetFilters}
-                  className="w-full lg:w-auto bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-3 rounded-2xl font-medium transition-colors"
+                  className="w-full lg:w-auto border border-gray-200 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 hover:border-transparent px-5 py-3 rounded-2xl font-medium transition-all duration-300"
                 >
                   Reset Filters
                 </button>
