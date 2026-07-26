@@ -9,7 +9,6 @@ import {
 import Loader from "../components/Loader";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const platformOptions = ["all", "PS5", "PS4", "PSVR2", "Xbox", "PC"];
 const sortOptions = [
   { value: "name-asc", label: "Name: A to Z" },
   { value: "name-desc", label: "Name: Z to A" },
@@ -17,15 +16,24 @@ const sortOptions = [
   { value: "price-high", label: "Price: High to Low" },
 ];
 
-const GamesPage: React.FC = () => {
+interface GamesPageProps {
+  /** When set, the platform filter is locked to this value (used for the /pc-games route). */
+  lockedPlatform?: string;
+}
+
+const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const platformOptions = lockedPlatform
+    ? [lockedPlatform]
+    : ["all", "PS5", "PS4", "PSVR2", "Xbox", "PC"];
 
   const [searchQuery, setSearchQuery] = useState(
     searchParams.get("search") || ""
   );
   const [selectedPlatform, setSelectedPlatform] = useState(
-    searchParams.get("platform") || "all"
+    lockedPlatform || searchParams.get("platform") || "all"
   );
   const [sortBy, setSortBy] = useState(searchParams.get("sort") || "name-asc");
 
@@ -33,7 +41,7 @@ const GamesPage: React.FC = () => {
     searchParams.get("search") || ""
   );
   const [tempSelectedPlatform, setTempSelectedPlatform] = useState(
-    searchParams.get("platform") || "all"
+    lockedPlatform || searchParams.get("platform") || "all"
   );
   const [tempSortBy, setTempSortBy] = useState(
     searchParams.get("sort") || "name-asc"
@@ -106,11 +114,11 @@ const GamesPage: React.FC = () => {
 
   const resetFilters = () => {
     setTempSearchQuery("");
-    setTempSelectedPlatform("all");
+    setTempSelectedPlatform(lockedPlatform || "all");
     setTempSortBy("name-asc");
 
     setSearchQuery("");
-    setSelectedPlatform("all");
+    setSelectedPlatform(lockedPlatform || "all");
     setSortBy("name-asc");
     setCurrentPage(1);
   };
