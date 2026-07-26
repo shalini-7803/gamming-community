@@ -397,57 +397,47 @@ orderStatusFilter
   };
 
   const renderOrders = () => (
-  <div className="bg-white rounded-xl shadow overflow-x-auto">
-  <div className="flex justify-between items-center mb-4">
-  <h3 className="text-xl font-bold">
-    Orders
-  </h3>
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-4 sm:p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800">
+          Orders
+        </h3>
 
-  <button
-    onClick={loadOrders}
-    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
-  >
-    Refresh
-  </button>
-</div>
-    <table className="w-full">
-      <thead>
-        <tr className="bg-gray-100">
-          <th className="p-3 text-left">Order Code</th>
-          <th className="p-3 text-left">Customer</th>
-          <th className="p-3 text-left">Mobile</th>
-          <th className="p-3 text-left">Amount</th>
-          <th className="p-3 text-left">Status</th>
-          {/* <th className="p-3 text-left">Payment</th> */}
-          <th className="p-3 text-left">Actions</th>
-        </tr>
-      </thead>
+        <button
+          onClick={loadOrders}
+          className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-300 shadow-md"
+        >
+          Refresh
+        </button>
+      </div>
 
-      <tbody>
+      {/* Mobile: stacked cards (no readable horizontal-scroll table on small screens) */}
+      <div className="md:hidden space-y-3">
         {(paginatedItems as Order[]).map((order) => (
-          <tr key={order.id} className="border-b">
-            <td className="p-3">
-  <button
-    onClick={() => setSelectedOrder(order)}
-    className="text-blue-600 hover:underline font-medium"
-  >
-    {order.order_code}
-  </button>
-</td>
+          <div
+            key={order.id}
+            className="border border-gray-200 rounded-xl p-4 bg-white/60"
+          >
+            <div className="flex items-center justify-between mb-2 gap-2">
+              <button
+                onClick={() => setSelectedOrder(order)}
+                className="text-cyan-600 hover:underline font-semibold text-sm truncate"
+              >
+                {order.order_code}
+              </button>
+              <span className="text-sm font-bold text-gray-800 flex-shrink-0">
+                ₹{order.total_amount}
+              </span>
+            </div>
 
-            <td className="p-3">
+            <div className="text-sm text-gray-600 mb-1">
               {order.customer_name}
-            </td>
-
-            <td className="p-3">
+            </div>
+            <div className="text-xs text-gray-500 mb-3">
               {order.customer_mobile}
-            </td>
+            </div>
 
-            <td className="p-3">
-              ₹{order.total_amount}
-            </td>
-
-            <td className="p-3">
+            <div className="flex items-center gap-2">
               <select
                 value={order.status}
                 onChange={async (e) => {
@@ -462,63 +452,143 @@ orderStatusFilter
                     loadOrders();
                   }
                 }}
-                className="border rounded px-2 py-1"
+                className="flex-1 min-w-0 border border-gray-200 rounded-lg px-2 py-1.5 text-sm"
               >
-                <option value="Pending">
-                  Pending
-                </option>
-
-                <option value="Processing">
-                  Processing
-                </option>
-
-                <option value="Completed">
-                  Completed
-                </option>
-
-                <option value="Cancelled">
-                  Cancelled
-                </option>
+                <option value="Pending">Pending</option>
+                <option value="Processing">Processing</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
               </select>
-            </td>
 
-            {/* <td className="p-3">
-              {order.payment_status}
-            </td> */}
-
-            <td className="p-3">
               <button
                 onClick={async () => {
-                  if (
-                    !window.confirm(
-                      "Delete order?"
-                    )
-                  )
-                    return;
+                  if (!window.confirm("Delete order?")) return;
 
-                  const success =
-                    await BackendService.deleteOrder(
-                      order.id
-                    );
+                  const success = await BackendService.deleteOrder(
+                    order.id
+                  );
 
                   if (success) {
-                    toast.success(
-                      "Order deleted"
-                    );
+                    toast.success("Order deleted");
                     await loadOrders();
                   }
                 }}
-                className="bg-red-500 text-white px-3 py-1 rounded"
+                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm flex-shrink-0 transition-colors"
               >
                 Delete
               </button>
-            </td>
-          </tr>
+            </div>
+          </div>
         ))}
-      </tbody>
-    </table>
-  </div>
-);
+      </div>
+
+      {/* Desktop/tablet: table */}
+      <div className="hidden md:block overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="p-3 text-left">Order Code</th>
+              <th className="p-3 text-left">Customer</th>
+              <th className="p-3 text-left">Mobile</th>
+              <th className="p-3 text-left">Amount</th>
+              <th className="p-3 text-left">Status</th>
+              <th className="p-3 text-left">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {(paginatedItems as Order[]).map((order) => (
+              <tr key={order.id} className="border-b">
+                <td className="p-3">
+                  <button
+                    onClick={() => setSelectedOrder(order)}
+                    className="text-cyan-600 hover:underline font-medium"
+                  >
+                    {order.order_code}
+                  </button>
+                </td>
+
+                <td className="p-3">
+                  {order.customer_name}
+                </td>
+
+                <td className="p-3">
+                  {order.customer_mobile}
+                </td>
+
+                <td className="p-3">
+                  ₹{order.total_amount}
+                </td>
+
+                <td className="p-3">
+                  <select
+                    value={order.status}
+                    onChange={async (e) => {
+                      const success =
+                        await BackendService.updateOrderStatus(
+                          order.id,
+                          e.target.value
+                        );
+
+                      if (success) {
+                        toast.success("Order updated");
+                        loadOrders();
+                      }
+                    }}
+                    className="border border-gray-200 rounded-lg px-2 py-1"
+                  >
+                    <option value="Pending">
+                      Pending
+                    </option>
+
+                    <option value="Processing">
+                      Processing
+                    </option>
+
+                    <option value="Completed">
+                      Completed
+                    </option>
+
+                    <option value="Cancelled">
+                      Cancelled
+                    </option>
+                  </select>
+                </td>
+
+                <td className="p-3">
+                  <button
+                    onClick={async () => {
+                      if (
+                        !window.confirm(
+                          "Delete order?"
+                        )
+                      )
+                        return;
+
+                      const success =
+                        await BackendService.deleteOrder(
+                          order.id
+                        );
+
+                      if (success) {
+                        toast.success(
+                          "Order deleted"
+                        );
+                        await loadOrders();
+                      }
+                    }}
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg transition-colors"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 
   const handleEditGame = (item: Game) => {
     setEditingItem(item);
@@ -2240,23 +2310,23 @@ onChange={(e) =>
         )}
 
         {selectedOrder && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6">
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white/95 backdrop-blur-sm rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 shadow-2xl border border-white/20">
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800">
           Order Details
         </h2>
 
         <button
           onClick={() => setSelectedOrder(null)}
-          className="text-gray-500 text-2xl"
+          className="text-gray-500 hover:text-gray-700 text-2xl transition-colors"
         >
           ×
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 
         <div>
           <p className="text-sm text-gray-500">
@@ -2349,6 +2419,7 @@ onChange={(e) =>
           Purchased Items
         </h3>
 
+        <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="border-b">
@@ -2409,6 +2480,7 @@ onChange={(e) =>
             )}
           </tbody>
         </table>
+        </div>
 
       </div>
 
