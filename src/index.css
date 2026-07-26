@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (max-width: 524px) {
+  .flash-strip-wrapper {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 8px;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    gap: 0.25rem;
+  }
+
+  .flash-strip-wrapper span,
+  .flash-strip-wrapper button {
+    font-size: 7px !important;
+  }
+
+  .flash-strip-wrapper svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .flash-strip-wrapper button {
+    padding: 4px 8px !important;
+  }
+}
+
+@keyframes review-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-review-scroll {
+  animation-name: review-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-review-scroll:hover {
+  animation-play-state: paused;
+}
