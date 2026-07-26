@@ -6,6 +6,7 @@ import {
   Menu,
   X,
   Shield,
+  ShieldCheck,
   LogOut,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -148,6 +149,18 @@ const Header: React.FC<HeaderProps> = ({
     navItems.push({ name: "Admin", id: "admin" });
   }
 
+  const isNavActive = (itemId: string) => {
+    if (itemId === "home") return location.pathname === "/";
+    if (itemId === "games")
+      return (
+        location.pathname.startsWith("/games") ||
+        location.pathname.startsWith("/pc-games")
+      );
+    if (itemId === "faq") return location.pathname === "/faq";
+    if (itemId === "admin") return location.pathname === "/admin";
+    return false;
+  };
+
   const handleNavClick = (itemId: string) => {
     if (itemId === "home") {
       navigate("/");
@@ -169,7 +182,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="bg-white shadow-md">
+      <header className="bg-gradient-to-b from-white to-slate-50 shadow-md">
         {!isSearchExpanded ? (
           <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
             <div className="hidden lg:block">
@@ -177,24 +190,28 @@ const Header: React.FC<HeaderProps> = ({
                 <div className="flex-1">
                   <button
                     onClick={handleSearchClick}
-                    className="text-cyan-600 hover:text-orange-500 transition-colors p-2"
+                    className="text-cyan-600 hover:text-orange-500 hover:bg-cyan-50 transition-colors p-2.5 rounded-full"
                   >
                     <Search className="w-6 h-6" />
                   </button>
                 </div>
 
                 <div className="flex items-center justify-center">
-                  <img
-                    src="https://i.ibb.co/Z6fBvJs7/IMG-20250814-112209-181.webp"
-                    alt="Gaming Community"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 object-contain hover:scale-105 transition-transform duration-300 shadow-lg rounded-xl cursor-pointer"
+                  <div
                     onClick={() => navigate("/")}
-                  />
+                    className="bg-gradient-to-br from-cyan-50 to-orange-50 p-1.5 rounded-2xl shadow-md border border-white hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+                  >
+                    <img
+                      src="https://i.ibb.co/Z6fBvJs7/IMG-20250814-112209-181.webp"
+                      alt="Gaming Community"
+                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 object-contain rounded-xl"
+                    />
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-4 flex-1 justify-end">
+                <div className="flex items-center space-x-3 flex-1 justify-end">
                   {isLoggedIn ? (
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-3">
                       <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 rounded-full border border-green-200">
                         <User className="w-4 h-4 text-green-600" />
                         <span className="text-green-700 font-medium text-sm">
@@ -204,7 +221,7 @@ const Header: React.FC<HeaderProps> = ({
 
                       <button
                         onClick={() => onNavigation("logout")}
-                        className="flex items-center space-x-2 px-4 py-2 text-red-600 hover:text-red-700 transition-colors"
+                        className="flex items-center space-x-2 px-4 py-2 rounded-full border border-transparent text-red-600 hover:text-white hover:bg-red-500 transition-all duration-300"
                       >
                         <LogOut className="w-4 h-4" />
                         <span>Logout</span>
@@ -213,7 +230,7 @@ const Header: React.FC<HeaderProps> = ({
                   ) : (
                     <button
                       onClick={onLoginClick}
-                      className="flex items-center space-x-2 px-4 py-2 text-cyan-600 hover:text-orange-500 transition-colors"
+                      className="flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-200 bg-white/70 shadow-sm text-cyan-600 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 hover:border-transparent hover:shadow-md transition-all duration-300"
                     >
                       <User className="w-4 h-4" />
                       <span>Login</span>
@@ -222,12 +239,12 @@ const Header: React.FC<HeaderProps> = ({
 
                   <button
                     onClick={onCartClick}
-                    className="relative flex items-center space-x-2 px-4 py-2 text-cyan-600 hover:text-orange-500 transition-colors"
+                    className="relative flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-200 bg-white/70 shadow-sm text-cyan-600 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:border-transparent hover:shadow-md transition-all duration-300"
                   >
                     <ShoppingCart className="w-4 h-4" />
                     <span>Cart</span>
                     {cartItemCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      <span className="absolute -top-1.5 -right-1.5 bg-gradient-to-br from-orange-500 to-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-md ring-2 ring-white">
                         {cartItemCount}
                       </span>
                     )}
@@ -236,15 +253,17 @@ const Header: React.FC<HeaderProps> = ({
               </div>
 
               <nav className="flex justify-center">
-                <ul className="flex space-x-8">
+                <ul className="flex space-x-2">
                   {navItems.map((item) => (
                     <li key={item.id}>
                       <button
                         onClick={() => handleNavClick(item.id)}
-                        className={`text-cyan-600 hover:text-orange-500 font-medium transition-colors py-2 flex items-center space-x-1 ${
+                        className={`font-medium transition-all duration-300 py-2 px-4 rounded-full flex items-center space-x-1 ${
                           item.id === "admin"
-                            ? "bg-gradient-to-r from-purple-100 to-indigo-100 px-3 rounded-full"
-                            : ""
+                            ? "bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-700"
+                            : isNavActive(item.id)
+                            ? "bg-cyan-50 text-cyan-700"
+                            : "text-gray-600 hover:text-cyan-600 hover:bg-gray-50"
                         }`}
                       >
                         {item.id === "admin" && <Shield className="w-4 h-4" />}
@@ -439,10 +458,11 @@ const Header: React.FC<HeaderProps> = ({
         )}
       </header>
 
-      <div className="bg-cyan-400 text-white py-2">
-        <div className="container mx-auto px-3 sm:px-4 text-center">
+      <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-2">
+        <div className="container mx-auto px-3 sm:px-4 flex items-center justify-center space-x-2">
+          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
           <p className="text-xs sm:text-sm md:text-base font-medium">
-            🕹️ Trusted by Top Streamers and Gamers – Shop the Same Games They
+            Trusted by Top Streamers and Gamers – Shop the Same Games They
             Play!
           </p>
         </div>
