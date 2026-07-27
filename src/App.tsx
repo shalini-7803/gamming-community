@@ -21,6 +21,7 @@ import AdminPage from "./pages/AdminPage";
 import TermsPage from "./pages/TermsPage";
 import RefundPolicyPage from "./pages/RefundPolicyPage";
 import FAQPage from "./pages/FAQPage";
+import ReferAndEarnPage from "./pages/ReferAndEarnPage";
 
 import { Game } from "./config/supabase";
 import { settingsService, ShopStatus } from "./services/settingsService";
@@ -515,6 +516,7 @@ function App() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/refund-policy" element={<RefundPolicyPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/refer-and-earn" element={<ReferAndEarnPage />} />
           </Routes>
         </main>
 

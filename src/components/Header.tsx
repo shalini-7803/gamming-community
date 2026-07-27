@@ -142,6 +142,7 @@ const Header: React.FC<HeaderProps> = ({
     { name: "Browse Games", id: "games" },
     { name: "Categories", id: "categories" },
     { name: "FAQ", id: "faq" },
+    { name: "Refer & Earn", id: "refer" },
     { name: "Contact", id: "contact" },
   ];
 
@@ -157,6 +158,7 @@ const Header: React.FC<HeaderProps> = ({
         location.pathname.startsWith("/pc-games")
       );
     if (itemId === "faq") return location.pathname === "/faq";
+    if (itemId === "refer") return location.pathname === "/refer-and-earn";
     if (itemId === "admin") return location.pathname === "/admin";
     return false;
   };
@@ -173,6 +175,8 @@ const Header: React.FC<HeaderProps> = ({
       window.open(whatsappUrl, "_blank");
     } else if (itemId === "games") {
       navigate("/games");
+    } else if (itemId === "refer") {
+      navigate("/refer-and-earn");
     } else {
       onNavigation(itemId);
     }

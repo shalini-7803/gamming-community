@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
 interface FooterProps {
@@ -6,16 +7,21 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigation }) => {
+  const navigate = useNavigate();
+
   const quickLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'FAQ', action: 'faq' },
+    { name: 'Refer & Earn', route: '/refer-and-earn' },
     { name: 'Contact', action: 'contact' },
     { name: 'Terms & Conditions', action: 'terms' },
     { name: 'Cancellation & Refund Policy', action: 'refund' }
   ];
 
   const handleLinkClick = (link: any) => {
-    if (link.action && onNavigation) {
+    if (link.route) {
+      navigate(link.route);
+    } else if (link.action && onNavigation) {
       onNavigation(link.action);
     }
   };
