@@ -7,15 +7,34 @@ interface LoaderProps {
   fullScreen?: boolean;
 }
 
-const Loader: React.FC<LoaderProps> = ({ 
-  size = 'medium', 
-  message = 'Loading...', 
-  fullScreen = false 
+const KEYS = [
+  { label: 'Y', bg: 'bg-yellow-400', text: 'text-yellow-900', pos: 'col-start-2 row-start-1', delay: '0s' },
+  { label: 'X', bg: 'bg-blue-400', text: 'text-blue-900', pos: 'col-start-1 row-start-2', delay: '0.45s' },
+  { label: 'B', bg: 'bg-red-400', text: 'text-red-900', pos: 'col-start-3 row-start-2', delay: '0.15s' },
+  { label: 'A', bg: 'bg-green-400', text: 'text-green-900', pos: 'col-start-2 row-start-3', delay: '0.3s' },
+];
+
+const Loader: React.FC<LoaderProps> = ({
+  size = 'medium',
+  message = 'Loading...',
+  fullScreen = false
 }) => {
-  const sizeClasses = {
-    small: 'w-6 h-6',
-    medium: 'w-12 h-12',
-    large: 'w-16 h-16'
+  const diamondSizeClasses = {
+    small: 'w-24 h-24',
+    medium: 'w-28 h-28',
+    large: 'w-32 h-32'
+  };
+
+  const keySizeClasses = {
+    small: 'w-7 h-7 text-xs',
+    medium: 'w-9 h-9 text-sm',
+    large: 'w-11 h-11 text-base'
+  };
+
+  const iconSizeClasses = {
+    small: 'w-8 h-8',
+    medium: 'w-10 h-10',
+    large: 'w-12 h-12'
   };
 
   const textSizeClasses = {
@@ -24,60 +43,54 @@ const Loader: React.FC<LoaderProps> = ({
     large: 'text-lg'
   };
 
-  const containerClasses = fullScreen 
-    ? 'fixed inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 flex items-center justify-center z-50'
+  const containerClasses = fullScreen
+    ? 'fixed inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-black flex items-center justify-center z-50 overflow-hidden'
     : 'flex flex-col items-center justify-center py-12';
 
   return (
     <div className={containerClasses}>
-      <div className="flex flex-col items-center space-y-4">
-        {/* Animated Gaming Controller */}
-        <div className="relative">
-          {/* Outer rotating ring */}
-          <div className={`${sizeClasses[size]} border-4 border-transparent border-t-cyan-400 border-r-orange-500 rounded-full animate-spin`}></div>
-          
-          {/* Inner pulsing controller */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-gradient-to-r from-cyan-400 to-blue-500 p-2 rounded-full animate-pulse shadow-lg">
-              <Gamepad2 className={`${size === 'small' ? 'w-3 h-3' : size === 'medium' ? 'w-6 h-6' : 'w-8 h-8'} text-white`} />
-            </div>
-          </div>
-        </div>
-
-        {/* Loading dots animation */}
-        <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-orange-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-        </div>
-
-        {/* Loading message */}
-        <div className="text-center">
-          <p className={`${textSizeClasses[size]} font-medium bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent`}>
-            {message}
-          </p>
-          <div className="mt-2 text-xs text-gray-500">
-            Fetching the best gaming deals...
-          </div>
-        </div>
-
-        {/* Animated progress bar */}
-        <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-orange-500 rounded-full animate-pulse"></div>
-        </div>
-      </div>
-
-      {/* Background pattern for full screen loader */}
+      {/* Ambient background glow, full screen only */}
       {fullScreen && (
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-24 -left-16 w-72 h-72 bg-violet-600/20 rounded-full blur-3xl animate-loader-drift" />
+          <div
+            className="absolute -bottom-24 -right-16 w-72 h-72 bg-fuchsia-600/15 rounded-full blur-3xl animate-loader-drift"
+            style={{ animationDelay: '1.5s' }}
           />
         </div>
       )}
+
+      <div className="relative flex flex-col items-center space-y-8 sm:space-y-10 animate-loader-fade-in">
+        {/* Controller image */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-fuchsia-500/25 blur-xl rounded-full animate-loader-breathe" />
+          <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl p-3 shadow-[0_0_25px_rgba(217,70,239,0.45)]">
+            <Gamepad2 className={`${iconSizeClasses[size]} text-white animate-controller-bob`} />
+          </div>
+        </div>
+
+        {/* Message */}
+        <p
+          className={`${textSizeClasses[size]} font-semibold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent animate-loader-flicker`}
+        >
+          {message}
+        </p>
+
+        {/* Animated controller keys */}
+        <div className={`relative grid grid-cols-3 grid-rows-3 place-items-center ${diamondSizeClasses[size]}`}>
+          <div className="absolute inset-0 bg-fuchsia-500/10 blur-xl rounded-full" />
+
+          {KEYS.map((key) => (
+            <div
+              key={key.label}
+              className={`relative ${key.pos} ${keySizeClasses[size]} ${key.bg} ${key.text} rounded-xl flex items-center justify-center font-black shadow-lg animate-key-press`}
+              style={{ animationDelay: key.delay }}
+            >
+              {key.label}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

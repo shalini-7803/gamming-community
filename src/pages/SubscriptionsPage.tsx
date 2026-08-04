@@ -1,31 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowLeft, Search, Filter, Grid, List } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSubscriptions } from "../hooks/useSupabaseData";
 import { Game, getStartingPrice } from "../config/supabase";
 import Loader from "../components/Loader";
+import Pagination from "../components/ui/Pagination";
+
+interface RestoredSubscriptionsState {
+  page?: number;
+  search?: string;
+  priceRange?: [number, number];
+  sort?: string;
+  view?: "grid" | "list";
+}
 
 const SubscriptionsPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const restoredState = location.state as RestoredSubscriptionsState | null;
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [tempSearchQuery, setTempSearchQuery] = useState("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
-  const [sortBy, setSortBy] = useState("name-asc");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [searchQuery, setSearchQuery] = useState(restoredState?.search || "");
+  const [tempSearchQuery, setTempSearchQuery] = useState(restoredState?.search || "");
+  const [priceRange, setPriceRange] = useState<[number, number]>(
+    restoredState?.priceRange || [0, 10000]
+  );
+  const [sortBy, setSortBy] = useState(restoredState?.sort || "name-asc");
+  const [currentPage, setCurrentPage] = useState(restoredState?.page || 1);
+  const [viewMode, setViewMode] = useState<"grid" | "list">(restoredState?.view || "grid");
   const [showFilters, setShowFilters] = useState(false);
 
   const itemsPerPage = 12;
-
-  useEffect(() => {
-    const state = location.state as { search?: string } | null;
-    if (state?.search) {
-      setSearchQuery(state.search);
-      setTempSearchQuery(state.search);
-    }
-  }, [location.state]);
 
   const { subscriptions = [], totalCount, totalPages, loading, error } =
     useSubscriptions({
@@ -36,9 +40,29 @@ const SubscriptionsPage: React.FC = () => {
       limit: itemsPerPage,
     });
 
+  const skipNextPageReset = useRef(true);
   useEffect(() => {
+    if (skipNextPageReset.current) {
+      skipNextPageReset.current = false;
+      return;
+    }
     setCurrentPage(1);
   }, [searchQuery, priceRange, sortBy]);
+
+  useEffect(() => {
+    if (loading) return;
+
+    const key = `subs-scroll:${window.location.pathname}${window.location.search}:${currentPage}`;
+    const savedScrollY = sessionStorage.getItem(key);
+
+    if (savedScrollY) {
+      sessionStorage.removeItem(key);
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: Number(savedScrollY), behavior: "auto" });
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -46,6 +70,11 @@ const SubscriptionsPage: React.FC = () => {
   };
 
  const handleSubscriptionClick = (subscription: Game) => {
+  sessionStorage.setItem(
+    `subs-scroll:${window.location.pathname}${window.location.search}:${currentPage}`,
+    String(window.scrollY)
+  );
+
   navigate(`/subscriptions/${subscription.id}`, {
     state: {
       page: currentPage,
@@ -62,18 +91,18 @@ const SubscriptionsPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
             <div className="flex items-center space-x-2 sm:space-x-4">
               <button
                 onClick={() => navigate("/")}
-                className="flex items-center space-x-1 sm:space-x-2 text-cyan-600 hover:text-orange-500 transition-colors bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
+                className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors bg-white/5 border border-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
               >
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Back</span>
               </button>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
                 Subscriptions
               </h1>
             </div>
@@ -90,24 +119,24 @@ const SubscriptionsPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
             <div className="flex items-center space-x-2 sm:space-x-4">
               <button
                 onClick={() => navigate("/")}
-                className="flex items-center space-x-1 sm:space-x-2 text-cyan-600 hover:text-orange-500 transition-colors bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
+                className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors bg-white/5 border border-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
               >
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Back</span>
               </button>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
                 Subscriptions
               </h1>
             </div>
           </div>
           <div className="text-center py-12">
-            <p className="text-red-600">
+            <p className="text-red-400">
               Failed to load subscriptions. Please try again later.
             </p>
           </div>
@@ -117,18 +146,18 @@ const SubscriptionsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <div className="flex items-center justify-between mb-6 sm:mb-8">
           <div className="flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center space-x-1 sm:space-x-2 text-cyan-600 hover:text-orange-500 transition-colors bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
+              className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors bg-white/5 border border-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Back</span>
             </button>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
               Subscriptions
             </h1>
           </div>
@@ -136,7 +165,7 @@ const SubscriptionsPage: React.FC = () => {
           <div className="flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={() => setViewMode(viewMode === "grid" ? "list" : "grid")}
-              className="p-2 text-gray-600 hover:text-cyan-600 transition-colors bg-white/80 backdrop-blur-sm rounded-full shadow-lg"
+              className="p-2 text-slate-300 hover:text-fuchsia-400 transition-colors bg-white/5 border border-white/10 backdrop-blur-sm rounded-full shadow-lg"
             >
               {viewMode === "grid" ? (
                 <List className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -146,7 +175,7 @@ const SubscriptionsPage: React.FC = () => {
             </button>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-3 sm:px-4 py-2 rounded-full hover:from-cyan-500 hover:to-blue-600 transition-colors shadow-lg text-sm sm:text-base"
+              className="lg:hidden flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-3 sm:px-4 py-2 rounded-full hover:from-violet-600 hover:to-fuchsia-600 transition-colors shadow-lg text-sm sm:text-base"
             >
               <Filter className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>Filters</span>
@@ -160,18 +189,18 @@ const SubscriptionsPage: React.FC = () => {
               showFilters ? "block" : "hidden"
             } space-y-4 sm:space-y-6`}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-white/20">
-              <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-3 sm:mb-4">
+            <div className="bg-slate-900/70 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-white/10">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">
                 Filters
               </h3>
 
               <div className="mb-4 sm:mb-6">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">
                   Search Subscriptions
                 </label>
                 <div className="space-y-2">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 w-4 h-4" />
                     <input
                       type="text"
                       placeholder="Search subscriptions..."
@@ -182,13 +211,13 @@ const SubscriptionsPage: React.FC = () => {
                           setSearchQuery(tempSearchQuery);
                         }
                       }}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent text-sm"
+                      className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-white/10 text-white placeholder-slate-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent text-sm"
                     />
                   </div>
 
                   <button
                     onClick={() => setSearchQuery(tempSearchQuery)}
-                    className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-orange-500 hover:to-red-500 text-white px-4 py-2 rounded-lg shadow-lg transition-all"
+                    className="w-full bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-4 py-2 rounded-lg shadow-lg transition-all"
                   >
                     Search
                   </button>
@@ -196,7 +225,7 @@ const SubscriptionsPage: React.FC = () => {
               </div>
 
               <div className="mb-4 sm:mb-6">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">
                   Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}
                 </label>
                 <div className="space-y-2">
@@ -211,7 +240,7 @@ const SubscriptionsPage: React.FC = () => {
                         priceRange[1],
                       ])
                     }
-                    className="w-full"
+                    className="w-full accent-fuchsia-500"
                   />
                   <input
                     type="range"
@@ -224,19 +253,19 @@ const SubscriptionsPage: React.FC = () => {
                         Math.max(Number(e.target.value), priceRange[0]),
                       ])
                     }
-                    className="w-full"
+                    className="w-full accent-fuchsia-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">
                   Sort By
                 </label>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent text-sm"
+                  className="w-full p-2 bg-slate-800 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent text-sm"
                 >
                   <option value="name-asc">Name (A-Z)</option>
                   <option value="name-desc">Name (Z-A)</option>
@@ -249,14 +278,14 @@ const SubscriptionsPage: React.FC = () => {
 
           <div className="lg:col-span-3">
             <div className="flex items-center justify-between mb-4 sm:mb-6">
-              <p className="text-gray-600 text-sm sm:text-base">
+              <p className="text-slate-400 text-sm sm:text-base">
                 Showing {showingFrom}-{showingTo} of {totalCount} subscriptions
               </p>
             </div>
 
             {subscriptions.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600">
+                <p className="text-slate-400">
                   No subscriptions found matching your criteria.
                 </p>
               </div>
@@ -265,7 +294,7 @@ const SubscriptionsPage: React.FC = () => {
                 {subscriptions.map((subscription) => (
                   <div
                     key={subscription.id}
-                    className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 sm:hover:-translate-y-3 cursor-pointer group"
+                    className="bg-slate-900/70 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-white/10 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-300 transform hover:-translate-y-1 sm:hover:-translate-y-3 cursor-pointer group"
                     onClick={() => handleSubscriptionClick(subscription)}
                   >
                     <div className="relative overflow-hidden">
@@ -274,20 +303,20 @@ const SubscriptionsPage: React.FC = () => {
                         alt={subscription.title}
                         className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs font-medium shadow-lg">
+                      <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs font-medium shadow-lg">
                         Subscription
                       </div>
                     </div>
                     <div className="p-3 sm:p-4">
-                      <h3 className="font-bold text-gray-800 text-xs sm:text-sm mb-2 line-clamp-2">
+                      <h3 className="font-bold text-white text-xs sm:text-sm mb-2 line-clamp-2 group-hover:text-fuchsia-400 transition-colors">
                         {subscription.title}
                       </h3>
                       <div className="flex items-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
-                        <span className="text-sm sm:text-lg font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                        <span className="text-sm sm:text-lg font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
                           ₹{getStartingPrice(subscription)}
                         </span>
                       </div>
-                      <button className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-orange-500 hover:to-red-500 text-white py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                      <button className="w-full bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                         Select Options
                       </button>
                     </div>
@@ -299,7 +328,7 @@ const SubscriptionsPage: React.FC = () => {
                 {subscriptions.map((subscription) => (
                   <div
                     key={subscription.id}
-                    className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="bg-slate-900/70 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-white/10 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_25px_rgba(217,70,239,0.2)] transition-all duration-300 cursor-pointer"
                     onClick={() => handleSubscriptionClick(subscription)}
                   >
                     <div className="flex items-center p-4 sm:p-6">
@@ -311,25 +340,25 @@ const SubscriptionsPage: React.FC = () => {
                       <div className="flex-1">
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                           <div className="flex-1 mb-3 sm:mb-0">
-                            <h3 className="font-bold text-gray-800 text-sm sm:text-lg mb-1 sm:mb-2">
+                            <h3 className="font-bold text-white text-sm sm:text-lg mb-1 sm:mb-2">
                               {subscription.title}
                             </h3>
-                            <p className="text-gray-600 text-xs sm:text-sm mb-2 line-clamp-2 hidden sm:block">
+                            <p className="text-slate-400 text-xs sm:text-sm mb-2 line-clamp-2 hidden sm:block">
                               {subscription.description}
                             </p>
                             <div className="flex items-center space-x-2">
-                              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-2 py-1 rounded text-xs font-medium">
+                              <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-2 py-1 rounded text-xs font-medium">
                                 Subscription
                               </span>
                             </div>
                           </div>
                           <div className="text-left sm:text-right">
                             <div className="flex items-center space-x-2 mb-2 sm:mb-3">
-                              <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                              <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
                                 ₹{getStartingPrice(subscription)}
                               </span>
                             </div>
-                            <button className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-orange-500 hover:to-red-500 text-white py-2 px-4 sm:px-6 rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            <button className="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white py-2 px-4 sm:px-6 rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                               Select Options
                             </button>
                           </div>
@@ -342,60 +371,11 @@ const SubscriptionsPage: React.FC = () => {
             )}
 
             {totalPages > 1 && (
-              <div className="flex items-center justify-center space-x-1 sm:space-x-2">
-                <button
-                  onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                  disabled={currentPage === 1}
-                  className="px-3 sm:px-4 py-2 text-gray-600 bg-white/80 backdrop-blur-sm border border-gray-300 rounded-lg hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-lg text-sm sm:text-base"
-                >
-                  Previous
-                </button>
-
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const page = i + 1;
-                  return (
-                    <button
-                      key={page}
-                      onClick={() => handlePageChange(page)}
-                      className={`px-3 sm:px-4 py-2 rounded-lg transition-colors shadow-lg text-sm sm:text-base ${
-                        currentPage === page
-                          ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
-                          : "text-gray-600 bg-white/80 backdrop-blur-sm border border-gray-300 hover:bg-white/90"
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  );
-                })}
-
-                {totalPages > 5 && (
-                  <>
-                    <span className="px-2 text-gray-500 text-sm sm:text-base">
-                      ...
-                    </span>
-                    <button
-                      onClick={() => handlePageChange(totalPages)}
-                      className={`px-3 sm:px-4 py-2 rounded-lg transition-colors shadow-lg text-sm sm:text-base ${
-                        currentPage === totalPages
-                          ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
-                          : "text-gray-600 bg-white/80 backdrop-blur-sm border border-gray-300 hover:bg-white/90"
-                      }`}
-                    >
-                      {totalPages}
-                    </button>
-                  </>
-                )}
-
-                <button
-                  onClick={() =>
-                    handlePageChange(Math.min(totalPages, currentPage + 1))
-                  }
-                  disabled={currentPage === totalPages}
-                  className="px-3 sm:px-4 py-2 text-gray-600 bg-white/80 backdrop-blur-sm border border-gray-300 rounded-lg hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-lg text-sm sm:text-base"
-                >
-                  Next
-                </button>
-              </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             )}
           </div>
         </div>

@@ -66,7 +66,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-950 via-gray-900 to-black px-4 py-4 sm:px-6 sm:py-5 text-white shadow-xl">
 
             <div className="absolute -top-16 -right-16 h-32 w-32 rounded-full bg-orange-500/25 blur-3xl" />
-            <div className="absolute -bottom-16 -left-16 h-32 w-32 rounded-full bg-red-500/20 blur-3xl" />
+            <div className="absolute -bottom-16 -left-16 h-32 w-32 rounded-full bg-fuchsia-500/20 blur-3xl" />
 
             <div className="relative flex flex-col sm:flex-row items-center sm:justify-between gap-4 text-center sm:text-left">
               <div className="flex-1">

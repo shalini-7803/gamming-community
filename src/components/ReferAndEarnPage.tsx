@@ -31,7 +31,7 @@ const steps = [
 
 const ReferAndEarnPage: React.FC<ReferAndEarnPageProps> = ({ onBackToHome }) => {
   const handleWhatsAppContact = () => {
-    const phoneNumber = '+91 9266514434';
+    const phoneNumber = '919266514434';
     const message = "Hi! I'd like to refer a friend and ask about the referral discount.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');

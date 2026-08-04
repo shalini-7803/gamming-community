@@ -167,7 +167,7 @@ const Header: React.FC<HeaderProps> = ({
     if (itemId === "home") {
       navigate("/");
     } else if (itemId === "contact") {
-      const phoneNumber = "+91 9266514434";
+      const phoneNumber = "919266514434";
       const message = "Hi! I need help with my gaming purchase.";
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
         message
@@ -186,7 +186,8 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="bg-gradient-to-b from-slate-950 to-slate-900 shadow-lg border-b border-cyan-500/10">
+      <header className="relative bg-gradient-to-b from-black via-slate-950 to-slate-900 shadow-[0_4px_30px_rgba(168,85,247,0.12)] border-b border-fuchsia-500/20">
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent opacity-70" />
         {!isSearchExpanded ? (
           <div className="container mx-auto px-3 sm:px-4 py-2.5 sm:py-3">
             <div className="hidden lg:flex items-center justify-between">
@@ -208,8 +209,8 @@ const Header: React.FC<HeaderProps> = ({
                             item.id === "admin"
                               ? "text-purple-300 hover:text-purple-200 bg-purple-500/10"
                               : isNavActive(item.id)
-                              ? "text-cyan-400 bg-white/5"
-                              : "text-slate-300 hover:text-cyan-400 hover:bg-white/5"
+                              ? "text-fuchsia-400 bg-white/5 shadow-[0_0_12px_rgba(217,70,239,0.35)]"
+                              : "text-slate-300 hover:text-fuchsia-400 hover:bg-white/5"
                           }`}
                         >
                           {item.id === "admin" && <Shield className="w-3.5 h-3.5" />}
@@ -224,16 +225,16 @@ const Header: React.FC<HeaderProps> = ({
               <div className="flex items-center space-x-3">
                 <button
                   onClick={handleSearchClick}
-                  className="text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-colors p-2.5 rounded-full"
+                  className="text-slate-300 hover:text-fuchsia-400 hover:bg-white/5 transition-colors p-2.5 rounded-full"
                 >
                   <Search className="w-5 h-5" />
                 </button>
 
                 {isLoggedIn ? (
                   <div className="flex items-center space-x-3">
-                    <div className="flex items-center space-x-2 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/25">
-                      <User className="w-4 h-4 text-emerald-400" />
-                      <span className="text-emerald-300 font-medium text-sm">
+                    <div className="flex items-center space-x-2 px-3 py-1.5 bg-lime-500/10 rounded-full border border-lime-500/25">
+                      <User className="w-4 h-4 text-lime-400" />
+                      <span className="text-lime-300 font-medium text-sm">
                         {displayName}
                       </span>
                     </div>
@@ -249,7 +250,7 @@ const Header: React.FC<HeaderProps> = ({
                 ) : (
                   <button
                     onClick={onLoginClick}
-                    className="flex items-center space-x-2 px-4 py-2 rounded-full border border-white/15 text-slate-200 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 hover:border-transparent transition-all duration-300 text-sm"
+                    className="flex items-center space-x-2 px-4 py-2 rounded-full border border-white/15 text-slate-200 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 hover:border-transparent transition-all duration-300 text-sm"
                   >
                     <User className="w-4 h-4" />
                     <span>Login</span>
@@ -275,7 +276,7 @@ const Header: React.FC<HeaderProps> = ({
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-slate-300 hover:text-cyan-400 p-1.5 z-50 relative"
+                  className="text-slate-300 hover:text-fuchsia-400 p-1.5 z-50 relative"
                 >
                   {isMobileMenuOpen ? (
                     <X className="w-5 h-5" />
@@ -294,14 +295,14 @@ const Header: React.FC<HeaderProps> = ({
                 <div className="flex items-center space-x-1">
                   <button
                     onClick={handleSearchClick}
-                    className="text-slate-300 hover:text-cyan-400 p-1.5"
+                    className="text-slate-300 hover:text-fuchsia-400 p-1.5"
                   >
                     <Search className="w-4 h-4" />
                   </button>
 
                   <button
                     onClick={onCartClick}
-                    className="relative text-slate-300 hover:text-cyan-400 p-1.5"
+                    className="relative text-slate-300 hover:text-fuchsia-400 p-1.5"
                   >
                     <ShoppingCart className="w-4 h-4" />
                     {cartItemCount > 0 && (
@@ -325,8 +326,8 @@ const Header: React.FC<HeaderProps> = ({
                             item.id === "admin"
                               ? "text-purple-300 bg-purple-500/10 border border-purple-500/25"
                               : isNavActive(item.id)
-                              ? "text-cyan-400 bg-white/5"
-                              : "text-slate-300 hover:text-cyan-400 hover:bg-white/5"
+                              ? "text-fuchsia-400 bg-white/5"
+                              : "text-slate-300 hover:text-fuchsia-400 hover:bg-white/5"
                           }`}
                         >
                           {item.id === "admin" && (
@@ -339,7 +340,7 @@ const Header: React.FC<HeaderProps> = ({
 
                     {isLoggedIn ? (
                       <div className="mt-4 space-y-2">
-                        <div className="py-3 px-3 text-emerald-300 bg-emerald-500/10 rounded-lg flex items-center justify-between border border-emerald-500/25">
+                        <div className="py-3 px-3 text-lime-300 bg-lime-500/10 rounded-lg flex items-center justify-between border border-lime-500/25">
                           <span>Welcome, {displayName}!</span>
                         </div>
 
@@ -360,7 +361,7 @@ const Header: React.FC<HeaderProps> = ({
                           onLoginClick();
                           setIsMobileMenuOpen(false);
                         }}
-                        className="mt-4 w-full text-left py-3 px-3 text-slate-200 hover:text-white transition-all hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-500 rounded-lg border border-white/15"
+                        className="mt-4 w-full text-left py-3 px-3 text-slate-200 hover:text-white transition-all hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 rounded-lg border border-white/15"
                       >
                         Admin Login
                       </button>
@@ -375,7 +376,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex items-center justify-between gap-1 sm:gap-4">
               <button
                 onClick={handleSearchClose}
-                className="text-slate-300 hover:text-cyan-400 transition-colors p-1"
+                className="text-slate-300 hover:text-fuchsia-400 transition-colors p-1"
               >
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
@@ -384,7 +385,7 @@ const Header: React.FC<HeaderProps> = ({
                 <select
                   value={platformFilter}
                   onChange={(e) => setPlatformFilter(e.target.value)}
-                  className="w-full px-3 py-2 border-2 border-cyan-400 rounded-full focus:outline-none focus:border-orange-400 transition-colors text-sm sm:text-base bg-white"
+                  className="w-full px-3 py-2 border-2 border-fuchsia-400 rounded-full focus:outline-none focus:border-violet-500 transition-colors text-sm sm:text-base bg-white"
                 >
                   <option value="all">All</option>
                   <option value="PS5">PS5</option>
@@ -403,10 +404,10 @@ const Header: React.FC<HeaderProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  className="w-full pl-8 pr-4 py-2 border-2 border-cyan-400 rounded-full focus:outline-none focus:border-orange-400 transition-colors text-sm sm:text-lg"
+                  className="w-full pl-8 pr-4 py-2 border-2 border-fuchsia-400 rounded-full focus:outline-none focus:border-violet-500 transition-colors text-sm sm:text-lg"
                   autoFocus
                 />
-                <Search className="absolute left-2 top-1/2 -translate-y-1/2 text-cyan-400 w-4 h-4 sm:w-5 sm:h-5" />
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 text-fuchsia-500 w-4 h-4 sm:w-5 sm:h-5" />
 
                 {showSuggestions && searchSuggestions.length > 0 && (
                   <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 z-50 max-h-64 overflow-y-auto">
@@ -444,7 +445,7 @@ const Header: React.FC<HeaderProps> = ({
               <div className="w-auto">
                 <button
                   onClick={handleSearch}
-                  className="bg-cyan-400 hover:bg-orange-500 text-white px-4 sm:px-6 py-2 rounded-full font-medium transition-colors text-sm sm:text-base whitespace-nowrap"
+                  className="bg-fuchsia-500 hover:bg-violet-600 text-white px-4 sm:px-6 py-2 rounded-full font-medium transition-colors text-sm sm:text-base whitespace-nowrap"
                 >
                   <Search className="w-3 h-5 sm:w-6 sm:h-6" />
                 </button>
@@ -454,10 +455,11 @@ const Header: React.FC<HeaderProps> = ({
         )}
       </header>
 
-      <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-2">
-        <div className="container mx-auto px-3 sm:px-4 flex items-center justify-center space-x-2">
-          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-          <p className="text-xs sm:text-sm md:text-base font-medium">
+      <div className="relative bg-gradient-to-r from-violet-700 via-fuchsia-600 to-violet-700 text-white py-2 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+        <div className="relative container mx-auto px-3 sm:px-4 flex items-center justify-center space-x-2">
+          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-lime-300" />
+          <p className="text-xs sm:text-sm md:text-base font-medium tracking-wide">
             Trusted by Top Streamers and Gamers – Shop the Same Games They
             Play!
           </p>

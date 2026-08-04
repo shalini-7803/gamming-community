@@ -99,3 +99,235 @@
 .animate-shimmer {
   animation: shimmer 4s linear infinite;
 }
+
+@keyframes loader-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-loader-breathe {
+  animation: loader-breathe 2.2s ease-in-out infinite;
+}
+
+@keyframes loader-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-loader-fade-in {
+  animation: loader-fade-in 0.5s ease-out both;
+}
+
+@keyframes loader-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, -4%) scale(1.05);
+  }
+}
+
+.animate-loader-drift {
+  animation: loader-drift 8s ease-in-out infinite;
+}
+
+@keyframes modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-modal-backdrop-in {
+  animation: modal-backdrop-in 0.2s ease-out both;
+}
+
+@keyframes modal-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-pop-in {
+  animation: modal-pop-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes loader-segment {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scaleY(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.animate-loader-segment {
+  animation: loader-segment 1s ease-in-out infinite;
+}
+
+@keyframes loader-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.4;
+  }
+  94% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.6;
+  }
+  97% {
+    opacity: 1;
+  }
+}
+
+.animate-loader-flicker {
+  animation: loader-flicker 3.5s ease-in-out infinite;
+}
+
+@keyframes controller-bob {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+
+.animate-controller-bob {
+  animation: controller-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes button-chase {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-button-chase {
+  animation: button-chase 1.2s ease-in-out infinite;
+}
+
+@keyframes key-press {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(0.82);
+    filter: brightness(1.35);
+  }
+}
+
+.animate-key-press {
+  animation: key-press 1s ease-in-out infinite;
+}
+
+@keyframes strip-gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-strip-gradient-flow {
+  background-size: 200% 200%;
+  animation: strip-gradient-flow 6s ease-in-out infinite;
+}
+
+@keyframes icon-wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-14deg);
+  }
+  75% {
+    transform: rotate(14deg);
+  }
+}
+
+.animate-icon-wiggle {
+  animation: icon-wiggle 1.8s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce-x {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-arrow-bounce-x {
+  animation: arrow-bounce-x 1s ease-in-out infinite;
+}
+
+@keyframes title-glow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(217, 70, 239, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(217, 70, 239, 0.85), 0 0 60px rgba(139, 92, 246, 0.55);
+  }
+}
+
+.animate-title-glow {
+  animation: title-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.animate-sparkle-twinkle {
+  animation: sparkle-twinkle 2.2s ease-in-out infinite;
+}

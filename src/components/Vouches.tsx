@@ -1,19 +1,29 @@
 import React from 'react';
+import { Star } from 'lucide-react';
 import { useTestimonials } from '../hooks/useSupabaseData';
 import Loader from './Loader';
+
+const SectionHeading: React.FC = () => (
+  <div className="flex items-center justify-center gap-3 mb-3">
+    <div className="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.45)] flex-shrink-0">
+      <Star className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" />
+    </div>
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+      Customer Screenshots
+    </h2>
+  </div>
+);
 
 const Vouches: React.FC = () => {
   const { testimonials, loading, error } = useTestimonials();
 
   if (loading) {
     return (
-      <section className="py-8 sm:py-12 md:py-16 bg-white overflow-hidden">
+      <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
         <div className="container mx-auto px-3 sm:px-4">
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-              Customer Screenshots
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+            <SectionHeading />
+            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
               Real phone screenshots from our satisfied gaming community
             </p>
           </div>
@@ -25,18 +35,16 @@ const Vouches: React.FC = () => {
 
   if (error || testimonials.length === 0) {
     return (
-      <section className="py-8 sm:py-12 md:py-16 bg-white overflow-hidden">
+      <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
         <div className="container mx-auto px-3 sm:px-4">
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-              Customer Screenshots
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+            <SectionHeading />
+            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
               Real phone screenshots from our satisfied gaming community
             </p>
           </div>
           <div className="text-center py-8">
-            <p className="text-gray-600">No testimonials available at the moment.</p>
+            <p className="text-slate-400">No testimonials available at the moment.</p>
           </div>
         </div>
       </section>
@@ -44,13 +52,20 @@ const Vouches: React.FC = () => {
   }
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 bg-white overflow-hidden">
-      <div className="container mx-auto px-3 sm:px-4">
+    <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+      {/* Ambient neon glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-violet-600/20 rounded-full blur-3xl animate-loader-drift" />
+        <div
+          className="absolute bottom-0 right-1/4 w-72 h-72 bg-fuchsia-600/15 rounded-full blur-3xl animate-loader-drift"
+          style={{ animationDelay: '2s' }}
+        />
+      </div>
+
+      <div className="relative container mx-auto px-3 sm:px-4">
         <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-            Customer Screenshots
-          </h2>
-          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+          <SectionHeading />
+          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
             Real phone screenshots from our satisfied gaming community
           </p>
         </div>
@@ -61,7 +76,7 @@ const Vouches: React.FC = () => {
             {/* Duplicate testimonials for seamless scroll */}
             {[...testimonials, ...testimonials].map((vouch, index) => (
               <div key={`${vouch.id ?? index}-${index}`} className="flex-shrink-0">
-                <div className="relative bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                <div className="relative bg-gradient-to-b from-violet-950 to-black rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-[0_0_25px_rgba(139,92,246,0.25)] border border-fuchsia-500/20 transform hover:scale-105 hover:shadow-[0_0_35px_rgba(217,70,239,0.4)] hover:border-fuchsia-400/40 transition-all duration-300">
                   <div className="bg-black rounded-xl sm:rounded-2xl p-0.5 sm:p-1">
                     <div className="relative overflow-hidden rounded-lg sm:rounded-xl">
                       <img
@@ -72,7 +87,7 @@ const Vouches: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-12 sm:w-16 h-0.5 sm:h-1 bg-gray-600 rounded-full"></div>
+                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-12 sm:w-16 h-0.5 sm:h-1 bg-fuchsia-500/60 rounded-full"></div>
                 </div>
               </div>
             ))}
@@ -81,11 +96,11 @@ const Vouches: React.FC = () => {
 
         {/* CTA */}
         <div className="text-center mt-10">
-          <div className="bg-gradient-to-r from-cyan-50 to-orange-50 rounded-2xl p-6 max-w-2xl mx-auto border border-cyan-100">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">
+          <div className="bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-orange-500/10 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto border border-fuchsia-500/20">
+            <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent mb-3">
               Join Thousands of Happy Gamers! 🎮
             </h3>
-            <p className="text-gray-600 text-sm sm:text-base">
+            <p className="text-slate-300 text-sm sm:text-base">
               Game Smarter, Save Bigger
             </p>
           </div>
@@ -96,4 +111,3 @@ const Vouches: React.FC = () => {
 };
 
 export default Vouches;
- 

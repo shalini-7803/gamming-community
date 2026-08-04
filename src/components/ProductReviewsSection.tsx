@@ -110,7 +110,16 @@ const ProductReviewsSection: React.FC = () => {
 
     localStorage.setItem(REVIEW_LIMIT_KEY, String(Date.now()));
 
-    toast.success("Review submitted! It will appear after 24-48 hours.");
+    toast.success("Review submitted! It will appear within 24 hours.", {
+      icon: "🎮",
+      style: {
+        background: "linear-gradient(to right, #7c3aed, #d946ef)",
+        color: "#fff",
+        borderRadius: "12px",
+        boxShadow: "0 0 20px rgba(217,70,239,0.35)",
+      },
+      progressStyle: { background: "rgba(255,255,255,0.8)" },
+    });
 
     setCustomerName("");
     setCustomerContact("");
@@ -185,7 +194,7 @@ const ProductReviewsSection: React.FC = () => {
                 </h3>
 
                 <p className="text-sm text-gray-500">
-                  It will appear after 24-48 hours.
+                  It will appear within 24-48 hours.
                 </p>
               </div>
 

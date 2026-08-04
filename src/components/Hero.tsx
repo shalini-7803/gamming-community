@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+const SPARKLE_POSITIONS = [
+  { top: '15%', left: '8%', size: 'w-3 h-3', delay: '0s' },
+  { top: '28%', left: '85%', size: 'w-4 h-4', delay: '0.4s' },
+  { top: '65%', left: '15%', size: 'w-3 h-3', delay: '0.8s' },
+  { top: '75%', left: '90%', size: 'w-3 h-3', delay: '1.2s' },
+  { top: '10%', left: '55%', size: 'w-2.5 h-2.5', delay: '1.6s' },
+  { top: '85%', left: '45%', size: 'w-4 h-4', delay: '2s' },
+];
 
 interface HeroProps {
   onShopBestsellers: () => void;
@@ -82,7 +91,7 @@ const goToAllGames = () => {
       subtitle: "Best Games, Best Prices",
       description: "Experience the latest PS4 & PS5 titles at unbeatable prices",
       image: "https://images.pexels.com/photos/1298601/pexels-photo-1298601.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080",
-      overlay: "bg-gradient-to-br from-cyan-900/95 via-blue-900/90 to-cyan-900/85",
+      overlay: "bg-gradient-to-br from-violet-950/95 via-fuchsia-900/80 to-black/90",
       buttonText: "Shop Now",
       buttonAction: onShopBestsellers,
       isBanner: false
@@ -96,12 +105,12 @@ const goToAllGames = () => {
     }
 
     return (
-      <div className="text-white w-full max-w-xs xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-       <h1 className="whitespace-nowrap text-center text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-black mb-2 xs:mb-3 sm:mb-4 md:mb-6 leading-tight tracking-tight">
+      <div className="relative text-white w-full max-w-xs xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+       <h1 className="animate-title-glow whitespace-nowrap text-center text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-black mb-2 xs:mb-3 sm:mb-4 md:mb-6 leading-tight tracking-tight">
   {slide.title}
 </h1>
 
-        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black mb-3 xs:mb-4 sm:mb-6 md:mb-8 bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-transparent text-center drop-shadow-lg">
+        <div className="animate-strip-gradient-flow text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black mb-3 xs:mb-4 sm:mb-6 md:mb-8 bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent text-center drop-shadow-lg">
           {slide.subtitle}
         </div>
 
@@ -114,14 +123,15 @@ const goToAllGames = () => {
   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 max-w-xs sm:max-w-sm md:max-w-lg mx-auto">
     <button
       onClick={slide.buttonAction}
-      className="flex-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-black px-4 sm:px-6 md:px-8 lg:px-10 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-full font-black text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-3"
+      className="relative flex-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-black px-4 sm:px-6 md:px-8 lg:px-10 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-full font-black text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-3"
     >
-      <Star className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
-      <span className="truncate">{slide.buttonText}</span>
+      <span className="absolute inset-0 rounded-full bg-orange-400 animate-ping opacity-40 pointer-events-none" />
+      <Star className="relative w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
+      <span className="relative truncate">{slide.buttonText}</span>
     </button>
     <button
       onClick={onBrowseCategories}
-      className="flex-1 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border-2 border-white/50 px-4 sm:px-6 md:px-8 lg:px-10 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition-all duration-300 transform hover:scale-105 shadow-xl"
+      className="flex-1 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border-2 border-white/50 hover:border-fuchsia-300 px-4 sm:px-6 md:px-8 lg:px-10 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition-all duration-300 transform hover:scale-105 shadow-xl"
     >
       Browse Categories
     </button>
@@ -149,7 +159,7 @@ const goToAllGames = () => {
             <div className={`w-full h-full flex items-center justify-center ${
               slide.image.includes('purple modern') || slide.image.includes('215601')
                 ? 'bg-black'
-                : 'bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950'
+                : 'bg-gradient-to-br from-violet-950 via-slate-950 to-black'
             }`}>
               <img
                 src={slide.image}
@@ -162,7 +172,16 @@ const goToAllGames = () => {
               className="w-full h-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
-              <div className={`w-full h-full ${slide.overlay} flex items-center justify-center`}>
+              <div className={`relative w-full h-full ${slide.overlay} flex items-center justify-center`}>
+                {/* Twinkling sparkle particles */}
+                {SPARKLE_POSITIONS.map((sparkle, i) => (
+                  <Sparkles
+                    key={i}
+                    className={`hidden sm:block absolute ${sparkle.size} text-fuchsia-200 animate-sparkle-twinkle pointer-events-none`}
+                    style={{ top: sparkle.top, left: sparkle.left, animationDelay: sparkle.delay }}
+                  />
+                ))}
+
                 <div className="container mx-auto px-2 sm:px-3 md:px-4 h-full flex items-center justify-center">
                   {renderSlideContent(slide)}
                 </div>
@@ -175,10 +194,10 @@ const goToAllGames = () => {
    {/* Left Arrow */}
 <button
   onClick={goToPrevSlide}
-  className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 backdrop-blur text-white rounded-full p-1 sm:p-3 shadow-md transition"
+  className="group absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-amber-500/70 to-orange-600/70 hover:from-amber-400 hover:to-orange-500 backdrop-blur-md border border-amber-300/50 hover:border-white/60 text-white rounded-full p-1.5 sm:p-3 shadow-[0_0_15px_rgba(251,146,60,0.4)] hover:shadow-[0_0_25px_rgba(251,146,60,0.8)] transition-all duration-300 hover:scale-110 active:scale-95"
   aria-label="Previous Slide"
 >
-  <svg className="w-3 h-3 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+  <svg className="w-3 h-3 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
   </svg>
 </button>
@@ -186,10 +205,10 @@ const goToAllGames = () => {
 {/* Right Arrow */}
 <button
   onClick={goToNextSlide}
-  className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 backdrop-blur text-white rounded-full p-1 sm:p-3 shadow-md transition"
+  className="group absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-amber-500/70 to-orange-600/70 hover:from-amber-400 hover:to-orange-500 backdrop-blur-md border border-amber-300/50 hover:border-white/60 text-white rounded-full p-1.5 sm:p-3 shadow-[0_0_15px_rgba(251,146,60,0.4)] hover:shadow-[0_0_25px_rgba(251,146,60,0.8)] transition-all duration-300 hover:scale-110 active:scale-95"
   aria-label="Next Slide"
 >
-  <svg className="w-3 h-3 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+  <svg className="w-3 h-3 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
   </svg>
 </button>
@@ -201,7 +220,7 @@ const goToAllGames = () => {
   {currentSlide === 3 && (
     <>
       <div className="absolute top-2 sm:top-3 md:top-4 lg:top-6 xl:top-8 left-2 sm:left-3 md:left-4 lg:left-6 xl:left-8">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-1.5 md:py-2 lg:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-lg animate-pulse">
+        <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-1.5 md:py-2 lg:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-lg animate-pulse">
           🕹 BEST GAMES
         </div>
       </div>
@@ -222,18 +241,29 @@ const goToAllGames = () => {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'
+              index === currentSlide
+                ? 'bg-fuchsia-300 scale-125 shadow-[0_0_10px_rgba(232,121,249,0.9)]'
+                : 'bg-white/50 hover:bg-white/70'
             }`}
           />
         ))}
       </div>
 
       {/* Floating elements for visual appeal */}
-      <div className="absolute top-1/4 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 animate-bounce-slow opacity-20">
-        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-yellow-400 rounded-full"></div>
+      <div className="absolute top-1/4 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 animate-loader-drift opacity-25 pointer-events-none">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-fuchsia-400 rounded-full blur-sm"></div>
       </div>
-      <div className="absolute bottom-1/4 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 animate-bounce-slow opacity-20" style={{ animationDelay: '1s' }}>
-        <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-orange-400 rounded-full"></div>
+      <div
+        className="absolute bottom-1/4 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 animate-loader-drift opacity-25 pointer-events-none"
+        style={{ animationDelay: '2s' }}
+      >
+        <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-violet-400 rounded-full blur-sm"></div>
+      </div>
+      <div
+        className="absolute top-1/2 right-1/3 animate-loader-drift opacity-20 pointer-events-none"
+        style={{ animationDelay: '4s' }}
+      >
+        <div className="w-5 h-5 sm:w-7 sm:h-7 md:w-10 md:h-10 bg-orange-400 rounded-full blur-sm"></div>
       </div>
     </section>
   );

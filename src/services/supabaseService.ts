@@ -84,6 +84,14 @@ async function removeCacheEntriesContainingGame(gameId: string) {
   }
 }
 
+function getMinRentPrice(game: Game): number | null {
+  const prices = (game.platform_prices || [])
+    .flatMap((p) => [p.rent_1_month, p.rent_3_months, p.rent_6_months, p.rent_12_months])
+    .filter((v): v is number => typeof v === "number" && v > 0);
+
+  return prices.length ? Math.min(...prices) : null;
+}
+
 function parseNumber(value: any): number | null {
   if (value === null || value === undefined || value === "") return null;
   const num = Number(value);
@@ -127,7 +135,7 @@ function filterAndPaginateGames(
   const {
     searchQuery = "",
     platform = "all",
-    priceRange = [0, 10000],
+    priceRange,
     sortBy = "name-asc",
     page = 1,
     limit = 24,
@@ -147,10 +155,10 @@ if (category === "game" && platform !== "all") {
     (game.platform_prices || []).some((p) => p.platform === platform)
   );
 }
-if (category === "subscription") {
+if (priceRange) {
   filtered = filtered.filter((game) => {
-    const price = getStartingPrice(game);
-    return price >= priceRange[0] && price <= priceRange[1];
+    const price = category === "game" ? getMinRentPrice(game) : getStartingPrice(game);
+    return price !== null && price >= priceRange[0] && price <= priceRange[1];
   });
 }
   switch (sortBy) {

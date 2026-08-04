@@ -36,13 +36,13 @@ const Categories: React.FC = () => {
   ];
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-white via-blue-50/30 to-orange-50/30">
+    <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
       <div className="container mx-auto px-3 sm:px-4">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent mb-3 sm:mb-4">
             Shop by Category
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg px-4">
+          <p className="text-slate-400 text-base sm:text-lg px-4">
             Find games for your favorite gaming platform
           </p>
         </div>
@@ -52,7 +52,7 @@ const Categories: React.FC = () => {
             <button
               key={category.id}
               onClick={category.onClick}
-              className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md hover:shadow-cyan-400/40 border-2 border-transparent hover:border-cyan-400 cursor-pointer transform hover:-translate-y-2 active:scale-95 transition-all duration-300 ease-out text-left"
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md hover:shadow-fuchsia-500/40 border-2 border-white/10 hover:border-fuchsia-400 cursor-pointer transform hover:-translate-y-2 active:scale-95 transition-all duration-300 ease-out text-left"
               type="button"
               aria-label={category.name}
             >
@@ -78,7 +78,7 @@ const Categories: React.FC = () => {
                   <div className="text-white/90 text-xs sm:text-sm mt-1">
                     {category.description}
                   </div>
-                  <div className="text-cyan-200 text-xs sm:text-sm font-medium mt-1">
+                  <div className="text-fuchsia-200 text-xs sm:text-sm font-medium mt-1">
                     {category.gameCount}{" "}
                     {category.name !== "Subscriptions" ? "Games" : "Subscriptions"}
                   </div>
