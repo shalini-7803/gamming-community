@@ -63,7 +63,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
       {/* WhatsApp Community + Channel CTA */}
       <section className="px-4 sm:px-6 lg:px-8 mt-6 mb-6">
         <div className="max-w-5xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-950 via-gray-900 to-black px-4 py-4 sm:px-6 sm:py-5 text-white shadow-xl">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-950 via-gray-900 to-black light:bg-gradient-to-br light:from-slate-50 light:via-blue-50 light:to-orange-50 px-4 py-4 sm:px-6 sm:py-5 text-white light:text-gray-900 shadow-xl">
 
             <div className="absolute -top-16 -right-16 h-32 w-32 rounded-full bg-orange-500/25 blur-3xl" />
             <div className="absolute -bottom-16 -left-16 h-32 w-32 rounded-full bg-fuchsia-500/20 blur-3xl" />
@@ -79,7 +79,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
                     Exclusive discounts
                   </span>
 
-                  <span className="rounded-full border border-white/10 bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-white">
+                  <span className="rounded-full border border-white/10 light:border-gray-200 bg-white/10 light:bg-white light:shadow-md px-2.5 py-0.5 text-[11px] font-semibold text-white light:text-gray-900">
                     1500+ members
                   </span>
                 </div>
@@ -88,7 +88,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
                   Join our Gaming Community
                 </h3>
 
-                <p className="mt-1 text-xs sm:text-sm text-gray-300">
+                <p className="mt-1 text-xs sm:text-sm text-gray-300 light:text-gray-700">
                   Early updates on new games, rental offers &amp; community-only deals.
                 </p>
               </div>
@@ -110,7 +110,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
                   href="https://whatsapp.com/channel/0029Vaz3HzXBadmdfwWvXQ1A"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex w-full xs:w-auto items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/15 active:scale-95"
+                  className="group inline-flex w-full xs:w-auto items-center justify-center gap-2 rounded-xl border border-white/15 light:border-gray-200 bg-white/10 light:bg-white light:shadow-md px-4 py-2 text-sm font-bold text-white light:text-gray-900 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/15 light:hover:bg-gray-100 active:scale-95"
                 >
                   Join Channel
                   <span className="transition-transform duration-300 group-hover:translate-x-1">

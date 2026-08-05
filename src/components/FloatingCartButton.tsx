@@ -27,9 +27,9 @@ const FloatingCartButton: React.FC<FloatingCartButtonProps> = ({
       </div>
 
       <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-        <div className="bg-gray-800 text-white text-sm rounded-lg py-2 px-3 whitespace-nowrap">
+        <div className="bg-gray-800 light:bg-white light:shadow-md text-white light:text-gray-900 text-sm rounded-lg py-2 px-3 whitespace-nowrap">
           {cartItemCount} item{cartItemCount !== 1 ? 's' : ''} in cart
-          <div className="absolute top-full right-4 border-4 border-transparent border-t-gray-800"></div>
+          <div className="absolute top-full right-4 border-4 border-transparent border-t-gray-800 light:border-t-white"></div>
         </div>
       </div>
     </button>

@@ -1,3 +1,5 @@
+import plugin from 'tailwindcss/plugin';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -37,5 +39,11 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      // Site defaults to the existing dark look (unprefixed classes).
+      // `light:` overrides apply only when the user switches to light mode.
+      addVariant('light', '.light &');
+    }),
+  ],
 };

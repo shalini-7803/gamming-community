@@ -37,7 +37,7 @@ const RefundPolicyPage: React.FC<RefundPolicyPageProps> = ({ onBackToHome }) => 
         </div>
 
         {/* Content */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-white/20 space-y-6 sm:space-y-8">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-white/20 light:border-gray-200 space-y-6 sm:space-y-8">
 
           {/* Important Notice */}
           <section className="bg-gradient-to-r from-red-50 to-orange-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-red-200">

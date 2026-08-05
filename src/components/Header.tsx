@@ -16,6 +16,7 @@ import {
   getPlatformsForGame,
   getStartingPrice,
 } from "../config/supabase";
+import ThemeToggle from "./ThemeToggle";
 
 interface HeaderProps {
   onLoginClick: () => void;
@@ -223,6 +224,8 @@ const Header: React.FC<HeaderProps> = ({
               </div>
 
               <div className="flex items-center space-x-3">
+                <ThemeToggle className="p-2.5" />
+
                 <button
                   onClick={handleSearchClick}
                   className="text-slate-300 hover:text-fuchsia-400 hover:bg-white/5 transition-colors p-2.5 rounded-full"
@@ -293,6 +296,8 @@ const Header: React.FC<HeaderProps> = ({
                 />
 
                 <div className="flex items-center space-x-1">
+                  <ThemeToggle className="p-1.5" />
+
                   <button
                     onClick={handleSearchClick}
                     className="text-slate-300 hover:text-fuchsia-400 p-1.5"

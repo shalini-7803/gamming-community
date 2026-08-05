@@ -164,7 +164,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
           </span>
         ))}
         {platforms.length > 3 && (
-          <span className="bg-white/10 text-slate-300 px-2 py-1 rounded-full text-[10px] sm:text-xs font-medium">
+          <span className="bg-white/10 text-slate-300 light:bg-white light:shadow-md light:border light:border-gray-200 light:text-gray-700 px-2 py-1 rounded-full text-[10px] sm:text-xs font-medium">
             +{platforms.length - 3}
           </span>
         )}
@@ -179,7 +179,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
       <div
         key={game.id}
         onClick={() => handleProductClick(game)}
-        className="group bg-slate-900/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/10 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+        className="group bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-2xl shadow-lg border border-white/10 light:border-gray-200 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
       >
         <div className="relative overflow-hidden">
           <img
@@ -200,7 +200,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
         </div>
 
         <div className="p-4 sm:p-5">
-          <h3 className="font-bold text-white text-sm sm:text-base line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem] group-hover:text-fuchsia-400 transition-colors">
+          <h3 className="font-bold text-white light:text-gray-900 text-sm sm:text-base line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem] group-hover:text-fuchsia-400 transition-colors">
             {game.title}
           </h3>
 
@@ -208,7 +208,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
           <div className="mt-4 flex items-end justify-between">
             <div>
-              <p className="text-xs sm:text-sm text-slate-500">Starting from</p>
+              <p className="text-xs sm:text-sm text-slate-500 light:text-gray-500">Starting from</p>
               <p className="text-lg sm:text-xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
                 ₹{startingPrice}
               </p>
@@ -236,7 +236,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
       <div
         key={game.id}
         onClick={() => handleProductClick(game)}
-        className="group bg-slate-900/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/10 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-300 cursor-pointer"
+        className="group bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-2xl shadow-lg border border-white/10 light:border-gray-200 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-300 cursor-pointer"
       >
         <div className="flex flex-col sm:flex-row">
           <div className="sm:w-48 lg:w-56 flex-shrink-0 relative overflow-hidden">
@@ -256,10 +256,10 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
             <div>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-bold text-white text-lg sm:text-xl mb-2 group-hover:text-fuchsia-400 transition-colors">
+                  <h3 className="font-bold text-white light:text-gray-900 text-lg sm:text-xl mb-2 group-hover:text-fuchsia-400 transition-colors">
                     {game.title}
                   </h3>
-                  <p className="text-slate-400 text-sm sm:text-base line-clamp-3">
+                  <p className="text-slate-400 light:text-gray-500 text-sm sm:text-base line-clamp-3">
                     {game.description}
                   </p>
                 </div>
@@ -270,7 +270,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
             <div className="mt-5 flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-500">Starting from</p>
+                <p className="text-sm text-slate-500 light:text-gray-500">Starting from</p>
                 <p className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
                   ₹{startingPrice}
                 </p>
@@ -294,7 +294,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <Loader
             size="large"
@@ -308,13 +308,13 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="bg-slate-900/70 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg border border-white/10">
-            <h2 className="text-2xl font-bold text-white mb-4">
+          <div className="bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg border border-white/10 light:border-gray-200">
+            <h2 className="text-2xl font-bold text-white light:text-gray-900 mb-4">
               Failed to load games
             </h2>
-            <p className="text-slate-400 mb-6">{error}</p>
+            <p className="text-slate-400 light:text-gray-500 mb-6">{error}</p>
             <button
               onClick={() => window.location.reload()}
               className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-xl font-semibold"
@@ -328,9 +328,9 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
-        <div className="bg-slate-900/70 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 mb-6 sm:mb-8">
+        <div className="bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 light:border-gray-200 mb-6 sm:mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.4)]">
               <Gamepad2 className="w-6 h-6 text-white" />
@@ -339,7 +339,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
                 Games Collection
               </h1>
-              <p className="text-slate-400 text-sm sm:text-base">
+              <p className="text-slate-400 light:text-gray-500 text-sm sm:text-base">
                 Explore our gaming library
               </p>
             </div>
@@ -347,7 +347,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
             <div className="relative flex-1 max-w-2xl">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search for games..."
@@ -360,7 +360,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
                     e.preventDefault();
                   }
                 }}
-                className="w-full pl-12 pr-32 py-3 rounded-2xl border border-white/10 bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                className="w-full pl-12 pr-32 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
               />
               <button
                 onClick={applyFilters}
@@ -373,19 +373,19 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setShowFilters((prev) => !prev)}
-                className="lg:hidden border border-white/10 px-4 py-3 rounded-2xl flex items-center gap-2 text-slate-300 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 hover:border-transparent transition-all duration-300"
+                className="lg:hidden border border-white/10 light:border-gray-200 px-4 py-3 rounded-2xl flex items-center gap-2 text-slate-300 light:text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 hover:border-transparent transition-all duration-300"
               >
                 <Filter className="w-4 h-4" />
                 Filters
               </button>
 
-              <div className="flex bg-slate-800 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="flex bg-slate-800 light:bg-white border border-white/10 light:border-gray-200 rounded-2xl overflow-hidden">
                 <button
                   onClick={() => setViewMode("grid")}
                   className={`px-4 py-3 ${
                     viewMode === "grid"
                       ? "bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
-                      : "text-slate-400"
+                      : "text-slate-400 light:text-gray-500"
                   }`}
                 >
                   <Grid className="w-4 h-4" />
@@ -395,7 +395,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
                   className={`px-4 py-3 ${
                     viewMode === "list"
                       ? "bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
-                      : "text-slate-400"
+                      : "text-slate-400 light:text-gray-500"
                   }`}
                 >
                   <List className="w-4 h-4" />
@@ -407,11 +407,11 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
           <div
             className={`${
               showFilters ? "block" : "hidden"
-            } lg:block mt-6 pt-6 border-t border-white/10`}
+            } lg:block mt-6 pt-6 border-t border-white/10 light:border-gray-200`}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wide text-slate-500 light:text-gray-500 mb-2">
                   Platform
                 </label>
                 <select
@@ -420,7 +420,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
                     setSelectedPlatform(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                  className="w-full px-4 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
                 >
                   {platformOptions.map((platform) => (
                     <option key={platform} value={platform}>
@@ -431,7 +431,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wide text-slate-500 light:text-gray-500 mb-2">
                   Rent Price
                 </label>
                 <select
@@ -440,7 +440,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
                     setSelectedPriceRange(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                  className="w-full px-4 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
                 >
                   {priceOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -451,7 +451,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wide text-slate-500 light:text-gray-500 mb-2">
                   Sort by
                 </label>
                 <select
@@ -460,7 +460,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
                     setSortBy(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                  className="w-full px-4 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -470,7 +470,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
                 </select>
               </div>
 
-              <div className="text-sm text-slate-400 lg:text-center">
+              <div className="text-sm text-slate-400 light:text-gray-500 lg:text-center">
                 <span className="font-bold text-fuchsia-300 bg-fuchsia-500/10 px-2.5 py-1 rounded-full">
                   {totalCount}
                 </span>{" "}
@@ -480,7 +480,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               <div className="lg:text-right">
                 <button
                   onClick={resetFilters}
-                  className="w-full lg:w-auto border border-white/10 text-slate-300 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 hover:border-transparent px-5 py-3 rounded-2xl font-medium transition-all duration-300"
+                  className="w-full lg:w-auto border border-white/10 light:border-gray-200 text-slate-300 light:text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 hover:border-transparent px-5 py-3 rounded-2xl font-medium transition-all duration-300"
                 >
                   Reset Filters
                 </button>
@@ -490,11 +490,11 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
         </div>
 
         {games.length === 0 ? (
-          <div className="bg-slate-900/70 backdrop-blur-sm rounded-3xl p-10 text-center shadow-xl border border-white/10">
-            <h2 className="text-2xl font-bold text-white mb-3">
+          <div className="bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-3xl p-10 text-center shadow-xl border border-white/10 light:border-gray-200">
+            <h2 className="text-2xl font-bold text-white light:text-gray-900 mb-3">
               No games found
             </h2>
-            <p className="text-slate-400 mb-6">
+            <p className="text-slate-400 light:text-gray-500 mb-6">
               Try changing your search or filter options.
             </p>
             <button

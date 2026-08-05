@@ -466,7 +466,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
+      <div className="min-h-screen bg-slate-950 light:bg-gradient-to-br light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
         <FlashSaleStrip />
 
         <Header

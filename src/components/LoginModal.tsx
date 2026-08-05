@@ -66,14 +66,14 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[70] p-4 animate-modal-backdrop-in">
-      <div className="relative w-full sm:max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-slate-900 border border-white/10 shadow-[0_0_50px_rgba(139,92,246,0.25)] animate-modal-pop-in">
+      <div className="relative w-full sm:max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-slate-900 light:bg-white border border-white/10 light:border-gray-200 shadow-[0_0_50px_rgba(139,92,246,0.25)] animate-modal-pop-in">
         {/* Ambient glow */}
         <div className="absolute -top-16 -left-10 w-40 h-40 bg-violet-600/30 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-16 -right-10 w-40 h-40 bg-fuchsia-600/25 rounded-full blur-3xl pointer-events-none" />
 
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10 z-10"
+          className="absolute top-4 right-4 text-slate-400 light:text-gray-500 hover:text-white light:hover:text-gray-900 transition-colors p-2 rounded-full hover:bg-white/10 light:hover:bg-gray-100 z-10"
         >
           <X className="w-5 h-5" />
         </button>
@@ -85,7 +85,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
               <div className="relative w-16 h-16 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full flex items-center justify-center shadow-lg">
                 <Lock className="w-8 h-8 text-white" />
               </div>
-              <div className="absolute -bottom-1 -right-1 bg-slate-900 rounded-full p-1 border border-white/10">
+              <div className="absolute -bottom-1 -right-1 bg-slate-900 light:bg-white rounded-full p-1 border border-white/10 light:border-gray-200">
                 <Gamepad2 className="w-4 h-4 text-fuchsia-400" />
               </div>
             </div>
@@ -93,18 +93,18 @@ const LoginModal: React.FC<LoginModalProps> = ({
             <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent mb-2">
               Admin Login
             </h2>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-400 light:text-gray-500 text-sm">
               Sign in to access the admin dashboard
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-slate-300 mb-2">
+              <label className="block text-sm font-semibold text-slate-300 light:text-gray-700 mb-2">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 w-4 h-4" />
                 <input
                   type="email"
                   value={email}
@@ -112,7 +112,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
                     setEmail(e.target.value);
                     setError("");
                   }}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-white/10 text-white placeholder-slate-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-shadow"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-800 light:bg-white border border-white/10 light:border-gray-300 text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-shadow"
                   placeholder="Enter admin email"
                   autoComplete="email"
                 />
@@ -120,11 +120,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-300 mb-2">
+              <label className="block text-sm font-semibold text-slate-300 light:text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 w-4 h-4" />
                 <input
                   type="password"
                   value={password}
@@ -132,7 +132,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
                     setPassword(e.target.value);
                     setError("");
                   }}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-white/10 text-white placeholder-slate-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-shadow"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-800 light:bg-white border border-white/10 light:border-gray-300 text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-shadow"
                   placeholder="Enter password"
                   autoComplete="current-password"
                 />
@@ -158,7 +158,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
             </button>
           </form>
 
-          <p className="text-xs text-slate-500 text-center mt-4">
+          <p className="text-xs text-slate-500 light:text-gray-500 text-center mt-4">
             Customer login is disabled. This login is for admin access only.
           </p>
         </div>

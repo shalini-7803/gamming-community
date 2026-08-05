@@ -442,11 +442,11 @@ Please confirm with our team before purchase regarding personal account compatib
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
           <button
             onClick={handleBack}
-            className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors mb-6 sm:mb-8 bg-white/5 border border-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
+            className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors mb-6 sm:mb-8 bg-white/5 light:bg-white light:shadow-md border border-white/10 light:border-gray-200 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             <span>Back</span>
@@ -464,11 +464,11 @@ Please confirm with our team before purchase regarding personal account compatib
 
   if (!product && !isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
           <button
             onClick={handleBack}
-            className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors mb-6 sm:mb-8 bg-white/5 border border-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
+            className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors mb-6 sm:mb-8 bg-white/5 light:bg-white light:shadow-md border border-white/10 light:border-gray-200 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             <span>Back</span>
@@ -515,7 +515,7 @@ Please confirm with our team before purchase regarding personal account compatib
 
   const renderTypeButtons = () => (
     <div className="mb-4 xl:mb-6">
-      <label className="block text-sm font-semibold text-slate-300 mb-3">
+      <label className="block text-sm font-semibold text-slate-300 light:text-gray-700 mb-3">
         Type
       </label>
 
@@ -527,7 +527,7 @@ Please confirm with our team before purchase regarding personal account compatib
             className={`w-full px-4 xl:px-6 py-2 xl:py-3 rounded-lg xl:rounded-xl font-medium transition-all duration-300 text-left text-sm xl:text-base ${
               selectedType === type
                 ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg"
-                : "bg-white/5 text-slate-300 border border-white/10 hover:bg-white/10"
+                : "bg-white/5 light:bg-white light:shadow-md text-slate-300 light:text-gray-700 border border-white/10 light:border-gray-200 hover:bg-white/10 light:hover:bg-gray-100"
             }`}
           >
             {type}
@@ -541,7 +541,7 @@ Please confirm with our team before purchase regarding personal account compatib
     selectedType === "Rent" &&
     durationOptions.length > 0 && (
       <div className="mb-4 xl:mb-6">
-        <label className="block text-sm font-semibold text-slate-300 mb-3">
+        <label className="block text-sm font-semibold text-slate-300 light:text-gray-700 mb-3">
           Rental Duration
         </label>
 
@@ -553,7 +553,7 @@ Please confirm with our team before purchase regarding personal account compatib
               className={`px-3 xl:px-4 py-2 xl:py-3 rounded-lg xl:rounded-xl font-medium transition-all duration-300 text-sm xl:text-base ${
                 selectedRentDuration === duration.key
                   ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-lg"
-                  : "bg-white/5 text-slate-300 border border-white/10 hover:bg-white/10"
+                  : "bg-white/5 light:bg-white light:shadow-md text-slate-300 light:text-gray-700 border border-white/10 light:border-gray-200 hover:bg-white/10 light:hover:bg-gray-100"
               }`}
             >
               <div className="text-xs xl:text-sm">{duration.label}</div>
@@ -586,7 +586,7 @@ Please confirm with our team before purchase regarding personal account compatib
 
       {availableEditions.length > 1 && (
         <div className="mb-4 xl:mb-6">
-          <label className="block text-sm font-semibold text-slate-300 mb-3">
+          <label className="block text-sm font-semibold text-slate-300 light:text-gray-700 mb-3">
             Choose Edition ({availableEditions.length} available)
           </label>
 
@@ -598,15 +598,15 @@ Please confirm with our team before purchase regarding personal account compatib
                 className={`p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                   selectedEdition?.id === edition.id
                     ? "border-fuchsia-500 bg-fuchsia-500/10"
-                    : "border-white/10 bg-white/5 hover:border-fuchsia-500/40"
+                    : "border-white/10 light:border-gray-200 bg-white/5 light:bg-white light:shadow-md hover:border-fuchsia-500/40"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-bold text-white">
+                    <h4 className="font-bold text-white light:text-gray-900">
                       {edition.edition} Edition
                     </h4>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-slate-400 light:text-gray-500">
                       Starting from ₹{getStartingPrice(edition)}
                     </p>
                   </div>
@@ -626,14 +626,14 @@ Please confirm with our team before purchase regarding personal account compatib
                         .map((feature, index) => (
                           <span
                             key={index}
-                            className="text-xs bg-white/10 text-slate-300 px-2 py-1 rounded"
+                            className="text-xs bg-white/10 light:bg-white light:shadow-md light:border light:border-gray-200 text-slate-300 light:text-gray-700 px-2 py-1 rounded"
                           >
                             {feature}
                           </span>
                         ))}
 
                       {edition.edition_features.length > 3 && (
-                        <span className="text-xs text-slate-500">
+                        <span className="text-xs text-slate-500 light:text-gray-500">
                           +{edition.edition_features.length - 3} more
                         </span>
                       )}
@@ -647,7 +647,7 @@ Please confirm with our team before purchase regarding personal account compatib
 
       {platformList.length > 0 && (
         <div className="mb-4 xl:mb-6">
-          <label className="block text-sm font-semibold text-slate-300 mb-3">
+          <label className="block text-sm font-semibold text-slate-300 light:text-gray-700 mb-3">
             Platform
           </label>
 
@@ -659,7 +659,7 @@ Please confirm with our team before purchase regarding personal account compatib
                 className={`px-4 xl:px-6 py-2 xl:py-3 rounded-lg xl:rounded-xl font-medium transition-all duration-300 text-sm xl:text-base ${
                   selectedPlatform === platform
                     ? "bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg"
-                    : "bg-white/5 text-slate-300 border border-white/10 hover:bg-white/10"
+                    : "bg-white/5 light:bg-white light:shadow-md text-slate-300 light:text-gray-700 border border-white/10 light:border-gray-200 hover:bg-white/10 light:hover:bg-gray-100"
                 }`}
               >
                 {platform}
@@ -696,7 +696,7 @@ Please confirm with our team before purchase regarding personal account compatib
         <h4 className="font-bold text-fuchsia-300 mb-3 text-sm xl:text-base">
           About This Option
         </h4>
-        <p className="text-slate-300 text-xs xl:text-sm leading-relaxed whitespace-pre-line">
+        <p className="text-slate-300 light:text-gray-700 text-xs xl:text-sm leading-relaxed whitespace-pre-line">
           {getTypeDescription()}
         </p>
       </div>
@@ -713,7 +713,7 @@ Please confirm with our team before purchase regarding personal account compatib
             </span>
 
             {selectedPlatformPricing?.original_price ? (
-              <span className="text-lg xl:text-2xl text-slate-500 line-through">
+              <span className="text-lg xl:text-2xl text-slate-500 light:text-gray-500 line-through">
                 ₹{selectedPlatformPricing.original_price}
               </span>
             ) : null}
@@ -739,7 +739,7 @@ Please confirm with our team before purchase regarding personal account compatib
 
         <button
           onClick={handleShare}
-          className="w-full border-2 border-white/15 text-slate-300 hover:bg-white/10 hover:text-white py-3 xl:py-4 rounded-xl font-bold text-base xl:text-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
+          className="w-full border-2 border-white/15 light:border-gray-200 text-slate-300 light:text-gray-700 hover:bg-white/10 light:hover:bg-gray-100 hover:text-white light:hover:text-gray-900 py-3 xl:py-4 rounded-xl font-bold text-base xl:text-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
         >
           <Share2 className="w-4 xl:w-5 h-4 xl:h-5" />
           <span>Share</span>
@@ -779,44 +779,44 @@ Please confirm with our team before purchase regarding personal account compatib
       </div>
 
       <div className="space-y-4">
-        <div className="border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm">
+        <div className="border border-white/10 light:border-gray-200 rounded-xl bg-white/5 light:bg-white light:shadow-md backdrop-blur-sm">
           <button
             onClick={() => toggleAccordion("details")}
-            className="w-full flex items-center justify-between p-4 xl:p-6 text-left hover:bg-white/10 transition-colors rounded-xl"
+            className="w-full flex items-center justify-between p-4 xl:p-6 text-left hover:bg-white/10 light:hover:bg-gray-100 transition-colors rounded-xl"
           >
-            <span className="font-bold text-white text-base xl:text-lg">
+            <span className="font-bold text-white light:text-gray-900 text-base xl:text-lg">
               Product Details
             </span>
 
             {activeAccordion === "details" ? (
-              <ChevronUp className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <ChevronUp className="w-5 h-5 text-slate-400 light:text-gray-500 flex-shrink-0" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <ChevronDown className="w-5 h-5 text-slate-400 light:text-gray-500 flex-shrink-0" />
             )}
           </button>
 
           {activeAccordion === "details" && (
             <div className="px-4 xl:px-6 pb-4 xl:pb-6">
-              <p className="text-slate-400 leading-relaxed text-sm xl:text-base">
+              <p className="text-slate-400 light:text-gray-500 leading-relaxed text-sm xl:text-base">
                 {currentProduct.description}
               </p>
             </div>
           )}
         </div>
 
-        <div className="border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm">
+        <div className="border border-white/10 light:border-gray-200 rounded-xl bg-white/5 light:bg-white light:shadow-md backdrop-blur-sm">
           <button
             onClick={() => toggleAccordion("additional")}
-            className="w-full flex items-center justify-between p-4 xl:p-6 text-left hover:bg-white/10 transition-colors rounded-xl"
+            className="w-full flex items-center justify-between p-4 xl:p-6 text-left hover:bg-white/10 light:hover:bg-gray-100 transition-colors rounded-xl"
           >
-            <span className="font-bold text-white text-base xl:text-lg">
+            <span className="font-bold text-white light:text-gray-900 text-base xl:text-lg">
               Additional Information
             </span>
 
             {activeAccordion === "additional" ? (
-              <ChevronUp className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <ChevronUp className="w-5 h-5 text-slate-400 light:text-gray-500 flex-shrink-0" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <ChevronDown className="w-5 h-5 text-slate-400 light:text-gray-500 flex-shrink-0" />
             )}
           </button>
 
@@ -835,19 +835,19 @@ Please confirm with our team before purchase regarding personal account compatib
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 xl:mt-6">
                 <div>
-                  <h4 className="font-bold text-white mb-2 text-sm xl:text-base">
+                  <h4 className="font-bold text-white light:text-gray-900 mb-2 text-sm xl:text-base">
                     Platform
                   </h4>
-                  <p className="text-slate-400 text-sm xl:text-base">
+                  <p className="text-slate-400 light:text-gray-500 text-sm xl:text-base">
                     {selectedPlatform}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="font-bold text-white mb-2 text-sm xl:text-base">
+                  <h4 className="font-bold text-white light:text-gray-900 mb-2 text-sm xl:text-base">
                     Edition
                   </h4>
-                  <p className="text-slate-400 text-sm xl:text-base">
+                  <p className="text-slate-400 light:text-gray-500 text-sm xl:text-base">
                     {currentProduct.edition || "Standard"}
                   </p>
                 </div>
@@ -856,19 +856,19 @@ Please confirm with our team before purchase regarding personal account compatib
           )}
         </div>
 
-        <div className="border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm">
+        <div className="border border-white/10 light:border-gray-200 rounded-xl bg-white/5 light:bg-white light:shadow-md backdrop-blur-sm">
           <button
             onClick={() => toggleAccordion("faq")}
-            className="w-full flex items-center justify-between p-4 xl:p-6 text-left hover:bg-white/10 transition-colors rounded-xl"
+            className="w-full flex items-center justify-between p-4 xl:p-6 text-left hover:bg-white/10 light:hover:bg-gray-100 transition-colors rounded-xl"
           >
-            <span className="font-bold text-white text-base xl:text-lg">
+            <span className="font-bold text-white light:text-gray-900 text-base xl:text-lg">
               FAQ
             </span>
 
             {activeAccordion === "faq" ? (
-              <ChevronUp className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <ChevronUp className="w-5 h-5 text-slate-400 light:text-gray-500 flex-shrink-0" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <ChevronDown className="w-5 h-5 text-slate-400 light:text-gray-500 flex-shrink-0" />
             )}
           </button>
 
@@ -876,10 +876,10 @@ Please confirm with our team before purchase regarding personal account compatib
             <div className="px-4 xl:px-6 pb-4 xl:pb-6 space-y-3 xl:space-y-4">
               {faqs.map((faq, index) => (
                 <div key={index}>
-                  <h5 className="font-semibold text-white mb-2 text-sm xl:text-base">
+                  <h5 className="font-semibold text-white light:text-gray-900 mb-2 text-sm xl:text-base">
                     {faq.question}
                   </h5>
-                  <p className="text-slate-400 text-xs xl:text-sm whitespace-pre-line leading-relaxed">
+                  <p className="text-slate-400 light:text-gray-500 text-xs xl:text-sm whitespace-pre-line leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
@@ -892,11 +892,11 @@ Please confirm with our team before purchase regarding personal account compatib
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <button
           onClick={handleBack}
-          className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors mb-6 sm:mb-8 bg-white/5 border border-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
+          className="flex items-center space-x-1 sm:space-x-2 text-fuchsia-400 hover:text-orange-400 transition-colors mb-6 sm:mb-8 bg-white/5 light:bg-white light:shadow-md border border-white/10 light:border-gray-200 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg text-sm sm:text-base"
         >
           <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>Back</span>
@@ -905,7 +905,7 @@ Please confirm with our team before purchase regarding personal account compatib
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 xl:gap-12">
           <div className={`${isImageSticky ? "xl:sticky xl:top-8" : ""} h-fit`}>
             <div className="flex justify-center">
-              <div className="bg-slate-900/70 backdrop-blur-sm rounded-2xl xl:rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/10 w-full max-w-sm sm:max-w-md xl:max-w-lg">
+              <div className="bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-2xl xl:rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/10 light:border-gray-200 w-full max-w-sm sm:max-w-md xl:max-w-lg">
                 <img
                   id="product-main-image"
                   src={currentProduct.image}
@@ -917,7 +917,7 @@ Please confirm with our team before purchase regarding personal account compatib
           </div>
 
           <div className="space-y-4 sm:space-y-6 xl:space-y-8">
-            <div className="bg-slate-900/70 backdrop-blur-sm rounded-2xl xl:rounded-3xl p-4 sm:p-6 xl:p-8 shadow-2xl border border-white/10">
+            <div className="bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-2xl xl:rounded-3xl p-4 sm:p-6 xl:p-8 shadow-2xl border border-white/10 light:border-gray-200">
               {renderProductDetails()}
             </div>
           </div>
@@ -942,7 +942,7 @@ Please confirm with our team before purchase regarding personal account compatib
                   <div
                     key={recommended.id}
                     onClick={() => handleRecommendedProductClick(recommended)}
-                    className="bg-slate-900/70 rounded-lg shadow-md border border-white/10 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_20px_rgba(217,70,239,0.2)] transition-all duration-300 cursor-pointer transform hover:scale-105"
+                    className="bg-slate-900/70 light:bg-gray-50 rounded-lg shadow-md border border-white/10 light:border-gray-200 overflow-hidden hover:border-fuchsia-500/40 hover:shadow-[0_0_20px_rgba(217,70,239,0.2)] transition-all duration-300 cursor-pointer transform hover:scale-105"
                   >
                     <div className="relative">
                       <img
@@ -960,7 +960,7 @@ Please confirm with our team before purchase regarding personal account compatib
                     </div>
 
                     <div className="p-2 sm:p-3">
-                      <h4 className="font-semibold text-white text-xs sm:text-sm mb-1 line-clamp-2">
+                      <h4 className="font-semibold text-white light:text-gray-900 text-xs sm:text-sm mb-1 line-clamp-2">
                         {recommended.title}
                       </h4>
 
@@ -971,7 +971,7 @@ Please confirm with our team before purchase regarding personal account compatib
                           </span>
                         </div>
 
-                        <div className="text-xs text-slate-500">
+                        <div className="text-xs text-slate-500 light:text-gray-500">
                           {recommended.category === "subscription"
                             ? "Subscription"
                             : platforms.join(", ") || "Game"}

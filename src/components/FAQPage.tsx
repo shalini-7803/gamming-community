@@ -128,7 +128,7 @@ const FAQPage: React.FC<FAQPageProps> = ({ onBackToHome }) => {
         </div>
 
         {/* FAQ Content */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-white/20 space-y-4 sm:space-y-6">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-white/20 light:border-gray-200 space-y-4 sm:space-y-6">
           
           {/* FAQ Items */}
           <div className="space-y-3 sm:space-y-4">

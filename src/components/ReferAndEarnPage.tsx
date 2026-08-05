@@ -62,7 +62,7 @@ const ReferAndEarnPage: React.FC<ReferAndEarnPageProps> = ({ onBackToHome }) => 
           </p>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-white/20 space-y-6 sm:space-y-8">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-white/20 light:border-gray-200 space-y-6 sm:space-y-8">
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 flex items-center gap-2">
               <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
