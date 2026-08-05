@@ -1,4 +1,11 @@
+import { authService } from "./authService";
+
 const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+
+const authHeaders = (): Record<string, string> => {
+  const token = authService.getToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 export interface OrderItem {
   title: string;
@@ -129,6 +136,7 @@ return {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          ...authHeaders(),
         },
         body: JSON.stringify({ status }),
       }
@@ -143,7 +151,11 @@ return {
 
 static async getOrders(): Promise<Order[]> {
   try {
-    const response = await fetch(`${API_URL}/orders`);
+    const response = await fetch(`${API_URL}/orders`, {
+      headers: {
+        ...authHeaders(),
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -162,6 +174,9 @@ static async deleteOrder(id: number): Promise<boolean> {
       `${API_URL}/orders/${id}`,
       {
         method: "DELETE",
+        headers: {
+          ...authHeaders(),
+        },
       }
     );
 

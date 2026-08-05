@@ -5,6 +5,12 @@ import {
   getStartingPrice,
 } from "../config/supabase";
 import { openDB } from "idb";
+import { authService } from "./authService";
+
+const authHeaders = (): Record<string, string> => {
+  const token = authService.getToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 // Interface for filtering and pagination parameters
 export interface GameFilters {
@@ -256,6 +262,7 @@ export const gamesService = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...authHeaders(),
       },
       body: JSON.stringify({
         ...game,
@@ -282,6 +289,7 @@ export const gamesService = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        ...authHeaders(),
       },
       body: JSON.stringify({
         ...game,
@@ -299,6 +307,9 @@ export const gamesService = {
   async delete(id: string): Promise<void> {
     const response = await fetch(`${API_URL}/games/${id}`, {
       method: "DELETE",
+      headers: {
+        ...authHeaders(),
+      },
     });
 
     if (!response.ok) {
@@ -332,6 +343,7 @@ export const subscriptionsService = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...authHeaders(),
       },
       body: JSON.stringify({
         ...subscription,
@@ -362,6 +374,7 @@ export const subscriptionsService = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        ...authHeaders(),
       },
       body: JSON.stringify({
         ...subscription,
@@ -379,6 +392,9 @@ export const subscriptionsService = {
   async delete(id: string): Promise<void> {
     const response = await fetch(`${API_URL}/games/${id}`, {
       method: "DELETE",
+      headers: {
+        ...authHeaders(),
+      },
     });
 
     if (!response.ok) {
