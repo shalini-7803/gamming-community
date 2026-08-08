@@ -32,8 +32,10 @@ export interface PaginatedResponse<T> {
 const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
 
 // Games Service
-const CACHE_TTL = 60 * 60 * 1000;
-const DB_NAME = "gamesCache";
+const CACHE_TTL = 5 * 60 * 1000;
+// Bumped to v2 so every browser starts with a clean, empty cache store
+// (discards any stale entries cached before write-invalidation was fixed).
+const DB_NAME = "gamesCache_v2";
 const STORE_NAME = "games";
 
 async function initDB() {
@@ -71,23 +73,9 @@ async function getAllKeys() {
   return db.getAllKeys(STORE_NAME);
 }
 
-async function removeCacheEntriesContainingGame(gameId: string) {
+async function clearAllCache() {
   const db = await initDB();
-  const keys = await db.getAllKeys(STORE_NAME);
-
-  for (const key of keys) {
-    const cached = await db.get(STORE_NAME, key);
-
-    if (cached?.data?.data) {
-      if (cached.data.data.some((g: Game) => g.id === gameId)) {
-        await db.delete(STORE_NAME, key);
-      }
-    } else if (Array.isArray(cached?.data)) {
-      if (cached.data.some((g: Game) => g.id === gameId)) {
-        await db.delete(STORE_NAME, key);
-      }
-    }
-  }
+  await db.clear(STORE_NAME);
 }
 
 function getMinRentPrice(game: Game): number | null {
@@ -276,10 +264,7 @@ export const gamesService = {
 
     const data = normalizeGame(await response.json());
 
-    const keys = await getAllKeys();
-    for (const key of keys) {
-      await removeCacheKey(String(key));
-    }
+    await clearAllCache();
 
     return data.id as string;
   },
@@ -301,7 +286,7 @@ export const gamesService = {
       throw new Error(`Failed to update game: ${response.status}`);
     }
 
-    await removeCacheEntriesContainingGame(id);
+    await clearAllCache();
   },
 
   async delete(id: string): Promise<void> {
@@ -316,7 +301,7 @@ export const gamesService = {
       throw new Error(`Failed to delete game: ${response.status}`);
     }
 
-    await removeCacheEntriesContainingGame(id);
+    await clearAllCache();
   },
 };
 
@@ -359,12 +344,7 @@ export const subscriptionsService = {
 
     const data = normalizeGame(await response.json());
 
-    const keys = await getAllKeys();
-    for (const key of keys) {
-      if (String(key).startsWith("subscriptions:")) {
-        await removeCacheKey(String(key));
-      }
-    }
+    await clearAllCache();
 
     return data.id as string;
   },
@@ -386,7 +366,7 @@ export const subscriptionsService = {
       throw new Error(`Failed to update subscription: ${response.status}`);
     }
 
-    await removeCacheEntriesContainingGame(id);
+    await clearAllCache();
   },
 
   async delete(id: string): Promise<void> {
@@ -401,7 +381,7 @@ export const subscriptionsService = {
       throw new Error(`Failed to delete subscription: ${response.status}`);
     }
 
-    await removeCacheEntriesContainingGame(id);
+    await clearAllCache();
   },
 };
 
