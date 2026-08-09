@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Bot, X, Send, MessageCircle } from "lucide-react";
-import { chatbotFaqService, ChatbotFaq, gamesService } from "../services/supabaseService";
+import {
+  chatbotFaqService,
+  ChatbotFaq,
+  gamesService,
+  subscriptionsService,
+} from "../services/supabaseService";
 import { Game, getPlatformsForGame, getStartingPrice } from "../config/supabase";
 
 const QUICK_TOPICS = [
@@ -136,7 +141,6 @@ function listGamesByFilter(
   platform: string | null
 ): Game[] {
   return games
-    .filter((g) => g.category === "game")
     .filter((g) => {
       const priceOk = maxPrice === null || getStartingPrice(g) <= maxPrice;
       const platformOk = !platform || getPlatformsForGame(g).includes(platform);
@@ -262,7 +266,10 @@ const ChatBot: React.FC = () => {
 
   useEffect(() => {
     chatbotFaqService.getAll().then(setFaqs);
-    gamesService.getAll({ limit: 1000 }).then((res) => setGames(res.data));
+    Promise.all([
+      gamesService.getAll({ limit: 1000 }),
+      subscriptionsService.getAll({ limit: 1000 }),
+    ]).then(([gamesRes, subsRes]) => setGames([...gamesRes.data, ...subsRes.data]));
   }, []);
 
   useEffect(() => {
