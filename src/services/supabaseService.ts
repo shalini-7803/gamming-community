@@ -464,3 +464,78 @@ export const testimonialsService = {
     }
   },
 };
+
+export interface ChatbotFaq {
+  id: string;
+  question: string;
+  keywords: string[];
+  answer: string;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export type ChatbotFaqInput = Omit<ChatbotFaq, "id" | "created_at" | "updated_at">;
+
+export const chatbotFaqService = {
+  async getAll(): Promise<ChatbotFaq[]> {
+    try {
+      const response = await fetch(`${API_URL}/chatbot-faqs`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch chatbot FAQs: ${response.status}`);
+      }
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    } catch (error) {
+      console.error("Error fetching chatbot FAQs:", error);
+      return [];
+    }
+  },
+
+  async add(faq: ChatbotFaqInput): Promise<ChatbotFaq> {
+    const response = await fetch(`${API_URL}/chatbot-faqs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders(),
+      },
+      body: JSON.stringify(faq),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to add chatbot FAQ: ${response.status}`);
+    }
+
+    return response.json();
+  },
+
+  async update(id: string, faq: ChatbotFaqInput): Promise<ChatbotFaq> {
+    const response = await fetch(`${API_URL}/chatbot-faqs/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders(),
+      },
+      body: JSON.stringify(faq),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update chatbot FAQ: ${response.status}`);
+    }
+
+    return response.json();
+  },
+
+  async delete(id: string): Promise<void> {
+    const response = await fetch(`${API_URL}/chatbot-faqs/${id}`, {
+      method: "DELETE",
+      headers: {
+        ...authHeaders(),
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete chatbot FAQ: ${response.status}`);
+    }
+  },
+};

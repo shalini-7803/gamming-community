@@ -11,6 +11,7 @@ import CartModal from "./components/CartModal";
 import CheckoutModal from "./components/CheckoutModal";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FloatingCartButton from "./components/FloatingCartButton";
+import ChatBot from "./components/ChatBot";
 
 // Page Components
 import HomePage from "./pages/HomePage";
@@ -555,6 +556,8 @@ function App() {
         />
 
         <WhatsAppButton />
+
+        {location.pathname !== "/admin" && <ChatBot />}
                 {flyToCartAnimation &&
           createPortal(
             <>
