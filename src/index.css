@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth, animated transition whenever dark/light theme is toggled */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-timing-function: ease;
+  transition-duration: 250ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+  }
+}
+
 @media (max-width: 524px) {
   .flash-strip-wrapper {
     display: flex !important;

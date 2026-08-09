@@ -320,7 +320,7 @@ const Header: React.FC<HeaderProps> = ({
               </div>
 
               {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 right-0 bg-slate-950 shadow-lg border-t border-white/10 z-50">
+                <div className="absolute top-full left-0 right-0 bg-slate-950 light:bg-white shadow-lg border-t border-white/10 light:border-gray-200 z-50">
                   <div className="container mx-auto px-3 sm:px-4 py-4">
                     <nav className="space-y-1">
                       {navItems.map((item) => (
@@ -332,7 +332,7 @@ const Header: React.FC<HeaderProps> = ({
                               ? "text-purple-300 bg-purple-500/10 border border-purple-500/25"
                               : isNavActive(item.id)
                               ? "text-fuchsia-400 bg-white/5"
-                              : "text-slate-300 hover:text-fuchsia-400 hover:bg-white/5"
+                              : "text-slate-300 light:text-gray-700 hover:text-fuchsia-400 hover:bg-white/5 light:hover:bg-gray-100"
                           }`}
                         >
                           {item.id === "admin" && (
@@ -366,7 +366,7 @@ const Header: React.FC<HeaderProps> = ({
                           onLoginClick();
                           setIsMobileMenuOpen(false);
                         }}
-                        className="mt-4 w-full text-left py-3 px-3 text-slate-200 hover:text-white transition-all hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 rounded-lg border border-white/15"
+                        className="mt-4 w-full text-left py-3 px-3 text-slate-200 light:text-gray-700 hover:text-white transition-all hover:bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500 rounded-lg border border-white/15 light:border-gray-300"
                       >
                         Admin Login
                       </button>
