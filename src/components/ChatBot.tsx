@@ -89,6 +89,102 @@ function describeGame(game: Game): string {
   );
 }
 
+const PLATFORM_KEYWORDS: Record<string, string> = {
+  ps5: "PS5",
+  ps4: "PS4",
+  psvr2: "PSVR2",
+  psvr: "PSVR2",
+  pc: "PC",
+  xbox: "Xbox",
+};
+
+const BROWSE_HINTS = [
+  "what games", "which games", "show me", "show games", "list of games",
+  "list games", "all games", "what do you have", "games do you have",
+  "recommend", "suggest", "cheap games", "budget games", "options",
+];
+
+function parsePriceLimit(input: string): number | null {
+  const normalized = input.toLowerCase();
+  const match = normalized.match(
+    /(?:under|below|less than|upto|up to|se kam|kam mein|ke andar)\D{0,10}(\d{2,6})/
+  );
+  if (match) return Number(match[1]);
+
+  const reverseMatch = normalized.match(/(\d{2,6})\D{0,10}(?:se kam|ke andar|or less|and under)/);
+  if (reverseMatch) return Number(reverseMatch[1]);
+
+  return null;
+}
+
+function parsePlatform(input: string): string | null {
+  const normalized = input.toLowerCase();
+  for (const [kw, label] of Object.entries(PLATFORM_KEYWORDS)) {
+    if (normalized.includes(kw)) return label;
+  }
+  return null;
+}
+
+function looksLikeBrowseQuery(input: string): boolean {
+  const normalized = input.toLowerCase();
+  return BROWSE_HINTS.some((hint) => normalized.includes(hint));
+}
+
+function listGamesByFilter(
+  games: Game[],
+  maxPrice: number | null,
+  platform: string | null
+): Game[] {
+  return games
+    .filter((g) => g.category === "game")
+    .filter((g) => {
+      const priceOk = maxPrice === null || getStartingPrice(g) <= maxPrice;
+      const platformOk = !platform || getPlatformsForGame(g).includes(platform);
+      return priceOk && platformOk;
+    })
+    .sort((a, b) => getStartingPrice(a) - getStartingPrice(b));
+}
+
+function describeGameList(
+  games: Game[],
+  maxPrice: number | null,
+  platform: string | null
+): string {
+  if (games.length === 0) {
+    return `Sorry! 😔 I couldn't find any games${
+      maxPrice ? ` under ₹${maxPrice}` : ""
+    }${platform ? ` for ${platform}` : ""} right now. Browse everything here: ${
+      window.location.origin
+    }/games`;
+  }
+
+  const top = games.slice(0, 6);
+  const lines = top.map((g) => `• ${g.title} — ₹${getStartingPrice(g).toLocaleString("en-IN")}`);
+  const more =
+    games.length > top.length ? `\n...and ${games.length - top.length} more!` : "";
+
+  const heading =
+    `Here are some games` +
+    (maxPrice ? ` under ₹${maxPrice}` : "") +
+    (platform ? ` for ${platform}` : "") +
+    `:\n\n`;
+
+  return `${heading}${lines.join("\n")}${more}\n\nBrowse all games: ${window.location.origin}/games`;
+}
+
+function findCatalogAnswer(input: string, games: Game[]): string | null {
+  const maxPrice = parsePriceLimit(input);
+  const platform = parsePlatform(input);
+  const isBrowse = looksLikeBrowseQuery(input);
+
+  if (maxPrice !== null || (platform && isBrowse) || (isBrowse && !platform && !maxPrice)) {
+    const filtered = listGamesByFilter(games, maxPrice, platform);
+    return describeGameList(filtered, maxPrice, platform);
+  }
+
+  return null;
+}
+
 const URL_REGEX = /(https?:\/\/[^\s]+)/g;
 
 function renderWithLinks(text: string, isUserMessage: boolean): React.ReactNode {
@@ -121,6 +217,11 @@ function looksLikeAvailabilityQuery(input: string): boolean {
 }
 
 function findAnswer(input: string, faqs: ChatbotFaq[], games: Game[]): string {
+  const catalogAnswer = findCatalogAnswer(input, games);
+  if (catalogAnswer) {
+    return catalogAnswer;
+  }
+
   const gameMatch = findGameMatch(input, games);
   if (gameMatch) {
     return describeGame(gameMatch);
