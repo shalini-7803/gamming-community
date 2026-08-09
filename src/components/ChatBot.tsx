@@ -89,6 +89,32 @@ function describeGame(game: Game): string {
   );
 }
 
+const URL_REGEX = /(https?:\/\/[^\s]+)/g;
+
+function renderWithLinks(text: string, isUserMessage: boolean): React.ReactNode {
+  const parts = text.split(URL_REGEX);
+
+  return parts.map((part, i) =>
+    part.startsWith("http://") || part.startsWith("https://") ? (
+      <a
+        key={i}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`underline break-all ${
+          isUserMessage
+            ? "text-white hover:text-white/80"
+            : "text-fuchsia-400 light:text-fuchsia-600 hover:text-fuchsia-300 light:hover:text-fuchsia-700"
+        }`}
+      >
+        {part}
+      </a>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    )
+  );
+}
+
 function looksLikeAvailabilityQuery(input: string): boolean {
   const normalized = input.toLowerCase();
   return AVAILABILITY_HINTS.some((hint) => normalized.includes(hint));
@@ -198,7 +224,7 @@ const ChatBot: React.FC = () => {
                       : "bg-white/10 light:bg-gray-100 text-slate-100 light:text-gray-900"
                   }`}
                 >
-                  {msg.text}
+                  {renderWithLinks(msg.text, msg.sender === "user")}
                 </div>
               </div>
             ))}
