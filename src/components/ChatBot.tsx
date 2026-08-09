@@ -218,7 +218,7 @@ const ChatBot: React.FC = () => {
                 className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-line ${
+                  className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-line break-words ${
                     msg.sender === "user"
                       ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white"
                       : "bg-white/10 light:bg-gray-100 text-slate-100 light:text-gray-900"
