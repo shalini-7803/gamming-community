@@ -546,3 +546,44 @@ export const chatbotFaqService = {
     }
   },
 };
+
+export interface ChatVisit {
+  id: string;
+  session_id: string;
+  page_path: string | null;
+  user_agent: string | null;
+  opened_at: string;
+}
+
+export const chatVisitService = {
+  async log(sessionId: string, pagePath: string): Promise<void> {
+    try {
+      await fetch(`${API_URL}/chat-visits`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionId,
+          page_path: pagePath,
+          user_agent: navigator.userAgent,
+        }),
+      });
+    } catch (error) {
+      console.error("Error logging chat visit:", error);
+    }
+  },
+
+  async getAll(): Promise<ChatVisit[]> {
+    try {
+      const response = await fetch(`${API_URL}/chat-visits`, {
+        headers: { ...authHeaders() },
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch chat visits: ${response.status}`);
+      }
+      return response.json();
+    } catch (error) {
+      console.error("Error fetching chat visits:", error);
+      return [];
+    }
+  },
+};

@@ -5,6 +5,7 @@ import {
   ChatbotFaq,
   gamesService,
   subscriptionsService,
+  chatVisitService,
 } from "../services/supabaseService";
 import { Game, getPlatformsForGame, getStartingPrice } from "../config/supabase";
 
@@ -278,6 +279,13 @@ const ChatBot: React.FC = () => {
     const timer = setTimeout(() => {
       setIsOpen(true);
       sessionStorage.setItem("gc_chat_auto_opened", "true");
+
+      let sessionId = localStorage.getItem("gc_session_id");
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        localStorage.setItem("gc_session_id", sessionId);
+      }
+      chatVisitService.log(sessionId, window.location.pathname);
     }, 2000);
 
     return () => clearTimeout(timer);

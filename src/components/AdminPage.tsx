@@ -40,6 +40,7 @@ import { reviewService, Review } from "../services/reviewService";
 import { couponService, Coupon } from "../services/couponService";
 import { BackendService, Order } from "../services/backendService";
 import AdminChatbotFaqs from "./AdminChatbotFaqs";
+import AdminLiveVisitors from "./AdminLiveVisitors";
 
 type AdminTab =
   | "games"
@@ -49,7 +50,8 @@ type AdminTab =
   | "coupons"
   | "reviews"
   | "orders"
-  | "chatbot";
+  | "chatbot"
+  | "visitors";
 
 interface GameFormState {
   title: string;
@@ -2139,6 +2141,7 @@ onChange={(e) =>
   count: orders.length
 },
             { id: "chatbot", label: "Chatbot", count: null },
+            { id: "visitors", label: "Live Visitors", count: null },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -2265,6 +2268,8 @@ onChange={(e) =>
   </>
 ) : activeTab === "chatbot" ? (
   <AdminChatbotFaqs />
+) : activeTab === "visitors" ? (
+  <AdminLiveVisitors />
 ) : loading ? (
           <div className="col-span-full text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto"></div>
