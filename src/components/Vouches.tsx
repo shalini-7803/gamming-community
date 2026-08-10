@@ -8,7 +8,7 @@ const SectionHeading: React.FC = () => (
     <div className="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.45)] flex-shrink-0">
       <Star className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" />
     </div>
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-600 light:via-fuchsia-600 light:to-orange-600 bg-clip-text text-transparent">
       Customer Screenshots
     </h2>
   </div>
@@ -19,11 +19,11 @@ const Vouches: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+      <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 overflow-hidden transition-colors duration-300">
         <div className="container mx-auto px-3 sm:px-4">
           <div className="text-center mb-8">
             <SectionHeading />
-            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+            <p className="text-slate-400 light:text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
               Real phone screenshots from our satisfied gaming community
             </p>
           </div>
@@ -35,16 +35,16 @@ const Vouches: React.FC = () => {
 
   if (error || testimonials.length === 0) {
     return (
-      <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+      <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 overflow-hidden transition-colors duration-300">
         <div className="container mx-auto px-3 sm:px-4">
           <div className="text-center mb-8">
             <SectionHeading />
-            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+            <p className="text-slate-400 light:text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
               Real phone screenshots from our satisfied gaming community
             </p>
           </div>
           <div className="text-center py-8">
-            <p className="text-slate-400">No testimonials available at the moment.</p>
+            <p className="text-slate-400 light:text-gray-500">No testimonials available at the moment.</p>
           </div>
         </div>
       </section>
@@ -52,7 +52,7 @@ const Vouches: React.FC = () => {
   }
 
   return (
-    <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+    <section className="relative py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 overflow-hidden transition-colors duration-300">
       {/* Ambient neon glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-violet-600/20 rounded-full blur-3xl animate-loader-drift" />
@@ -65,7 +65,7 @@ const Vouches: React.FC = () => {
       <div className="relative container mx-auto px-3 sm:px-4">
         <div className="text-center mb-8">
           <SectionHeading />
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 light:text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
             Real phone screenshots from our satisfied gaming community
           </p>
         </div>
@@ -97,10 +97,10 @@ const Vouches: React.FC = () => {
         {/* CTA */}
         <div className="text-center mt-10">
           <div className="bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-orange-500/10 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto border border-fuchsia-500/20">
-            <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent mb-3">
+            <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-violet-300 to-fuchsia-300 light:from-violet-600 light:to-fuchsia-600 bg-clip-text text-transparent mb-3">
               Join Thousands of Happy Gamers! 🎮
             </h3>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-slate-300 light:text-gray-700 text-sm sm:text-base">
               Game Smarter, Save Bigger
             </p>
           </div>

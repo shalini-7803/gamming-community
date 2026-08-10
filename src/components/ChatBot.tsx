@@ -306,10 +306,10 @@ const ChatBot: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-52 right-6 w-[calc(100vw-3rem)] max-w-sm h-[28rem] max-h-[70vh] bg-slate-900 light:bg-white border border-white/10 light:border-gray-200 rounded-2xl shadow-2xl z-40 flex flex-col overflow-hidden transition-colors duration-300">
+        <div className="fixed inset-x-4 top-16 bottom-24 sm:inset-x-auto sm:left-auto sm:top-auto sm:bottom-52 sm:right-6 sm:w-full sm:max-w-sm sm:h-[28rem] sm:max-h-[70vh] bg-slate-900 light:bg-white border border-white/10 light:border-gray-200 rounded-2xl shadow-2xl z-40 flex flex-col overflow-hidden transition-colors duration-300">
           <div className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 px-4 py-3">
-            <Bot className="w-5 h-5 text-white" />
-            <div>
+            <Bot className="w-5 h-5 text-white flex-shrink-0" />
+            <div className="flex-1 min-w-0">
               <p className="text-white font-semibold text-sm leading-tight">
                 Gaming Community Assistant
               </p>
@@ -317,6 +317,13 @@ const ChatBot: React.FC = () => {
                 Answers common questions only
               </p>
             </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="flex-shrink-0 text-white/80 hover:text-white p-1 -mr-1"
+              title="Close chat"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
