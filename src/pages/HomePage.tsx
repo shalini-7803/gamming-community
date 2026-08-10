@@ -80,7 +80,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
                   </span>
 
                   <span className="rounded-full border border-white/10 light:border-gray-200 bg-white/10 light:bg-white light:shadow-md px-2.5 py-0.5 text-[11px] font-semibold text-white light:text-gray-900">
-                    1500+ members
+                    2500+ members
                   </span>
                 </div>
 
