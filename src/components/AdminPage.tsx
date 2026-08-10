@@ -9,7 +9,8 @@ import {
   Settings,
   Copy,
   Tag,
-  Star
+  Star,
+  Upload
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -848,6 +849,27 @@ orderStatusFilter
       console.error("Error saving item:", error);
       toast.error("Failed to save item. Please try again.");
     }
+  };
+
+  const handleScreenshotFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setTestimonialImage(reader.result as string);
+    };
+    reader.onerror = () => {
+      toast.error("Failed to read image. Please try again.");
+    };
+    reader.readAsDataURL(file);
+
+    e.target.value = "";
   };
 
   const handleTestimonialSubmit = async (e: React.FormEvent) => {
@@ -2071,14 +2093,40 @@ onChange={(e) =>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Screenshot Image
         </label>
-        <input
-          type="text"
-          value={testimonialImage}
-          onChange={(e) => setTestimonialImage(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          placeholder="Paste image URL or base64 data"
-          required
-        />
+
+        {testimonialImage ? (
+          <div className="relative w-40 mx-auto">
+            <img
+              src={testimonialImage}
+              alt="Screenshot preview"
+              className="w-40 h-auto rounded-xl border border-gray-200 shadow-md"
+            />
+            <button
+              type="button"
+              onClick={() => setTestimonialImage("")}
+              className="absolute -top-2 -right-2 bg-white rounded-full p-1.5 shadow-md border border-gray-200 text-gray-500 hover:text-red-500"
+              title="Remove"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <label className="flex flex-col items-center justify-center gap-2 w-full p-8 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-cyan-400 hover:bg-cyan-50/50 transition-colors">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleScreenshotFileSelect}
+              className="hidden"
+            />
+            <div className="bg-gradient-to-r from-cyan-400 to-blue-500 p-3 rounded-full">
+              <Upload className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-sm font-semibold text-gray-700">
+              Tap to upload from gallery
+            </span>
+            <span className="text-xs text-gray-400">JPG, PNG, or WEBP</span>
+          </label>
+        )}
       </div>
 
       {editingItem && (
