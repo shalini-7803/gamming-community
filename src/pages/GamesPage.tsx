@@ -144,7 +144,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
     setSearchQuery("");
     setSelectedPlatform(lockedPlatform || "all");
-    setSortBy("name-asc");
+    setSortBy("newest");
     setSelectedPriceRange("all");
     setCurrentPage(1);
   };
@@ -337,7 +337,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               <Gamepad2 className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+              <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent">
                 Games Collection
               </h1>
               <p className="text-slate-400 light:text-gray-500 text-sm sm:text-base">
@@ -472,7 +472,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               </div>
 
               <div className="text-sm text-slate-400 light:text-gray-500 lg:text-center">
-                <span className="font-bold text-fuchsia-300 bg-fuchsia-500/10 px-2.5 py-1 rounded-full">
+                <span className="font-bold text-fuchsia-300 light:text-fuchsia-800 bg-fuchsia-500/10 px-2.5 py-1 rounded-full">
                   {totalCount}
                 </span>{" "}
                 game{totalCount !== 1 ? "s" : ""} found

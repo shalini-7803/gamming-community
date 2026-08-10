@@ -39,7 +39,7 @@ const Categories: React.FC = () => {
     <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
       <div className="container mx-auto px-3 sm:px-4">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent mb-3 sm:mb-4">
             Shop by Category
           </h2>
           <p className="text-slate-400 text-base sm:text-lg px-4">

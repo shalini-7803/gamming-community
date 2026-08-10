@@ -147,7 +147,7 @@ const ReviewsSection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-4">
             <span className="text-white">Built on Trust,</span>
             <br className="sm:hidden" />{" "}
-            <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent">
               Backed by Gamers
             </span>
           </h2>

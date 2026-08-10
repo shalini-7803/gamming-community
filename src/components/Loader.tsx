@@ -71,7 +71,7 @@ const Loader: React.FC<LoaderProps> = ({
 
         {/* Message */}
         <p
-          className={`${textSizeClasses[size]} font-semibold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent animate-loader-flicker`}
+          className={`${textSizeClasses[size]} font-semibold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent animate-loader-flicker`}
         >
           {message}
         </p>

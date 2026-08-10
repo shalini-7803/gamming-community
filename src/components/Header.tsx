@@ -329,7 +329,7 @@ const Header: React.FC<HeaderProps> = ({
                           onClick={() => handleNavClick(item.id)}
                           className={`block w-full text-left py-3 px-3 transition-colors rounded-lg flex items-center space-x-2 text-sm font-semibold uppercase tracking-wide ${
                             item.id === "admin"
-                              ? "text-purple-300 bg-purple-500/10 border border-purple-500/25"
+                              ? "text-purple-300 light:text-purple-800 bg-purple-500/10 border border-purple-500/25"
                               : isNavActive(item.id)
                               ? "text-fuchsia-400 bg-white/5"
                               : "text-slate-300 light:text-gray-700 hover:text-fuchsia-400 hover:bg-white/5 light:hover:bg-gray-100"
@@ -345,7 +345,7 @@ const Header: React.FC<HeaderProps> = ({
 
                     {isLoggedIn ? (
                       <div className="mt-4 space-y-2">
-                        <div className="py-3 px-3 text-lime-300 bg-lime-500/10 rounded-lg flex items-center justify-between border border-lime-500/25">
+                        <div className="py-3 px-3 text-lime-300 light:text-lime-800 bg-lime-500/10 rounded-lg flex items-center justify-between border border-lime-500/25">
                           <span>Welcome, {displayName}!</span>
                         </div>
 

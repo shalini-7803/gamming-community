@@ -71,7 +71,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
             <div className="relative flex flex-col sm:flex-row items-center sm:justify-between gap-4 text-center sm:text-left">
               <div className="flex-1">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-400/30 bg-orange-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-orange-200">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-400/30 light:border-orange-300 bg-orange-500/10 light:bg-orange-50 px-2.5 py-0.5 text-[11px] font-semibold text-orange-200 light:text-orange-800">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-400" />

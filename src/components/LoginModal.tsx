@@ -91,7 +91,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
               </div>
             </div>
 
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent mb-2">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent mb-2">
               Admin Login
             </h2>
             <p className="text-slate-400 light:text-gray-500 text-sm">

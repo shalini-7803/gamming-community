@@ -102,7 +102,7 @@ const SubscriptionsPage: React.FC = () => {
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Back</span>
               </button>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent">
                 Subscriptions
               </h1>
             </div>
@@ -130,7 +130,7 @@ const SubscriptionsPage: React.FC = () => {
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Back</span>
               </button>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent">
                 Subscriptions
               </h1>
             </div>
@@ -157,7 +157,7 @@ const SubscriptionsPage: React.FC = () => {
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Back</span>
             </button>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent">
               Subscriptions
             </h1>
           </div>

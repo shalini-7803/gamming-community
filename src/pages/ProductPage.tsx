@@ -566,7 +566,7 @@ Please confirm with our team before purchase regarding personal account compatib
 
   const renderProductDetails = () => (
     <>
-      <h1 className="text-2xl xl:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent mb-4 xl:mb-6">
+      <h1 className="text-2xl xl:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent mb-4 xl:mb-6">
         {currentProduct.title}
       </h1>
 
@@ -693,7 +693,7 @@ Please confirm with our team before purchase regarding personal account compatib
         )}
 
       <div className="mb-4 xl:mb-6 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-xl p-4 xl:p-6 border border-fuchsia-500/20">
-        <h4 className="font-bold text-fuchsia-300 mb-3 text-sm xl:text-base">
+        <h4 className="font-bold text-fuchsia-300 light:text-fuchsia-800 mb-3 text-sm xl:text-base">
           About This Option
         </h4>
         <p className="text-slate-300 light:text-gray-700 text-xs xl:text-sm leading-relaxed whitespace-pre-line">
@@ -749,30 +749,30 @@ Please confirm with our team before purchase regarding personal account compatib
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 xl:gap-4 mb-6 xl:mb-8">
         <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 text-center">
           <Shield className="w-6 h-6 mx-auto mb-2 text-green-400" />
-          <h4 className="font-bold text-green-300 text-sm xl:text-base">
+          <h4 className="font-bold text-green-300 light:text-green-800 text-sm xl:text-base">
             Warranty
           </h4>
-          <p className="text-green-200/80 text-xs xl:text-sm">
+          <p className="text-green-200/80 light:text-green-800 text-xs xl:text-sm">
             Safe and supported access
           </p>
         </div>
 
         <div className="bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-xl p-4 text-center">
           <Clock className="w-6 h-6 mx-auto mb-2 text-fuchsia-400" />
-          <h4 className="font-bold text-fuchsia-300 text-sm xl:text-base">
+          <h4 className="font-bold text-fuchsia-300 light:text-fuchsia-800 text-sm xl:text-base">
             Fast Delivery
           </h4>
-          <p className="text-fuchsia-200/80 text-xs xl:text-sm">
+          <p className="text-fuchsia-200/80 light:text-fuchsia-800 text-xs xl:text-sm">
             Quick account access
           </p>
         </div>
 
         <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 text-center">
           <Headphones className="w-6 h-6 mx-auto mb-2 text-orange-400" />
-          <h4 className="font-bold text-orange-300 text-sm xl:text-base">
+          <h4 className="font-bold text-orange-300 light:text-orange-800 text-sm xl:text-base">
             Support
           </h4>
-          <p className="text-orange-200/80 text-xs xl:text-sm">
+          <p className="text-orange-200/80 light:text-orange-800 text-xs xl:text-sm">
             Setup help available
           </p>
         </div>
@@ -823,10 +823,10 @@ Please confirm with our team before purchase regarding personal account compatib
           {activeAccordion === "additional" && (
             <div className="px-4 xl:px-6 pb-4 xl:pb-6">
               <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 xl:p-6">
-                <h4 className="font-bold text-orange-300 mb-3">
+                <h4 className="font-bold text-orange-300 light:text-orange-800 mb-3">
                   Important Notice
                 </h4>
-                <p className="text-orange-200/80 leading-relaxed text-sm xl:text-base">
+                <p className="text-orange-200/80 light:text-orange-800 leading-relaxed text-sm xl:text-base">
                   Refunds are not available after purchase; however, support or
                   replacement will be provided if the product does not function
                   properly according to our policy.
@@ -929,7 +929,7 @@ Please confirm with our team before purchase regarding personal account compatib
 
         {recommendedProducts.length > 0 && (
           <div className="mt-10 sm:mt-14">
-            <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 bg-clip-text text-transparent mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent mb-6">
               You Might Also Like
             </h2>
 
