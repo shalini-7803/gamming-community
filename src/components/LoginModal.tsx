@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Lock, Mail, AlertCircle, X, Gamepad2 } from "lucide-react";
+import { Lock, Mail, AlertCircle, X, Gamepad2, Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import { authService } from "../services/authService";
 
@@ -16,6 +16,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -126,16 +127,29 @@ const LoginModal: React.FC<LoginModalProps> = ({
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 w-4 h-4" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                     setError("");
                   }}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-800 light:bg-white border border-white/10 light:border-gray-300 text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-shadow"
+                  className="w-full pl-10 pr-11 py-3 bg-slate-800 light:bg-white border border-white/10 light:border-gray-300 text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-shadow"
                   placeholder="Enter password"
                   autoComplete="current-password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 hover:text-slate-300 light:hover:text-gray-700 transition-colors"
+                  title={showPassword ? "Hide password" : "Show password"}
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
               </div>
             </div>
 
