@@ -675,15 +675,15 @@ Please confirm with our team before purchase regarding personal account compatib
       {currentProduct.edition_features &&
         currentProduct.edition_features.length > 0 && (
           <div className="mb-4 xl:mb-6 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-xl p-4 xl:p-6 border border-purple-500/20">
-            <h4 className="font-bold text-purple-300 mb-3 text-sm xl:text-base">
+            <h4 className="font-bold text-purple-300 light:text-purple-800 mb-3 text-sm xl:text-base">
               {currentProduct.edition} Edition Features
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {currentProduct.edition_features.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-2">
-                  <Star className="w-4 h-4 text-purple-400 flex-shrink-0" />
-                  <span className="text-purple-200 text-xs xl:text-sm">
+                  <Star className="w-4 h-4 text-purple-400 light:text-purple-600 flex-shrink-0" />
+                  <span className="text-purple-200 light:text-purple-900 text-xs xl:text-sm">
                     {feature}
                   </span>
                 </div>

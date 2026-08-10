@@ -11,6 +11,7 @@ import Pagination from "../components/ui/Pagination";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const sortOptions = [
+  { value: "newest", label: "Newest First" },
   { value: "name-asc", label: "Name: A to Z" },
   { value: "name-desc", label: "Name: Z to A" },
   { value: "price-low", label: "Price: Low to High" },
@@ -43,7 +44,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
   const [selectedPlatform, setSelectedPlatform] = useState(
     lockedPlatform || searchParams.get("platform") || "all"
   );
-  const [sortBy, setSortBy] = useState(searchParams.get("sort") || "name-asc");
+  const [sortBy, setSortBy] = useState(searchParams.get("sort") || "newest");
   const [selectedPriceRange, setSelectedPriceRange] = useState(
     searchParams.get("price") || "all"
   );
@@ -65,7 +66,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
 
     if (searchQuery) params.set("search", searchQuery);
     if (selectedPlatform !== "all") params.set("platform", selectedPlatform);
-    if (sortBy !== "name-asc") params.set("sort", sortBy);
+    if (sortBy !== "newest") params.set("sort", sortBy);
     if (selectedPriceRange !== "all") params.set("price", selectedPriceRange);
     if (currentPage > 1) params.set("page", String(currentPage));
     if (viewMode !== "grid") params.set("view", viewMode);

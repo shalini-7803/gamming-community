@@ -273,6 +273,17 @@ const ChatBot: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (sessionStorage.getItem("gc_chat_auto_opened")) return;
+
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+      sessionStorage.setItem("gc_chat_auto_opened", "true");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isOpen]);
 
@@ -299,10 +310,20 @@ const ChatBot: React.FC = () => {
     <>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="fixed bottom-36 right-6 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40"
+        className="group fixed bottom-36 right-6 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded-full p-4 ring-2 ring-white/30 light:ring-white shadow-[0_0_20px_rgba(217,70,239,0.5)] hover:shadow-[0_0_30px_rgba(217,70,239,0.75)] transition-all duration-300 transform hover:scale-110 z-40"
         title={isOpen ? "Close chat" : "Chat with us"}
       >
-        {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
+        {!isOpen && (
+          <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
+            <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-lime-400 ring-2 ring-slate-900 light:ring-white" />
+          </span>
+        )}
+        {isOpen ? (
+          <X className="w-6 h-6" />
+        ) : (
+          <Bot className="w-6 h-6 transition-transform duration-300 group-hover:rotate-6" />
+        )}
       </button>
 
       {isOpen && (

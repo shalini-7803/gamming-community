@@ -130,7 +130,7 @@ function filterAndPaginateGames(
     searchQuery = "",
     platform = "all",
     priceRange,
-    sortBy = "name-asc",
+    sortBy = "newest",
     page = 1,
     limit = 24,
   } = filters;
@@ -156,6 +156,13 @@ if (priceRange) {
   });
 }
   switch (sortBy) {
+    case "newest":
+      filtered.sort((a, b) => {
+        const aDate = new Date(a.created_at || 0).getTime();
+        const bDate = new Date(b.created_at || 0).getTime();
+        return bDate - aDate;
+      });
+      break;
     case "name-asc":
       filtered.sort((a, b) => a.title.localeCompare(b.title));
       break;
