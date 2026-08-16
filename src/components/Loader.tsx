@@ -8,10 +8,10 @@ interface LoaderProps {
 }
 
 const KEYS = [
-  { label: 'Y', bg: 'bg-yellow-400', text: 'text-yellow-900', pos: 'col-start-2 row-start-1', delay: '0s' },
-  { label: 'X', bg: 'bg-blue-400', text: 'text-blue-900', pos: 'col-start-1 row-start-2', delay: '0.45s' },
-  { label: 'B', bg: 'bg-red-400', text: 'text-red-900', pos: 'col-start-3 row-start-2', delay: '0.15s' },
-  { label: 'A', bg: 'bg-green-400', text: 'text-green-900', pos: 'col-start-2 row-start-3', delay: '0.3s' },
+  { label: '△', bg: 'bg-emerald-400', text: 'text-emerald-900', pos: 'col-start-2 row-start-1', delay: '0s' },
+  { label: '□', bg: 'bg-pink-400', text: 'text-pink-900', pos: 'col-start-1 row-start-2', delay: '0.45s' },
+  { label: '○', bg: 'bg-red-400', text: 'text-red-900', pos: 'col-start-3 row-start-2', delay: '0.15s' },
+  { label: '✕', bg: 'bg-sky-400', text: 'text-sky-900', pos: 'col-start-2 row-start-3', delay: '0.3s' },
 ];
 
 const Loader: React.FC<LoaderProps> = ({
@@ -66,6 +66,8 @@ const Loader: React.FC<LoaderProps> = ({
           <div className="absolute inset-0 bg-fuchsia-500/25 blur-xl rounded-full animate-loader-breathe" />
           <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl p-3 shadow-[0_0_25px_rgba(217,70,239,0.45)]">
             <Gamepad2 className={`${iconSizeClasses[size]} text-white animate-controller-bob`} />
+            {/* DualSense-style light bar */}
+            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-1.5 rounded-full bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.9)] animate-loader-flicker" />
           </div>
         </div>
 
