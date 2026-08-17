@@ -1,5 +1,5 @@
 import React from 'react';
-import { Gamepad2 } from 'lucide-react';
+import { Gamepad2, Sparkles } from 'lucide-react';
 
 interface LoaderProps {
   size?: 'small' | 'medium' | 'large';
@@ -7,11 +7,12 @@ interface LoaderProps {
   fullScreen?: boolean;
 }
 
-const KEYS = [
-  { label: '△', bg: 'bg-emerald-400', text: 'text-emerald-900', pos: 'col-start-2 row-start-1', delay: '0s' },
-  { label: '□', bg: 'bg-pink-400', text: 'text-pink-900', pos: 'col-start-1 row-start-2', delay: '0.45s' },
-  { label: '○', bg: 'bg-red-400', text: 'text-red-900', pos: 'col-start-3 row-start-2', delay: '0.15s' },
-  { label: '✕', bg: 'bg-sky-400', text: 'text-sky-900', pos: 'col-start-2 row-start-3', delay: '0.3s' },
+const BARS = [
+  { delay: '0s', color: 'from-violet-400 to-violet-600' },
+  { delay: '0.15s', color: 'from-fuchsia-400 to-fuchsia-600' },
+  { delay: '0.3s', color: 'from-orange-400 to-orange-600' },
+  { delay: '0.15s', color: 'from-fuchsia-400 to-fuchsia-600' },
+  { delay: '0s', color: 'from-violet-400 to-violet-600' },
 ];
 
 const Loader: React.FC<LoaderProps> = ({
@@ -19,28 +20,28 @@ const Loader: React.FC<LoaderProps> = ({
   message = 'Loading...',
   fullScreen = false
 }) => {
-  const diamondSizeClasses = {
-    small: 'w-24 h-24',
-    medium: 'w-28 h-28',
-    large: 'w-32 h-32'
-  };
-
-  const keySizeClasses = {
-    small: 'w-7 h-7 text-xs',
-    medium: 'w-9 h-9 text-sm',
-    large: 'w-11 h-11 text-base'
+  const ringSizeClasses = {
+    small: 'w-20 h-20',
+    medium: 'w-24 h-24',
+    large: 'w-28 h-28'
   };
 
   const iconSizeClasses = {
-    small: 'w-8 h-8',
-    medium: 'w-10 h-10',
-    large: 'w-12 h-12'
+    small: 'w-7 h-7',
+    medium: 'w-9 h-9',
+    large: 'w-11 h-11'
   };
 
   const textSizeClasses = {
     small: 'text-sm',
     medium: 'text-base',
     large: 'text-lg'
+  };
+
+  const barHeightClasses = {
+    small: 'h-5',
+    medium: 'h-6',
+    large: 'h-8'
   };
 
   const containerClasses = fullScreen
@@ -60,37 +61,73 @@ const Loader: React.FC<LoaderProps> = ({
         </div>
       )}
 
-      <div className="relative flex flex-col items-center space-y-8 sm:space-y-10 animate-loader-fade-in">
-        {/* Controller image */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-fuchsia-500/25 blur-xl rounded-full animate-loader-breathe" />
-          <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl p-3 shadow-[0_0_25px_rgba(217,70,239,0.45)]">
-            <Gamepad2 className={`${iconSizeClasses[size]} text-white animate-controller-bob`} />
-            {/* DualSense-style light bar */}
-            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-1.5 rounded-full bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.9)] animate-loader-flicker" />
+      <div className="relative flex flex-col items-center space-y-6 sm:space-y-8 animate-loader-fade-in">
+        {/* Sparkle accents */}
+        <Sparkles
+          className="absolute -top-3 -left-4 w-4 h-4 text-fuchsia-300 animate-sparkle-twinkle pointer-events-none"
+          style={{ animationDelay: '0.4s' }}
+        />
+        <Sparkles
+          className="absolute -bottom-2 -right-5 w-3.5 h-3.5 text-orange-300 animate-sparkle-twinkle pointer-events-none"
+          style={{ animationDelay: '1.2s' }}
+        />
+
+        {/* Spinning neon ring with controller at center */}
+        <div className={`relative ${ringSizeClasses[size]}`}>
+          <div className="absolute -inset-2 bg-fuchsia-500/20 blur-2xl rounded-full animate-loader-breathe" />
+          <div className="absolute inset-0 bg-violet-500/25 blur-xl rounded-full animate-loader-breathe" style={{ animationDelay: '0.6s' }} />
+
+          {/* Orbiting satellite dots */}
+          <div className="absolute inset-[-6px] animate-loader-ring-spin" style={{ animationDuration: '3s' }}>
+            <span className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(103,232,249,0.9)]" />
+          </div>
+          <div className="absolute inset-[-2px] animate-loader-ring-spin-reverse" style={{ animationDuration: '4s' }}>
+            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-300 shadow-[0_0_6px_rgba(253,186,116,0.9)]" />
+          </div>
+
+          <div
+            className="absolute inset-0 rounded-full animate-loader-ring-spin shadow-[0_0_20px_rgba(217,70,239,0.35)]"
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(217,70,239,0.9) 25%, transparent 50%)',
+            }}
+          />
+          <div
+            className="absolute inset-1.5 rounded-full animate-loader-ring-spin-reverse"
+            style={{
+              background:
+                'conic-gradient(from 90deg, transparent 0%, rgba(251,146,60,0.8) 20%, transparent 45%)',
+            }}
+          />
+
+          <div className="absolute inset-3 rounded-full bg-slate-950 light:bg-white border border-white/10 light:border-gray-200 flex items-center justify-center shadow-[inset_0_0_15px_rgba(217,70,239,0.25)]">
+            <Gamepad2 className={`${iconSizeClasses[size]} text-fuchsia-400 animate-controller-bob drop-shadow-[0_0_6px_rgba(217,70,239,0.8)]`} />
           </div>
         </div>
 
-        {/* Message */}
-        <p
-          className={`${textSizeClasses[size]} font-semibold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent animate-loader-flicker`}
-        >
-          {message}
-        </p>
-
-        {/* Animated controller keys */}
-        <div className={`relative grid grid-cols-3 grid-rows-3 place-items-center ${diamondSizeClasses[size]}`}>
-          <div className="absolute inset-0 bg-fuchsia-500/10 blur-xl rounded-full" />
-
-          {KEYS.map((key) => (
+        {/* Equalizer-style loading bars */}
+        <div className={`flex items-end gap-1.5 ${barHeightClasses[size]}`}>
+          {BARS.map((bar, i) => (
             <div
-              key={key.label}
-              className={`relative ${key.pos} ${keySizeClasses[size]} ${key.bg} ${key.text} rounded-xl flex items-center justify-center font-black shadow-lg animate-key-press`}
-              style={{ animationDelay: key.delay }}
-            >
-              {key.label}
-            </div>
+              key={i}
+              className={`w-1.5 sm:w-2 h-full rounded-full bg-gradient-to-t ${bar.color} shadow-[0_0_8px_rgba(217,70,239,0.5)] animate-loader-segment`}
+              style={{ animationDelay: bar.delay }}
+            />
           ))}
+        </div>
+
+        {/* Message */}
+        <div className="flex items-center gap-1.5">
+          <p
+            className={`${textSizeClasses[size]} font-bold uppercase tracking-widest bg-gradient-to-r from-violet-300 via-fuchsia-300 via-orange-300 to-violet-300 light:from-violet-700 light:via-fuchsia-700 light:via-orange-700 light:to-violet-700 bg-clip-text text-transparent animate-strip-gradient-flow`}
+          >
+            {message}
+          </p>
+          <span className="flex gap-0.5">
+            <span className="w-1 h-1 rounded-full bg-fuchsia-400 shadow-[0_0_4px_rgba(217,70,239,0.9)] animate-loader-dot-bounce" style={{ animationDelay: '0s' }} />
+            <span className="w-1 h-1 rounded-full bg-fuchsia-400 shadow-[0_0_4px_rgba(217,70,239,0.9)] animate-loader-dot-bounce" style={{ animationDelay: '0.15s' }} />
+            <span className="w-1 h-1 rounded-full bg-fuchsia-400 shadow-[0_0_4px_rgba(217,70,239,0.9)] animate-loader-dot-bounce" style={{ animationDelay: '0.3s' }} />
+          </span>
         </div>
       </div>
     </div>

@@ -212,6 +212,38 @@
   animation: loader-segment 1s ease-in-out infinite;
 }
 
+@keyframes loader-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-loader-ring-spin {
+  animation: loader-ring-spin 2.5s linear infinite;
+}
+
+.animate-loader-ring-spin-reverse {
+  animation: loader-ring-spin 3.5s linear infinite reverse;
+}
+
+@keyframes loader-dot-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.animate-loader-dot-bounce {
+  animation: loader-dot-bounce 1.2s ease-in-out infinite;
+}
+
 @keyframes loader-flicker {
   0%, 100% {
     opacity: 1;

@@ -550,14 +550,18 @@ function App() {
           shopWorkingHours={shopStatus.workingHours}
         />
 
-        <FloatingCartButton
-          cartItemCount={cartItemCount}
-          onCartClick={handleCartClick}
-        />
+        {location.pathname !== "/admin" && (
+          <>
+            <FloatingCartButton
+              cartItemCount={cartItemCount}
+              onCartClick={handleCartClick}
+            />
 
-        <WhatsAppButton />
+            <WhatsAppButton />
 
-        {location.pathname !== "/admin" && <ChatBot />}
+            <ChatBot />
+          </>
+        )}
                 {flyToCartAnimation &&
           createPortal(
             <>

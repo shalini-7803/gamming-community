@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import AnimatedGamingBackground from './AnimatedGamingBackground';
 
 const SPARKLE_POSITIONS = [
   { top: '15%', left: '8%', size: 'w-3 h-3', delay: '0s' },
@@ -46,6 +47,19 @@ const goToAllGames = () => {
   }, [isHovered]);
 
   const slides = [
+    // PREVIEW ONLY — animated gaming background slide, not yet approved for production.
+    // Uncomment to preview locally; keep out of prod builds until confirmed.
+    // {
+    //   title: "🎮 PREMIUM GAMING 🎮",
+    //   subtitle: "Best Games, Best Prices",
+    //   description: "Experience the latest PS4 & PS5 titles at unbeatable prices",
+    //   image: "",
+    //   overlay: "",
+    //   buttonText: "Shop Now",
+    //   buttonAction: onShopBestsellers,
+    //   isBanner: false,
+    //   isAnimatedBg: true,
+    // },
   //   {
   //   title: "",
   //   subtitle: "",
@@ -155,7 +169,23 @@ const goToAllGames = () => {
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {slide.isBanner ? (
+          {(slide as any).isAnimatedBg ? (
+            <AnimatedGamingBackground className="w-full h-full">
+              <div className="relative w-full h-full flex items-center justify-center">
+                {SPARKLE_POSITIONS.map((sparkle, i) => (
+                  <Sparkles
+                    key={i}
+                    className={`hidden sm:block absolute ${sparkle.size} text-fuchsia-200 animate-sparkle-twinkle pointer-events-none`}
+                    style={{ top: sparkle.top, left: sparkle.left, animationDelay: sparkle.delay }}
+                  />
+                ))}
+
+                <div className="container mx-auto px-2 sm:px-3 md:px-4 h-full flex items-center justify-center">
+                  {renderSlideContent(slide)}
+                </div>
+              </div>
+            </AnimatedGamingBackground>
+          ) : slide.isBanner ? (
             <div className={`w-full h-full flex items-center justify-center ${
               slide.image.includes('purple modern') || slide.image.includes('215601')
                 ? 'bg-black'
