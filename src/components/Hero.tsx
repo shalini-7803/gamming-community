@@ -194,7 +194,7 @@ const goToAllGames = () => {
               <img
                 src={slide.image}
                 alt="Banner"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           ) : (
