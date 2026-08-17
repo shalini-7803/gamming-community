@@ -10,7 +10,8 @@ import {
   Copy,
   Tag,
   Star,
-  Upload
+  Upload,
+  Share2
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -387,6 +388,39 @@ orderStatusFilter
     setEditingItem(null);
     setTestimonialImage("");
     resetGameForm(activeTab === "subscriptions" ? "subscription" : "game");
+  };
+
+  const handleShareOrder = async (order: Order) => {
+    const items = (
+      typeof order.items === "string" ? JSON.parse(order.items) : order.items || []
+    ) as any[];
+
+    const itemLines = items
+      .map((item) => `• ${item.title} (${item.platform}, ${item.type}) x${item.quantity} — ₹${item.price}`)
+      .join("\n");
+
+    const text = [
+      `🎮 Order ${order.order_code}`,
+      `Customer: ${order.customer_name}`,
+      `Mobile: ${order.customer_mobile}`,
+      `Status: ${order.status}${order.payment_status ? ` (${order.payment_status})` : ""}`,
+      "",
+      "Items:",
+      itemLines,
+      "",
+      `Total: ₹${order.total_amount}`,
+    ].join("\n");
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: `Order ${order.order_code}`, text });
+      } catch (error) {
+        // user cancelled the share sheet — nothing to do
+      }
+    } else {
+      await navigator.clipboard.writeText(text);
+      toast.success("Order details copied to clipboard!");
+    }
   };
 
   const openNewItemModal = () => {
@@ -2376,12 +2410,23 @@ onChange={(e) =>
           Order Details
         </h2>
 
-        <button
-          onClick={() => setSelectedOrder(null)}
-          className="text-gray-500 hover:text-gray-700 text-2xl transition-colors"
-        >
-          ×
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => handleShareOrder(selectedOrder)}
+            className="flex items-center gap-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-md transition-all"
+            title="Share order details"
+          >
+            <Share2 className="w-4 h-4" />
+            <span className="hidden sm:inline">Share</span>
+          </button>
+
+          <button
+            onClick={() => setSelectedOrder(null)}
+            className="text-gray-500 hover:text-gray-700 text-2xl transition-colors"
+          >
+            ×
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
