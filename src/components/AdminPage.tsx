@@ -445,7 +445,7 @@ orderStatusFilter
 
         <button
           onClick={loadOrders}
-          className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-300 shadow-md"
+          className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-300 shadow-md"
         >
           Refresh
         </button>
@@ -461,7 +461,7 @@ orderStatusFilter
             <div className="flex items-center justify-between mb-2 gap-2">
               <button
                 onClick={() => setSelectedOrder(order)}
-                className="text-cyan-600 hover:underline font-semibold text-sm truncate"
+                className="text-fuchsia-600 hover:underline font-semibold text-sm truncate"
               >
                 {order.order_code}
               </button>
@@ -542,7 +542,7 @@ orderStatusFilter
                 <td className="p-3">
                   <button
                     onClick={() => setSelectedOrder(order)}
-                    className="text-cyan-600 hover:underline font-medium"
+                    className="text-fuchsia-600 hover:underline font-medium"
                   >
                     {order.order_code}
                   </button>
@@ -1071,7 +1071,7 @@ orderStatusFilter
               onClick={() => setPage(page)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 currentPage === page
-                  ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
+                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white"
                   : "text-gray-600 bg-white border border-gray-300 hover:bg-gray-50"
               }`}
             >
@@ -1087,7 +1087,7 @@ orderStatusFilter
               onClick={() => setPage(totalPages)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 currentPage === totalPages
-                  ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
+                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white"
                   : "text-gray-600 bg-white border border-gray-300 hover:bg-gray-50"
               }`}
             >
@@ -1434,7 +1434,7 @@ onChange={(e) =>
                             visible: coupon.visible,
                         });
                       }}
-                      className="px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white rounded-lg transition-all duration-300"
+                      className="px-4 py-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white rounded-lg transition-all duration-300"
                     >
                       Edit
                     </button>
@@ -1593,7 +1593,7 @@ onChange={(e) =>
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
           <div className="flex items-center space-x-3 mb-6">
-            <Settings className="w-8 h-8 text-cyan-500" />
+            <Settings className="w-8 h-8 text-fuchsia-500" />
             <h3 className="text-2xl font-bold text-gray-800">
               Shop Availability Settings
             </h3>
@@ -1620,7 +1620,7 @@ onChange={(e) =>
                     }
                     className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
                       shopSettings.shop_mode === id
-                        ? "border-cyan-500 bg-cyan-50"
+                        ? "border-fuchsia-500 bg-fuchsia-50"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
@@ -1651,7 +1651,7 @@ onChange={(e) =>
                   })
                 }
                 rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
               />
             </div>
 
@@ -1687,7 +1687,7 @@ onChange={(e) =>
                   }
                 }}
                 disabled={isSavingSettings}
-                className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
+                className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
               >
                 {isSavingSettings ? "Saving..." : "Save Settings"}
               </button>
@@ -1823,7 +1823,7 @@ onChange={(e) =>
           type="text"
           value={formData.title}
           onChange={(e) => updateFormField("title", e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
           required
         />
       </div>
@@ -1836,7 +1836,7 @@ onChange={(e) =>
           type="text"
           value={formData.image}
           onChange={(e) => updateFormField("image", e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
           placeholder="Paste image URL or base64 data"
           required
         />
@@ -1849,7 +1849,7 @@ onChange={(e) =>
         <textarea
           value={formData.description}
           onChange={(e) => updateFormField("description", e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
           rows={4}
         />
       </div>
@@ -1897,7 +1897,7 @@ onChange={(e) =>
                   e.target.value as "Standard" | "Premium" | "Ultimate" | "Deluxe"
                 )
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
             >
               {["Standard", "Premium", "Deluxe", "Ultimate"].map((edition) => (
                 <option key={edition} value={edition}>
@@ -1917,7 +1917,7 @@ onChange={(e) =>
           <button
             type="button"
             onClick={addPlatformRow}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm"
+            className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-4 py-2 rounded-lg text-sm"
           >
             Add Platform
           </button>
@@ -1940,7 +1940,7 @@ onChange={(e) =>
                     onChange={(e) =>
                       updatePlatformPrice(index, "platform", e.target.value)
                     }
-                    className="w-full max-w-xs p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    className="w-full max-w-xs p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
                     // disabled={activeTab === "subscriptions"}
                   >
                     <option value="">Select Platform</option>
@@ -1964,7 +1964,7 @@ onChange={(e) =>
                             copyPlatformPrices(index, Number(e.target.value));
                             e.currentTarget.value = "";
                           }}
-                          className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm"
+                          className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400 text-sm"
                         >
                           <option value="">Copy prices from...</option>
                           {copyableRows.map((sourceRow) => {
@@ -2023,7 +2023,7 @@ onChange={(e) =>
                             e.target.value === "" ? null : Number(e.target.value)
                           )
                         }
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
                         min="0"
                       />
                     </div>
@@ -2047,13 +2047,13 @@ onChange={(e) =>
                 type="text"
                 value={newEditionFeature}
                 onChange={(e) => setNewEditionFeature(e.target.value)}
-                className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
                 placeholder="Add edition feature"
               />
               <button
                 type="button"
                 onClick={addEditionFeature}
-                className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 rounded-lg"
+                className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-4 rounded-lg"
               >
                 Add
               </button>
@@ -2114,7 +2114,7 @@ onChange={(e) =>
         </button>
         <button
           type="submit"
-          className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-6 py-3 rounded-xl font-bold"
+          className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-6 py-3 rounded-xl font-bold"
         >
           {editingItem ? "Update" : "Create"}
         </button>
@@ -2146,14 +2146,14 @@ onChange={(e) =>
             </button>
           </div>
         ) : (
-          <label className="flex flex-col items-center justify-center gap-2 w-full p-8 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-cyan-400 hover:bg-cyan-50/50 transition-colors">
+          <label className="flex flex-col items-center justify-center gap-2 w-full p-8 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-fuchsia-400 hover:bg-fuchsia-50/50 transition-colors">
             <input
               type="file"
               accept="image/*"
               onChange={handleScreenshotFileSelect}
               className="hidden"
             />
-            <div className="bg-gradient-to-r from-cyan-400 to-blue-500 p-3 rounded-full">
+            <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 p-3 rounded-full">
               <Upload className="w-5 h-5 text-white" />
             </div>
             <span className="text-sm font-semibold text-gray-700">
@@ -2182,7 +2182,7 @@ onChange={(e) =>
         {!editingItem && (
           <button
             type="submit"
-            className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-6 py-3 rounded-xl font-bold"
+            className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-6 py-3 rounded-xl font-bold"
           >
             Add Screenshot
           </button>
@@ -2193,60 +2193,58 @@ onChange={(e) =>
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
+        <div className="flex items-center justify-between gap-3 mb-5 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center space-x-2 text-cyan-600 hover:text-orange-500 transition-colors bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg"
+              className="flex-shrink-0 flex items-center space-x-1.5 sm:space-x-2 text-violet-600 hover:text-fuchsia-600 transition-all duration-300 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Home</span>
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="hidden xs:inline text-sm sm:text-base">Back to Home</span>
             </button>
 
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+            <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-500 bg-clip-text text-transparent truncate">
               Admin Panel
             </h1>
           </div>
         </div>
 
-        <div className="mb-8 bg-white/80 backdrop-blur-sm rounded-xl p-1 shadow-lg border border-white/20 grid grid-cols-2 gap-2 md:flex md:space-x-1">
-          {[
-            { id: "games", label: "Games", count: allGames.length },
-            { id: "subscriptions", label: "Subscriptions", count: subscriptions.length },
-            { id: "testimonials", label: "Screenshots", count: testimonials.length },
-            { id: "settings", label: "Shop Settings", count: null },
-            { id: "coupons", label: "Coupons", count: null },
-            { id: "reviews", label: "Reviews", count: reviews.length },
-            {
-  id: "orders",
-  label: "Orders",
-  count: orders.length
-},
-            { id: "chatbot", label: "Chatbot", count: null },
-            { id: "visitors", label: "Live Visitors", count: null },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as AdminTab)}
-              className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2 ${
-                activeTab === tab.id
-                  ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg"
-                  : "text-gray-600 hover:text-gray-800 hover:bg-white/50"
-              }`}
-            >
-              <span>{tab.label}</span>
-              {tab.count !== null && (
-                <span
-                  className={`text-xs px-2 py-1 rounded-full ${
-                    activeTab === tab.id ? "bg-white/20" : "bg-gray-200"
-                  }`}
-                >
-                  {tab.count}
-                </span>
-              )}
-            </button>
-          ))}
+        <div className="mb-5 sm:mb-8 -mx-3 px-3 sm:mx-0 sm:px-0">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-lg border border-white/20 flex gap-1.5 overflow-x-auto scrollbar-none snap-x">
+            {[
+              { id: "games", label: "Games", count: allGames.length },
+              { id: "subscriptions", label: "Subscriptions", count: subscriptions.length },
+              { id: "testimonials", label: "Screenshots", count: testimonials.length },
+              { id: "settings", label: "Shop Settings", count: null },
+              { id: "coupons", label: "Coupons", count: null },
+              { id: "reviews", label: "Reviews", count: reviews.length },
+              { id: "orders", label: "Orders", count: orders.length },
+              { id: "chatbot", label: "Chatbot", count: null },
+              { id: "visitors", label: "Live Visitors", count: null },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as AdminTab)}
+                className={`flex-shrink-0 snap-start py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-300 flex items-center justify-center space-x-2 whitespace-nowrap ${
+                  activeTab === tab.id
+                    ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-fuchsia-500/25"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                }`}
+              >
+                <span>{tab.label}</span>
+                {tab.count !== null && (
+                  <span
+                    className={`text-xs px-2 py-0.5 rounded-full ${
+                      activeTab === tab.id ? "bg-white/20" : "bg-gray-200"
+                    }`}
+                  >
+                    {tab.count}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
 
 {activeTab !== "settings" &&
@@ -2257,7 +2255,7 @@ onChange={(e) =>
             <div className="flex justify-end mb-6">
               <button
                 onClick={openNewItemModal}
-                className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <Plus className="w-5 h-5" />
                 <span>
@@ -2289,7 +2287,7 @@ onChange={(e) =>
 }...`}
                   value={currentSearchQuery}
                   onChange={(e) => setCurrentSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent"
                 />
               </div>
             </div>
@@ -2311,7 +2309,7 @@ onChange={(e) =>
         }}
         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
           gamesSpecialFilter === filter.value
-            ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
+            ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white"
             : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
         }`}
       >
@@ -2355,7 +2353,7 @@ onChange={(e) =>
   <AdminLiveVisitors />
 ) : loading ? (
           <div className="col-span-full text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-fuchsia-400 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading {activeTab}...</p>
           </div>
         ) : (
@@ -2414,7 +2412,7 @@ onChange={(e) =>
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleShareOrder(selectedOrder)}
-            className="flex items-center gap-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-md transition-all"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-md transition-all"
             title="Share order details"
           >
             <Share2 className="w-4 h-4" />

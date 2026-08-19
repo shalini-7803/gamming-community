@@ -186,6 +186,8 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
           <img
             src={game.image}
             alt={game.title}
+            loading="lazy"
+            decoding="async"
             className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
           />
           {game.edition && game.edition !== "Standard" && (
@@ -244,6 +246,8 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
             <img
               src={game.image}
               alt={game.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-48 sm:h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             {game.edition && game.edition !== "Standard" && (

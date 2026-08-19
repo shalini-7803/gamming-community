@@ -186,15 +186,19 @@ const goToAllGames = () => {
               </div>
             </AnimatedGamingBackground>
           ) : slide.isBanner ? (
-            <div className={`w-full h-full flex items-center justify-center ${
-              slide.image.includes('purple modern') || slide.image.includes('215601')
-                ? 'bg-black'
-                : 'bg-gradient-to-br from-violet-950 via-slate-950 to-black'
-            }`}>
+            <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-black">
+              {/* Blurred fill so the frame is never plain black, without cropping the real image */}
+              <img
+                src={slide.image}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60"
+              />
               <img
                 src={slide.image}
                 alt="Banner"
-                className="w-full h-full object-cover"
+                decoding="async"
+                className="relative w-full h-full object-contain"
               />
             </div>
           ) : (

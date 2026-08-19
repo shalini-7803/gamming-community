@@ -91,6 +91,8 @@ const CustomerScreenshots: React.FC = () => {
                     <img
                       src={screenshot.image}
                       alt="Customer screenshot"
+                      loading="lazy"
+                      decoding="async"
                       className="w-32 sm:w-48 md:w-56 h-auto max-h-64 sm:max-h-80 md:max-h-96 object-cover rounded-lg sm:rounded-xl"
                       style={{ aspectRatio: '9/16' }}
                     />

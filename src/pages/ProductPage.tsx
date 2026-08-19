@@ -948,6 +948,8 @@ Please confirm with our team before purchase regarding personal account compatib
                       <img
                         src={recommended.image}
                         alt={recommended.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full aspect-square object-cover"
                       />
 

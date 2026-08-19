@@ -82,6 +82,8 @@ const Vouches: React.FC = () => {
                       <img
                         src={vouch.image}
                         alt="Customer testimonial screenshot"
+                        loading="lazy"
+                        decoding="async"
                         className="w-48 sm:w-56 md:w-64 h-auto max-h-80 sm:max-h-96 md:max-h-[28rem] object-cover rounded-lg sm:rounded-xl"
                         style={{ aspectRatio: '9/16' }}
                       />
