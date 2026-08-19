@@ -37,6 +37,7 @@ import {
   ShopSettings,
   ShopMode,
   PaymentSettings,
+  resolvePaymentImageUrl,
 } from "../services/settingsService";
 import { reviewService, Review } from "../services/reviewService";
 import { couponService, Coupon } from "../services/couponService";
@@ -1735,7 +1736,7 @@ onChange={(e) =>
               {paymentSettings?.upi_qr_image && (
                 <div className="mb-4">
                   <img
-                    src={`${(import.meta.env.VITE_API_URL || "").replace(/\/$/, "")}${paymentSettings.upi_qr_image}`}
+                    src={resolvePaymentImageUrl(paymentSettings.upi_qr_image)}
                     alt="Current UPI QR"
                     className="w-48 rounded-xl border border-gray-200 shadow"
                   />

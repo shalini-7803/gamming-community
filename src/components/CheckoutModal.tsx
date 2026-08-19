@@ -17,6 +17,7 @@ import ShopClosedModal from "./ShopClosedModal";
 import {
   settingsService,
   PaymentSettings,
+  resolvePaymentImageUrl,
 } from "../services/settingsService";
 import { couponService, Coupon } from "../services/couponService";
 
@@ -686,7 +687,7 @@ Please confirm my order and provide delivery details. Thank you! 🙏`;
               <img
                 src={
                   paymentSettings?.upi_qr_image
-                    ? `${(import.meta.env.VITE_API_URL || "").replace(/\/$/, "")}${paymentSettings.upi_qr_image}`
+                    ? resolvePaymentImageUrl(paymentSettings.upi_qr_image)
                     : "/UPI.jpg"
                 }
                 alt="UPI QR Code"

@@ -60,6 +60,12 @@ function normalizePaymentSettings(raw: any): PaymentSettings | null {
   };
 }
 
+export function resolvePaymentImageUrl(value: string): string {
+  if (!value) return "";
+  if (value.startsWith("data:") || value.startsWith("http")) return value;
+  return `${API_URL}${value}`;
+}
+
 export const settingsService = {
   async getShopSettings(): Promise<ShopSettings | null> {
     try {
@@ -165,26 +171,23 @@ export const settingsService = {
   },
 
   async uploadPaymentQrImage(file: File): Promise<string | null> {
-  try {
-    const formData = new FormData();
-    formData.append("qrImage", file);
+    try {
+      // Stored as a base64 data URI directly in the database — Render's disk is
+      // ephemeral and wipes uploaded files on every redeploy/restart.
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
 
-    const response = await fetch(`${API_URL}/payment-settings/upload-qr`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to upload QR image: ${response.status}`);
+      const success = await this.updatePaymentSettings({ upi_qr_image: dataUrl });
+      return success ? dataUrl : null;
+    } catch (error) {
+      console.error("Error uploading payment QR image:", error);
+      return null;
     }
-
-    const data = await response.json();
-    return data.filePath || null;
-  } catch (error) {
-    console.error("Error uploading payment QR image:", error);
-    return null;
-  }
-},
+  },
 
   isWithinWorkingHours(startTime: string, endTime: string): boolean {
     const now = new Date();
