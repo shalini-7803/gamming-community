@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Radio } from 'lucide-react';
 import Hero from '../components/Hero';
 import TrustIndicators from '../components/TrustIndicators';
 import Vouches from '../components/Vouches';
@@ -111,10 +110,9 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
                   href="https://whatsapp.com/channel/0029Vb8SqmRFMqrbHZNlWM0m"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex w-full xs:w-auto items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-emerald-500/40 active:scale-95"
+                  className="group inline-flex w-full xs:w-auto items-center justify-center gap-2 rounded-xl border border-white/15 light:border-gray-200 bg-white/10 light:bg-white light:shadow-md px-4 py-2 text-sm font-bold text-white light:text-gray-900 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/15 light:hover:bg-gray-100 active:scale-95"
                 >
-                  <Radio className="w-4 h-4 animate-pulse" />
-                  Join Channel
+                  Join Channel ❤️
                   <span className="transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
