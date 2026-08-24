@@ -5,6 +5,7 @@ import Hero from '../components/Hero';
 import TrustIndicators from '../components/TrustIndicators';
 import Vouches from '../components/Vouches';
 import BestSellers from '../components/BestSellers';
+import RecommendedForYou from '../components/RecommendedForYou';
 import Categories from '../components/Categories';
 import ReviewsSection from '../components/ReviewsSection';
 import Loader from '../components/Loader';
@@ -134,6 +135,9 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
       </div> 
       <div id="bestsellers">
         <BestSellers onGameClick={handleGameClick} />
+      </div>
+      <div id="recommended">
+        <RecommendedForYou onGameClick={handleGameClick} />
       </div>
       <div className='z-[9999]'>
         <ReviewsSection />

@@ -102,6 +102,34 @@ export const useBestsellers = (limit: number = 6) => {
   return { bestsellers, loading, error, refetch: fetchBestsellers };
 };
 
+// Hook for admin-recommended games/subscriptions
+export const useRecommended = (limit: number = 6) => {
+  const [recommended, setRecommended] = useState<Game[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchRecommended = async () => {
+    try {
+      setLoading(true);
+      const recommendedData = await gamesService.getRecommended(limit);
+      const uniqueRecommended = getUniqueGamesForCustomer(recommendedData);
+      setRecommended(uniqueRecommended);
+      setError(null);
+    } catch (err) {
+      setError("Failed to fetch recommended games");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecommended();
+  }, [limit]);
+
+  return { recommended, loading, error, refetch: fetchRecommended };
+};
+
 // Hook for all games data (admin use)
 export const useAllGames = () => {
   const [allGames, setAllGames] = useState<Game[]>([]);

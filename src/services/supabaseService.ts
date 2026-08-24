@@ -226,6 +226,30 @@ export const gamesService = {
     }
   },
 
+  async getRecommended(limitCount: number = 6): Promise<Game[]> {
+    try {
+      const cacheKey = `recommended:${limitCount}`;
+      const cached = await getFromCache(cacheKey);
+      if (cached) return cached;
+
+      const allGames = await fetchAllGamesFromApi();
+      const recommended = allGames
+        .filter((game) => game.is_recommended === true)
+        .sort((a, b) => {
+          const aDate = new Date(a.created_at || 0).getTime();
+          const bDate = new Date(b.created_at || 0).getTime();
+          return bDate - aDate;
+        })
+        .slice(0, limitCount);
+
+      await saveToCache(cacheKey, recommended);
+      return recommended;
+    } catch (error) {
+      console.error("Error fetching recommended games:", error);
+      return [];
+    }
+  },
+
   async getBestsellers(limitCount: number = 6): Promise<Game[]> {
     try {
       const cacheKey = `bestsellers:${limitCount}`;
