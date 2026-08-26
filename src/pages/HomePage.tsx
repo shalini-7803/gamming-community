@@ -62,6 +62,13 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
         onBrowseCategories={() => scrollToSection('categories')}
       />
 
+      <div id="bestsellers">
+        <BestSellers onGameClick={handleGameClick} />
+      </div>
+      <div id="recommended">
+        <RecommendedForYou onGameClick={handleGameClick} />
+      </div>
+
       {/* WhatsApp Community + Channel CTA */}
       <section className="px-4 sm:px-6 lg:px-8 mt-6 mb-6">
         <div className="max-w-5xl mx-auto">
@@ -132,12 +139,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
 
        <div id="categories">
         <Categories onViewAllGames={()=>handleViewAllGames} onViewSubscriptions={handleViewSubscriptions} />
-      </div> 
-      <div id="bestsellers">
-        <BestSellers onGameClick={handleGameClick} />
-      </div>
-      <div id="recommended">
-        <RecommendedForYou onGameClick={handleGameClick} />
       </div>
       <div className='z-[9999]'>
         <ReviewsSection />
