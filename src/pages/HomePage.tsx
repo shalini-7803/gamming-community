@@ -18,8 +18,8 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const { bestsellers, loading: bestsellersLoading } = useBestsellers(4);
-  const { recommended, loading: recommendedLoading } = useRecommended(4);
+  const { bestsellers, loading: bestsellersLoading } = useBestsellers(8);
+  const { recommended, loading: recommendedLoading } = useRecommended(8);
 
   // Simulate initial loading for home page
   useEffect(() => {
@@ -75,6 +75,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
               subtitle="Most popular titles"
               icon={Flame}
               iconBg="from-orange-500 to-red-500"
+              glowColor="bg-red-500"
               accentText="text-orange-400"
               buttonGradient="from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700"
               games={bestsellers}
@@ -87,6 +88,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
               subtitle="Hand-picked by our team"
               icon={Sparkles}
               iconBg="from-orange-500 to-amber-500"
+              glowColor="bg-amber-500"
               accentText="text-orange-400"
               buttonGradient="from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
               games={recommended}
