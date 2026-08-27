@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Radio, Flame, Sparkles } from 'lucide-react';
+import { Radio, Flame } from 'lucide-react';
 import Hero from '../components/Hero';
 import TrustIndicators from '../components/TrustIndicators';
 import Vouches from '../components/Vouches';
@@ -9,7 +9,7 @@ import Categories from '../components/Categories';
 import ReviewsSection from '../components/ReviewsSection';
 import Loader from '../components/Loader';
 import { Game } from '../config/supabase';
-import { useBestsellers, useRecommended } from '../hooks/useSupabaseData';
+import { useBestsellers } from '../hooks/useSupabaseData';
 
 interface HomePageProps {
   onNavigation: (section: string) => void;
@@ -19,7 +19,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const { bestsellers, loading: bestsellersLoading } = useBestsellers(8);
-  const { recommended, loading: recommendedLoading } = useRecommended(8);
 
   // Simulate initial loading for home page
   useEffect(() => {
@@ -69,7 +68,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
         className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300"
       >
         <div className="container mx-auto px-3 sm:px-4">
-          <div id="recommended" className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="max-w-md mx-auto">
             <ShowcaseBox
               title="Best Selling Games"
               subtitle="Most popular titles"
@@ -81,19 +80,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
               games={bestsellers}
               loading={bestsellersLoading}
               viewAllPath="/best-sellers"
-              onGameClick={handleGameClick}
-            />
-            <ShowcaseBox
-              title="Recommended For You"
-              subtitle="Hand-picked by our team"
-              icon={Sparkles}
-              iconBg="from-orange-500 to-amber-500"
-              glowColor="bg-amber-500"
-              accentText="text-orange-400"
-              buttonGradient="from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
-              games={recommended}
-              loading={recommendedLoading}
-              viewAllPath="/recommended"
               onGameClick={handleGameClick}
             />
           </div>

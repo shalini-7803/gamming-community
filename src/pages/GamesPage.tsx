@@ -215,10 +215,18 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
               {game.edition}
             </div>
           )}
-          {game.show_in_bestsellers && (
-            <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg">
-              Bestseller
-            </div>
+          {showcase === "bestsellers" ? (
+            game.is_recommended && (
+              <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg">
+                Recommended
+              </div>
+            )
+          ) : (
+            game.show_in_bestsellers && (
+              <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg">
+                Bestseller
+              </div>
+            )
           )}
         </div>
 
