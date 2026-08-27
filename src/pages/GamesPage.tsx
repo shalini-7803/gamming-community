@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Search, Filter, Grid, List, Gamepad2 } from "lucide-react";
+import { Search, Filter, Grid, List, Gamepad2, Flame, Sparkles } from "lucide-react";
 import { useGames } from "../hooks/useSupabaseData";
 import {
   Game,
@@ -28,9 +28,28 @@ const priceOptions: { value: string; label: string; range?: [number, number] }[]
 interface GamesPageProps {
   /** When set, the platform filter is locked to this value (used for the /pc-games route). */
   lockedPlatform?: string;
+  /** When set, only admin-flagged games are shown (used by /best-sellers and /recommended). */
+  showcase?: "bestsellers" | "recommended";
 }
 
-const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
+const SHOWCASE_COPY = {
+  bestsellers: {
+    title: "Best Selling Games",
+    subtitle: "Our most popular titles, loved by the community",
+    icon: Flame,
+    iconBg: "from-orange-500 to-red-500",
+    emptyMessage: "No bestsellers marked yet. Check back soon!",
+  },
+  recommended: {
+    title: "Recommended For You",
+    subtitle: "Hand-picked by our team — don't miss these",
+    icon: Sparkles,
+    iconBg: "from-orange-500 to-amber-500",
+    emptyMessage: "No recommendations marked yet. Check back soon!",
+  },
+} as const;
+
+const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -97,8 +116,9 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
       sortBy,
       page: currentPage,
       limit: 24,
+      showcase,
     }),
-    [searchQuery, selectedPlatform, selectedPriceRange, sortBy, currentPage]
+    [searchQuery, selectedPlatform, selectedPriceRange, sortBy, currentPage, showcase]
   );
 
   const { games, totalCount, totalPages, loading, error } = useGames(filters);
@@ -337,15 +357,25 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
         <div className="bg-slate-900/70 light:bg-gray-50 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 light:border-gray-200 mb-6 sm:mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.4)]">
-              <Gamepad2 className="w-6 h-6 text-white" />
+            <div
+              className={`w-12 h-12 bg-gradient-to-r ${
+                showcase ? SHOWCASE_COPY[showcase].iconBg : "from-violet-500 to-fuchsia-500"
+              } rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.4)]`}
+            >
+              {showcase ? (
+                React.createElement(SHOWCASE_COPY[showcase].icon, {
+                  className: "w-6 h-6 text-white",
+                })
+              ) : (
+                <Gamepad2 className="w-6 h-6 text-white" />
+              )}
             </div>
             <div>
               <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 via-fuchsia-300 to-orange-300 light:from-violet-700 light:via-fuchsia-700 light:to-orange-700 bg-clip-text text-transparent">
-                Games Collection
+                {showcase ? SHOWCASE_COPY[showcase].title : "Games Collection"}
               </h1>
               <p className="text-slate-400 light:text-gray-500 text-sm sm:text-base">
-                Explore our gaming library
+                {showcase ? SHOWCASE_COPY[showcase].subtitle : "Explore our gaming library"}
               </p>
             </div>
           </div>
@@ -500,7 +530,9 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform }) => {
               No games found
             </h2>
             <p className="text-slate-400 light:text-gray-500 mb-6">
-              Try changing your search or filter options.
+              {showcase
+                ? SHOWCASE_COPY[showcase].emptyMessage
+                : "Try changing your search or filter options."}
             </p>
             <button
               onClick={resetFilters}

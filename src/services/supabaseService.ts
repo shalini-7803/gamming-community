@@ -20,6 +20,8 @@ export interface GameFilters {
   sortBy?: string;
   page?: number;
   limit?: number;
+  /** Restrict results to admin-flagged games (used by the "View All" showcase pages). */
+  showcase?: "bestsellers" | "recommended";
 }
 
 export interface PaginatedResponse<T> {
@@ -133,9 +135,16 @@ function filterAndPaginateGames(
     sortBy = "newest",
     page = 1,
     limit = 24,
+    showcase,
   } = filters;
 
   let filtered = allGames.filter((game) => game.category === category);
+
+  if (showcase === "bestsellers") {
+    filtered = filtered.filter((game) => game.show_in_bestsellers === true);
+  } else if (showcase === "recommended") {
+    filtered = filtered.filter((game) => game.is_recommended === true);
+  }
 
   if (searchQuery.trim()) {
     const query = searchQuery.trim().toLowerCase();

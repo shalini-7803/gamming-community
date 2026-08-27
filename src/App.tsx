@@ -489,6 +489,8 @@ function App() {
             />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/pc-games" element={<GamesPage lockedPlatform="PC" />} />
+            <Route path="/best-sellers" element={<GamesPage showcase="bestsellers" />} />
+            <Route path="/recommended" element={<GamesPage showcase="recommended" />} />
             <Route
               path="/games/:id"
               element={
