@@ -112,6 +112,7 @@ const AdminPage: React.FC = () => {
     null
   );
 
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [gamesSearchQuery, setGamesSearchQuery] = useState("");
   const [subscriptionsSearchQuery, setSubscriptionsSearchQuery] = useState("");
   const [testimonialsSearchQuery, setTestimonialsSearchQuery] = useState("");
@@ -2287,8 +2288,40 @@ onChange={(e) =>
 }...`}
                   value={currentSearchQuery}
                   onChange={(e) => setCurrentSearchQuery(e.target.value)}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent"
                 />
+
+                {activeTab === "games" &&
+                  isSearchFocused &&
+                  gamesSearchQuery.trim() &&
+                  (filteredItems as Game[]).length > 0 && (
+                    <div className="absolute z-20 mt-1 w-full bg-white rounded-xl shadow-2xl border border-gray-200 max-h-80 overflow-y-auto">
+                      {(filteredItems as Game[]).slice(0, 6).map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onMouseDown={() => handleEditGame(item)}
+                          className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-fuchsia-50 transition-colors border-b border-gray-100 last:border-b-0"
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+                          />
+                          <span className="text-sm font-medium text-gray-800 truncate">
+                            {item.title}
+                          </span>
+                        </button>
+                      ))}
+                      {(filteredItems as Game[]).length > 6 && (
+                        <div className="px-4 py-2 text-xs text-gray-400 text-center">
+                          +{(filteredItems as Game[]).length - 6} more — refine your search
+                        </div>
+                      )}
+                    </div>
+                  )}
               </div>
             </div>
 
