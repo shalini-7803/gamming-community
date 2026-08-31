@@ -204,7 +204,7 @@ const goToAllGames = () => {
                   src={slide.image}
                   alt="Every Game, One Gaming Community"
                   decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover object-[center_35%]"
+                  className="absolute inset-0 w-full h-full object-contain"
                 />
               </div>
 
@@ -330,7 +330,13 @@ const goToAllGames = () => {
 
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-1 sm:space-x-2">
+      <div
+        className={`absolute left-1/2 transform -translate-x-1/2 flex space-x-1 sm:space-x-2 ${
+          (slides[currentSlide] as any)?.isCommunityBanner
+            ? 'bottom-20 xs:bottom-24 sm:bottom-28 md:bottom-32'
+            : 'bottom-2 sm:bottom-4'
+        }`}
+      >
         {slides.map((_, index) => (
           <button
             key={index}
