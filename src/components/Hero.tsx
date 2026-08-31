@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Star, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import AnimatedGamingBackground from './AnimatedGamingBackground';
+import { gamesService } from '../services/supabaseService';
+import { Game } from '../config/supabase';
+
+// Specific catalog games featured in the community banner's sliding row,
+// in display order. Missing/removed IDs are silently skipped at render time.
+const COMMUNITY_BANNER_GAME_IDS = [
+  '7d67f10e-c8b9-4c03-988f-8fab9e38620c', // Call of Duty: Modern Warfare
+  'f2cee1d6-07c8-4a9f-944f-a9623d7eb87c', // Mafia: The Old Country
+  '97046936-22e5-4920-bc63-496cda964175', // Marvel's Wolverine (Pre-Order)
+  'fb6dfe60-d846-4e81-8765-0d23ab6836ca', // GTA 6 (Pre-Order)
+  '9e4b2b9b-7ba1-4e55-9c87-f4721c33bce1', // 007 First Light
+  '3519d831-ca1d-4625-bf62-099f20ccde7c', // Resident Evil Requiem
+  'fff3a43a-f608-4e55-9737-5f9d47ff6a3b', // Assassins Creed Black Flag Resynced
+];
 
 const SPARKLE_POSITIONS = [
   { top: '15%', left: '8%', size: 'w-3 h-3', delay: '0s' },
@@ -20,8 +34,19 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onShopBestsellers, onBrowseCategories }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [communityBannerGames, setCommunityBannerGames] = useState<Game[]>([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    gamesService.getAll({ limit: 1000 }).then((res) => {
+      const byId = new Map(res.data.map((g) => [g.id, g]));
+      const ordered = COMMUNITY_BANNER_GAME_IDS
+        .map((id) => byId.get(id))
+        .filter((g): g is Game => !!g);
+      setCommunityBannerGames(ordered);
+    });
+  }, []);
 
   const goToNextSlide = () => {
   setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -70,15 +95,16 @@ const goToAllGames = () => {
   //   buttonAction: () => {},
   //   isBanner: true,
   // },
-    { 
+    {
     title: "",
     subtitle: "",
     description: "",
-    image: "/boxing-day.jpeg",
+    image: "/hero-community-banner.jpg",
     overlay: "",
     buttonText: "",
     buttonAction: () => {},
-    isBanner: true,
+    isBanner: false,
+    isCommunityBanner: true,
   },
     { 
     title: "",
@@ -169,7 +195,34 @@ const goToAllGames = () => {
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {(slide as any).isAnimatedBg ? (
+          {(slide as any).isCommunityBanner ? (
+            <div
+              className="relative w-full h-full bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              {communityBannerGames.length > 0 && (
+                <div className="absolute bottom-3 xs:bottom-4 sm:bottom-6 md:bottom-8 left-0 right-0 overflow-hidden">
+                  <div className="flex w-max gap-2 xs:gap-3 sm:gap-4 animate-scroll-fast">
+                    {[...communityBannerGames, ...communityBannerGames].map((game, i) => (
+                      <button
+                        key={`${game.id}-${i}`}
+                        onClick={() => navigate(`/games/${game.id}`)}
+                        className="group flex-shrink-0 w-16 xs:w-20 sm:w-28 md:w-32 aspect-[2/3] rounded-lg sm:rounded-xl overflow-hidden border-2 border-white/90 shadow-xl transition-transform duration-300 hover:scale-105 hover:-translate-y-1"
+                      >
+                        <img
+                          src={game.image}
+                          alt={game.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (slide as any).isAnimatedBg ? (
             <AnimatedGamingBackground className="w-full h-full">
               <div className="relative w-full h-full flex items-center justify-center">
                 {SPARKLE_POSITIONS.map((sparkle, i) => (
