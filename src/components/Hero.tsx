@@ -196,18 +196,24 @@ const goToAllGames = () => {
           }`}
         >
           {(slide as any).isCommunityBanner ? (
-            <div
-              className="relative w-full h-full bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            >
+            <div className="relative w-full h-full flex flex-col bg-[#0d0716]">
+              <div className="relative flex-1 min-h-0 overflow-hidden">
+                <img
+                  src={slide.image}
+                  alt="Every Game, One Gaming Community"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover object-[center_35%]"
+                />
+              </div>
+
               {communityBannerGames.length > 0 && (
-                <div className="absolute bottom-3 xs:bottom-4 sm:bottom-6 md:bottom-8 left-0 right-0 overflow-hidden">
+                <div className="relative flex-shrink-0 bg-gradient-to-b from-[#0d0716] to-black py-2 xs:py-2.5 sm:py-3 md:py-4 overflow-hidden">
                   <div className="flex w-max gap-2 xs:gap-3 sm:gap-4 animate-scroll-fast">
                     {[...communityBannerGames, ...communityBannerGames].map((game, i) => (
                       <button
                         key={`${game.id}-${i}`}
                         onClick={() => navigate(`/games/${game.id}`)}
-                        className="group flex-shrink-0 w-16 xs:w-20 sm:w-28 md:w-32 aspect-[2/3] rounded-lg sm:rounded-xl overflow-hidden border-2 border-white/90 shadow-xl transition-transform duration-300 hover:scale-105 hover:-translate-y-1"
+                        className="group flex-shrink-0 w-14 xs:w-16 sm:w-20 md:w-24 aspect-[2/3] rounded-lg sm:rounded-xl overflow-hidden border-2 border-white/90 shadow-xl transition-transform duration-300 hover:scale-105 hover:-translate-y-1"
                       >
                         <img
                           src={game.image}
