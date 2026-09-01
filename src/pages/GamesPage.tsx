@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Search, Filter, Grid, List, Gamepad2, Flame, Sparkles } from "lucide-react";
 import { useGames, useAllGames } from "../hooks/useSupabaseData";
 import {
@@ -74,6 +75,27 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
   const [searchSuggestions, setSearchSuggestions] = useState<Game[]>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { allGames: catalogGames } = useAllGames();
+  const searchBoxRef = useRef<HTMLDivElement>(null);
+  const [dropdownRect, setDropdownRect] = useState<{ top: number; left: number; width: number } | null>(null);
+
+  useEffect(() => {
+    if (!isSearchFocused || searchSuggestions.length === 0) return;
+
+    const updateRect = () => {
+      const el = searchBoxRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setDropdownRect({ top: rect.bottom + 8, left: rect.left, width: rect.width });
+    };
+
+    updateRect();
+    window.addEventListener("scroll", updateRect, true);
+    window.addEventListener("resize", updateRect);
+    return () => {
+      window.removeEventListener("scroll", updateRect, true);
+      window.removeEventListener("resize", updateRect);
+    };
+  }, [isSearchFocused, searchSuggestions.length]);
 
   const [currentPage, setCurrentPage] = useState(
     Number(searchParams.get("page")) || 1
@@ -413,7 +435,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-            <div className="relative isolate z-40 flex-1 max-w-2xl">
+            <div ref={searchBoxRef} className="relative flex-1 max-w-2xl">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 w-5 h-5" />
               <input
                 type="text"
@@ -440,38 +462,49 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
                 Search
               </button>
 
-              {isSearchFocused && searchSuggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 max-h-80 overflow-y-auto">
-                  {searchSuggestions.map((item) => {
-                    const platforms = getPlatformsForGame(item);
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onMouseDown={() => handleSuggestionClick(item)}
-                        className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 transition-colors text-left border-b border-gray-100 last:border-b-0"
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-10 h-10 object-cover rounded-lg flex-shrink-0"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium text-gray-800 truncate">
-                            {item.title}
+              {isSearchFocused &&
+                searchSuggestions.length > 0 &&
+                dropdownRect &&
+                createPortal(
+                  <div
+                    className="fixed bg-white rounded-2xl shadow-2xl border border-gray-200 z-[9999] max-h-80 overflow-y-auto"
+                    style={{
+                      top: dropdownRect.top,
+                      left: dropdownRect.left,
+                      width: dropdownRect.width,
+                    }}
+                  >
+                    {searchSuggestions.map((item) => {
+                      const platforms = getPlatformsForGame(item);
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onMouseDown={() => handleSuggestionClick(item)}
+                          className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 transition-colors text-left border-b border-gray-100 last:border-b-0"
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-10 h-10 object-cover rounded-lg flex-shrink-0"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-gray-800 truncate">
+                              {item.title}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              ₹{getStartingPrice(item)} •{" "}
+                              {item.category === "subscription"
+                                ? "Subscription"
+                                : platforms.join(", ")}
+                            </div>
                           </div>
-                          <div className="text-sm text-gray-500">
-                            ₹{getStartingPrice(item)} •{" "}
-                            {item.category === "subscription"
-                              ? "Subscription"
-                              : platforms.join(", ")}
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
+                        </button>
+                      );
+                    })}
+                  </div>,
+                  document.body
+                )}
             </div>
 
             <div className="flex items-center gap-3">
