@@ -63,29 +63,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
         onBrowseCategories={() => scrollToSection('categories')}
       />
 
-      <section
-        id="bestsellers"
-        className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300"
-      >
-        <div className="container mx-auto px-3 sm:px-4">
-          <div className="max-w-md mx-auto">
-            <ShowcaseBox
-              title="Best Selling Games"
-              subtitle="Most popular titles"
-              icon={Flame}
-              iconBg="from-orange-500 to-red-500"
-              glowColor="bg-red-500"
-              accentText="text-orange-400"
-              buttonGradient="from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700"
-              games={bestsellers}
-              loading={bestsellersLoading}
-              viewAllPath="/best-sellers"
-              onGameClick={handleGameClick}
-            />
-          </div>
-        </div>
-      </section>
-
       {/* WhatsApp Community + Channel CTA */}
       <section className="px-4 sm:px-6 lg:px-8 mt-6 mb-6">
         <div className="max-w-5xl mx-auto">
@@ -151,6 +128,30 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigation }) => {
       </section>
 
       <TrustIndicators />
+
+        <section
+        id="bestsellers"
+        className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 light:from-slate-50 light:via-blue-50 light:to-orange-50 transition-colors duration-300"
+      >
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="max-w-md mx-auto">
+            <ShowcaseBox
+              title="Best Selling Games"
+              subtitle="Most popular titles"
+              icon={Flame}
+              iconBg="from-orange-500 to-red-500"
+              glowColor="bg-red-500"
+              accentText="text-orange-400"
+              buttonGradient="from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700"
+              games={bestsellers}
+              loading={bestsellersLoading}
+              viewAllPath="/best-sellers"
+              onGameClick={handleGameClick}
+            />
+          </div>
+        </div>
+      </section>
+
 
       <Vouches />
 
