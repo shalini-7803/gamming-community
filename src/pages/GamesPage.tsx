@@ -413,7 +413,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-            <div className="relative flex-1 max-w-2xl">
+            <div className="relative isolate z-40 flex-1 max-w-2xl">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 light:text-gray-500 w-5 h-5" />
               <input
                 type="text"
@@ -441,7 +441,7 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
               </button>
 
               {isSearchFocused && searchSuggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 z-30 max-h-80 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 max-h-80 overflow-y-auto">
                   {searchSuggestions.map((item) => {
                     const platforms = getPlatformsForGame(item);
                     return (
