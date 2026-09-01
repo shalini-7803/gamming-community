@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Search, Filter, Grid, List, Gamepad2, Flame, Sparkles } from "lucide-react";
-import { useGames } from "../hooks/useSupabaseData";
+import { useGames, useAllGames } from "../hooks/useSupabaseData";
 import {
   Game,
   getPlatformsForGame,
@@ -71,6 +71,9 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
   const [tempSearchQuery, setTempSearchQuery] = useState(
     searchParams.get("search") || ""
   );
+  const [searchSuggestions, setSearchSuggestions] = useState<Game[]>([]);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const { allGames: catalogGames } = useAllGames();
 
   const [currentPage, setCurrentPage] = useState(
     Number(searchParams.get("page")) || 1
@@ -122,6 +125,27 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
   );
 
   const { games, totalCount, totalPages, loading, error } = useGames(filters);
+
+  useEffect(() => {
+    const query = tempSearchQuery.trim().toLowerCase();
+    if (query.length === 0) {
+      setSearchSuggestions([]);
+      return;
+    }
+
+    setSearchSuggestions(
+      (catalogGames || [])
+        .filter((game) => game.title.toLowerCase().includes(query))
+        .slice(0, 8)
+    );
+  }, [tempSearchQuery, catalogGames]);
+
+  const handleSuggestionClick = (game: Game) => {
+    setTempSearchQuery("");
+    setSearchSuggestions([]);
+    setIsSearchFocused(false);
+    handleProductClick(game);
+  };
 
  const handleProductClick = (game: Game) => {
   sessionStorage.setItem(
@@ -398,9 +422,13 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
                 onChange={(e) => {
                   setTempSearchQuery(e.target.value);
                 }}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
+                    setSearchSuggestions([]);
+                    applyFilters();
                   }
                 }}
                 className="w-full pl-12 pr-32 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
@@ -411,6 +439,39 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
               >
                 Search
               </button>
+
+              {isSearchFocused && searchSuggestions.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 z-30 max-h-80 overflow-y-auto">
+                  {searchSuggestions.map((item) => {
+                    const platforms = getPlatformsForGame(item);
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onMouseDown={() => handleSuggestionClick(item)}
+                        className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 transition-colors text-left border-b border-gray-100 last:border-b-0"
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-10 h-10 object-cover rounded-lg flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-gray-800 truncate">
+                            {item.title}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            ₹{getStartingPrice(item)} •{" "}
+                            {item.category === "subscription"
+                              ? "Subscription"
+                              : platforms.join(", ")}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center gap-3">
