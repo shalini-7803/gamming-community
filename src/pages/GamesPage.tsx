@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Search, Filter, Grid, List, Gamepad2, Flame, Sparkles } from "lucide-react";
+import { Search, Filter, Grid, List, Gamepad2, Flame, Sparkles, X } from "lucide-react";
 import { useGames, useAllGames } from "../hooks/useSupabaseData";
 import {
   Game,
@@ -202,6 +202,13 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
 
   const applyFilters = () => {
     setSearchQuery(tempSearchQuery);
+    setCurrentPage(1);
+  };
+
+  const clearSearch = () => {
+    setTempSearchQuery("");
+    setSearchQuery("");
+    setSearchSuggestions([]);
     setCurrentPage(1);
   };
 
@@ -453,8 +460,19 @@ const GamesPage: React.FC<GamesPageProps> = ({ lockedPlatform, showcase }) => {
                     applyFilters();
                   }
                 }}
-                className="w-full pl-12 pr-32 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                className="w-full pl-12 pr-40 py-3 rounded-2xl border border-white/10 light:border-gray-300 bg-slate-800 light:bg-white text-white light:text-gray-900 placeholder-slate-500 light:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
               />
+              {tempSearchQuery && (
+                <button
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={clearSearch}
+                  title="Clear search"
+                  className="absolute right-[5.75rem] top-1/2 -translate-y-1/2 text-slate-400 light:text-gray-400 hover:text-white light:hover:text-gray-700 hover:bg-white/10 light:hover:bg-gray-100 rounded-full p-1.5 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
               <button
                 onClick={applyFilters}
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-5 py-2 rounded-xl font-semibold transition-all duration-300 shadow-md"
