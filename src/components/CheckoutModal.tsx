@@ -304,20 +304,22 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
         paymentStatus: "Pending",
       };
 
-      try {
-        const result = await BackendService.createOrder(orderData);
+      let result = await BackendService.createOrder(orderData);
 
-        if (result.success) {
-          setCurrentStep("payment");
-          toast.success("Order created successfully! Please complete the payment.");
-        } else {
-          setCurrentStep("payment");
-          toast.info("Order details prepared. Please complete payment.");
-        }
-      } catch (backendError) {
-        console.error("Backend error, proceeding with client-side order:", backendError);
+      if (!result.success) {
+        // Retry once — most failures here are transient network/server blips,
+        // and we never want to show the payment screen for an order that
+        // wasn't actually saved (it would then be invisible in Admin Orders).
+        result = await BackendService.createOrder(orderData);
+      }
+
+      if (result.success) {
         setCurrentStep("payment");
-        toast.info("Order details prepared. Please complete payment.");
+        toast.success("Order created successfully! Please complete the payment.");
+      } else {
+        toast.error(
+          "Could not save your order due to a connection issue. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error in payment flow:", error);
