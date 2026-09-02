@@ -240,6 +240,11 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const fullCustomerMobile = `${customerCountryCode} ${customerMobile.trim()}`;
 
   const handleProceedToPayment = async () => {
+    if (!isShopOpen) {
+      setShowShopClosedModal(true);
+      return;
+    }
+
     if (!customerName.trim()) {
       toast.error("Please enter your name");
       return;
@@ -302,12 +307,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
       try {
         const result = await BackendService.createOrder(orderData);
 
-        if (!isShopOpen) {
-          setIsProcessing(false);
-          setShowShopClosedModal(true);
-          return;
-        }
-
         if (result.success) {
           setCurrentStep("payment");
           toast.success("Order created successfully! Please complete the payment.");
@@ -317,13 +316,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
         }
       } catch (backendError) {
         console.error("Backend error, proceeding with client-side order:", backendError);
-
-        if (!isShopOpen) {
-          setIsProcessing(false);
-          setShowShopClosedModal(true);
-          return;
-        }
-
         setCurrentStep("payment");
         toast.info("Order details prepared. Please complete payment.");
       }

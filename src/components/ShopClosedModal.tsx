@@ -21,7 +21,8 @@ const ShopClosedModal: React.FC<ShopClosedModalProps> = ({
 
   const handleWhatsAppContact = () => {
     const phoneNumber = '919266514434';
-    const whatsappMessage = 'Hi! I have a query about shop timings and orders.';
+    const whatsappMessage =
+      "Hi! I was trying to place an order but the shop shows as closed right now. Please let me know when you're available so I can complete my order.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(whatsappUrl, '_blank');
   };

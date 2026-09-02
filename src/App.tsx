@@ -153,26 +153,23 @@ function App() {
     bootAuth();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchShopStatus = async () => {
-  //     const status = await settingsService.getShopStatus();
-  //     setShopStatus(status);
-  //   };
+  useEffect(() => {
+    const fetchShopStatus = async () => {
+      const status = await settingsService.getShopStatus();
+      setShopStatus(status);
+    };
 
-  //   fetchShopStatus();
+    fetchShopStatus();
 
-  //   const subscription = settingsService.subscribeToSettings(async () => {
-  //     const status = await settingsService.getShopStatus();
-  //     setShopStatus(status);
-  //   });
+    const subscription = settingsService.subscribeToSettings(async () => {
+      const status = await settingsService.getShopStatus();
+      setShopStatus(status);
+    });
 
-  //   const interval = setInterval(fetchShopStatus, 60000000);
-
-  //   return () => {
-  //     subscription.unsubscribe();
-  //     clearInterval(interval);
-  //   };
-  // }, []);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const handleLogin = async () => {
     const currentUser = await authService.getCurrentUser();
