@@ -93,7 +93,7 @@ const emptyGameForm = (
   type:
     category === "subscription"
       ? ["Rent"]
-      : ["Rent", "Permanent Offline", "Permanent Offline + Online"],
+      : ["Rent", "Offline Rent", "Permanent Offline + Online"],
   category,
   show_in_bestsellers: false,
   is_recommended: false,
@@ -1862,7 +1862,7 @@ onChange={(e) =>
               Types
             </label>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              {["Rent", "Permanent Offline", "Permanent Offline + Online"].map(
+              {["Rent", "Offline Rent", "Permanent Offline + Online"].map(
                 (type) => (
                   <label key={type} className="flex items-center space-x-2">
                     <input
@@ -2007,7 +2007,7 @@ onChange={(e) =>
                     ["rent_3_months", "Rent 3 Months"],
                     ["rent_6_months", "Rent 6 Months"],
                     ["rent_12_months", "Rent 12 Months"],
-                    ["permanent_offline_price", "Permanent Offline"],
+                    ["permanent_offline_price", "Offline Rent"],
                     ["permanent_online_price", "Permanent Offline + Online"],
                   ].map(([field, label]) => (
                     <div key={field}>

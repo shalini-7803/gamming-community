@@ -133,10 +133,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
     selectedPlatformPricing?.rent_12_months
   );
 
-  const isPcPlatform = selectedPlatform.toLowerCase() === "pc";
-
-  const hasPermanentOffline =
-    isPcPlatform && !!selectedPlatformPricing?.permanent_offline_price;
+  const hasPermanentOffline = !!selectedPlatformPricing?.permanent_offline_price;
 
   const hasPermanentOnline =
     !!selectedPlatformPricing?.permanent_online_price;
@@ -151,7 +148,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
     const types: string[] = [];
 
     if (hasRentOptions) types.push("Rent");
-    if (hasPermanentOffline) types.push("Permanent Offline");
+    if (hasPermanentOffline) types.push("Offline Rent");
     if (hasPermanentOnline) types.push("Permanent");
 
     if (types.length === 0) {
@@ -309,19 +306,28 @@ const ProductPage: React.FC<ProductPageProps> = ({
 🚀 Best option to enjoy latest games at lowest cost without full purchase`;
     }
 
-    if (selectedType === "Permanent Offline") {
-      return `📴 Permanent Offline Access (PC & Console):
+    if (selectedType === "Offline Rent") {
+      return `🎮 Offline Rent – Description Details
 
-✔ Play the game permanently in offline mode only
-✔ Single device access (PC/Console)
-✔ Internet required only for initial setup
+🎮 30-Day Digital Offline Rental: Game access is provided for 30 days from the date of activation.
 
-⚠️ Important:
-Keep the system offline after setup. Going online may lock the game
+🔐 Activation Required: The game must be downloaded and activated during the initial setup with the required internet connection.
 
-❌ No Refund / No Replacement if instructions are not followed
+📴 Offline Gameplay: After successful activation, no internet connection is required to play the game during the rental period.
 
-✔ Best for story mode / offline gaming`;
+⚠️ DO NOT CONNECT TO THE INTERNET: After activation, do not connect the console to the internet while using the rented game.
+
+🔒 Permanent Lock Risk: Connecting the console to the internet after activation may cause the game to become permanently locked/inaccessible. Gaming Community will not be responsible for any such lock or loss of access.
+
+🚫 No Re-Download: Re-download is not available with this rental option. Please ensure the game is downloaded and activated correctly during the initial setup.
+
+⏳ Rental Duration: 30 days only from activation.
+
+❌ No Refund/Replacement: If the game becomes inaccessible due to an internet connection after activation, no refund, replacement, will be provided.
+
+📌 Customer Responsibility: Customers must follow all offline-rental instructions provided during activation.
+
+⚠️ IMPORTANT: This is a strictly offline 30-day rental. Once activated, keep the console offline until the rental period ends.`;
     }
 
     if (selectedType === "Permanent") {
