@@ -2212,7 +2212,7 @@ onChange={(e) =>
         </div>
 
         <div className="mb-5 sm:mb-8 -mx-3 px-3 sm:mx-0 sm:px-0">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-lg border border-white/20 flex gap-1.5 overflow-x-auto scrollbar-none snap-x">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-lg border border-white/20 grid grid-cols-2 gap-1.5 md:flex md:gap-1.5 md:overflow-x-auto md:scrollbar-none md:snap-x">
             {[
               { id: "games", label: "Games", count: allGames.length },
               { id: "subscriptions", label: "Subscriptions", count: subscriptions.length },
@@ -2227,7 +2227,7 @@ onChange={(e) =>
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as AdminTab)}
-                className={`flex-shrink-0 snap-start py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-300 flex items-center justify-center space-x-2 whitespace-nowrap ${
+                className={`md:flex-shrink-0 md:snap-start py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-300 flex items-center justify-center space-x-2 whitespace-nowrap ${
                   activeTab === tab.id
                     ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-fuchsia-500/25"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
