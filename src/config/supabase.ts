@@ -128,7 +128,7 @@ export const getGameDisplayPrice = (
     );
   }
 
-  if (selectedType === "Offline Rent") {
+  if (selectedType === "Offline Rent" || selectedType === "Permanent Offline") {
     return pricing.permanent_offline_price || pricing.original_price || 0;
   }
 

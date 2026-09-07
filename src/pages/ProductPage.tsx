@@ -148,7 +148,10 @@ const ProductPage: React.FC<ProductPageProps> = ({
     const types: string[] = [];
 
     if (hasRentOptions) types.push("Rent");
-    if (hasPermanentOffline) types.push("Offline Rent");
+    if (hasPermanentOffline)
+      types.push(
+        selectedPlatform === "PC" ? "Permanent Offline" : "Offline Rent"
+      );
     if (hasPermanentOnline) types.push("Permanent");
 
     if (types.length === 0) {
@@ -156,7 +159,13 @@ const ProductPage: React.FC<ProductPageProps> = ({
     }
 
     return types;
-  }, [currentProduct, hasRentOptions, hasPermanentOffline, hasPermanentOnline]);
+  }, [
+    currentProduct,
+    hasRentOptions,
+    hasPermanentOffline,
+    hasPermanentOnline,
+    selectedPlatform,
+  ]);
 
   useEffect(() => {
     if (!currentProduct) return;
@@ -328,6 +337,26 @@ const ProductPage: React.FC<ProductPageProps> = ({
 📌 Customer Responsibility: Customers must follow all offline-rental instructions provided during activation.
 
 ⚠️ IMPORTANT: This is a strictly offline 30-day rental. Once activated, keep the console offline until the rental period ends.`;
+    }
+
+    if (selectedType === "Permanent Offline") {
+      return `🎮 Steam Permanent Offline
+
+Enjoy your game with Permanent Steam Offline Access, activated and authorized for one PC/device only.
+
+♾️ Permanent Game Access
+
+🔐 One Device Authorization
+
+💻 Steam PC Game
+
+📴 Offline Gameplay After Activation
+
+📥 Re-Download Available on the Authorized Device
+
+🌐 Internet Required for Initial Activation
+
+⚠️ Important: Do not change the authorized device or make unauthorized changes to the Steam account/settings. Online features may require an internet connection and may not be available in Offline Mode.`;
     }
 
     if (selectedType === "Permanent") {
