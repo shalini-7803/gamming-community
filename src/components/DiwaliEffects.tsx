@@ -207,14 +207,18 @@ const DiwaliEffects: React.FC = () => {
 
     let launchTimer: ReturnType<typeof setTimeout>;
     const scheduleLaunch = () => {
-      const gap = 1100 + Math.random() * 900;
+      const gap = 550 + Math.random() * 500;
       launchTimer = setTimeout(() => {
-        launch(Math.random() < 0.3);
+        launch(Math.random() < 0.35);
+        if (Math.random() < 0.3) {
+          setTimeout(() => launch(Math.random() < 0.2), 160);
+        }
         scheduleLaunch();
       }, gap);
     };
 
     launch(true);
+    setTimeout(() => launch(false), 250);
     scheduleLaunch();
 
     let raf: number;
