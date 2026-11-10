@@ -12,7 +12,6 @@ import CheckoutModal from "./components/CheckoutModal";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FloatingCartButton from "./components/FloatingCartButton";
 // import ChatBot from "./components/ChatBot";
-import DiwaliEffects from "./components/DiwaliEffects";
 
 // Page Components
 import HomePage from "./pages/HomePage";
@@ -552,8 +551,6 @@ function App() {
 
         {location.pathname !== "/admin" && (
           <>
-            <DiwaliEffects />
-
             <FloatingCartButton
               cartItemCount={cartItemCount}
               onCartClick={handleCartClick}
